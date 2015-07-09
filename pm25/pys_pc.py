@@ -1,0 +1,71 @@
+#! /usr/bin/env python                                                                                                                # -*- coding: utf-8 -*-  
+
+#
+# pms module detect
+# by leon@2015-07-09
+#
+
+# -*- coding: utf-8 -*-  
+import time
+from yeelink import YeelinkHelper
+
+# global enum
+DATALEN     = 10
+SBYTE       = 0xaa
+EBYTE       = 0xab
+HDR_IDX     = 0     #0xaa
+CMD_IDX     = 1
+PM25L_IDX   = 2
+PM25H_IDX   = 3
+PM10L_IDX   = 4
+PM10H_IDX   = 5
+R1_IDX      = 6
+R2_IDX      = 7
+CHK_IDX     = 8
+END_IDX     = 9     #0xab
+
+# yeelink 
+YEELINK_API_KAY = 'b06b39d890b39332127b90637f728e64'
+YEELINK_DEV = '115167'
+# pm2.5, pm10, cpu_temp
+YEELINK_SENSORS = ['144020','144022','144483']
+
+class RPiDev:
+    @staticmethod
+    def get_cpu_temp():
+        cpu_temp_file = open( "/sys/class/thermal/thermal_zone0/temp" )
+        cpu_temp = cpu_temp_file.read()
+        cpu_temp_file.close()
+        return float(cpu_temp)/1000
+    
+class PmsMod:
+    def __init__(self,ydev):
+        self.idx = 0
+        self.maxLen = DATALEN*2
+        self.datas = [0]*self.maxLen
+        self.ydev = ydev
+    
+    def getPm25(self,pos):
+        offset = pos*DATALEN + PM25L_IDX
+        return float(self.datas[offset]+256*self.datas[offset+1])/10;
+    
+    def getPm10(self,pos):
+        offset = pos*DATALEN + PM10L_IDX
+        return float(self.datas[offset]+256*self.datas[offset+1])/10;        
+    
+    def collect(self):
+        count = 0 
+        while True:
+            pm25 = 25
+            pm10 = 70
+            cpu_temp = RPiDev.get_cpu_temp()
+            vals = [int(pm25),int(pm10),int(cpu_temp)]
+            self.ydev.up(vals)
+            print("pm25=%.1fug/m3, pm10=%.1fug/m3 tmp=%.1f'C" %(pm25,pm10,cpu_temp))
+            time.sleep(10)
+
+if __name__ == "__main__":
+    ydev1 = YeelinkHelper(YEELINK_API_KAY,YEELINK_DEV,YEELINK_SENSORS)
+    mod = PmsMod(ydev1)
+    mod.collect()
+    port.close()

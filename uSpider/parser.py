@@ -10,6 +10,7 @@ import re
 from bs4 import BeautifulSoup
 from console import uConsole
 import unittest
+import logging
 
 class uParser(threading.Thread):
     def __init__(self,name, console):
@@ -46,5 +47,5 @@ class uParser(threading.Thread):
                     if os.path.isfile(url):
                         self.console.postMsg(self,"skip:%s"%url)
                         continue 
-                    self.console.postMsg(self,"putUrl:%s"%url)
+                    #self.console.postMsg(self,"putUrl:%s"%url)
                     self.console.putUrl(url)

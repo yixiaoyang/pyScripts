@@ -6,7 +6,7 @@ import os
 import time
 import threading
 import queue
-
+import logging
 import unittest
 
 class uConsole():
@@ -18,9 +18,11 @@ class uConsole():
         self.urls = set()
         self.docs = set()
         
-        
         rootUrl.strip(' \t')
         rootUrl.rstrip('/')
+        
+        self.rootPath = rootPath + '/' + rootUrl
+
         if rootUrl.find('http://') != 0:
             rootUrl = 'http://'+rootUrl
         self.rootUrl = rootUrl
@@ -29,18 +31,24 @@ class uConsole():
         self.index = index
         
         self.putUrl(self.index)
-        self.rootPath = rootPath
         self.urlLock = threading.Lock()
         self.docLock = threading.Lock()
         self.urlWorkerCnt = 0
         self.docWorkerCnt = 0
+        
+        logging.basicConfig(level=logging.DEBUG,
+                            datefmt='%a, %d %b %Y %H:%M:%S',
+                            filename=rootPath+'/err.log',
+                            filemode='w')
     def register(self,child):
         self.children[child.name] = child
         print ("[MSG:%-12s] child %s registerd" %(self.name, child.name))
     
     def postMsg(self, child, msg, err=False):
         if err:
-            print ("[ERR:%-10s] %s" %(child.name,msg))
+            errStr = "[ERR:%-10s] %s" %(child.name,msg)
+            print (errStr)
+            logging.error(errStr)
         else:
             print ("[MSG:%-10s][%d/%d] %s" %(child.name,len(self.urls),len(self.docs),msg))
             

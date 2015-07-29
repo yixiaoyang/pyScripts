@@ -9,8 +9,11 @@ import queue
 
 from urllib.parse import urlparse
 import urllib.request
+import urllib.error
 import mimetypes
 from console import uConsole
+import logging
+import socket
 
 class uDwonloader(threading.Thread):
     def __init__(self,name,console):
@@ -19,29 +22,54 @@ class uDwonloader(threading.Thread):
         self.name = name
         self.count = 0
         self.allowMimes=set(['text/html'])
+        socket.setdefaulttimeout(5.0)
+
+    def tryDownload(self,url,filepath):
+        try:
+            if os.path.isfile(filepath):
+                self.console.postMsg(self,"skip:%s"%url)
+                return True
+            self.console.postMsg(self, "request "+url)
+            urlfp =  urllib.request.urlopen(url)
+            self.handleUrlContent(urlfp,filepath)
+            urlfp.close()
+            self.console.postMsg(self, "done "+url)
+        except urllib.error.HTTPError as e:
+            self.console.postMsg(self, "%d %s => url:%s"%(e.code,e.reason,url),True)
+            return True
+        except urllib.error.URLError as e:
+            if hasattr(e, 'reason'):
+                errStr = str(e.reason)
+                self.console.postMsg(self, "%s => url:%s"%(errStr,url),True)
+                # if timeout, retry download it
+                if errStr.find('timed out') >= 0:
+                    return False
+            else:
+                self.console.postMsg(self, "%s => url:%s"%("URLError",url),True)
+            return True
+        else:
+            pass
+        return True
+    
     def run(self):
-        urlfp = None
         while True:
             url = self.console.getUrl(self)
             if url == None:
                 self.console.postMsg(self,"thread exit")
                 break
-            parser = urlparse(url)
-            try:
-                urlfp =  urllib.request.urlopen(url)
-            except urllib.error.HTTPError as e:
-                self.console.postMsg(self, e.reason +" => url:"+url,True)
-                self.console.urlWorkerCnt -= 1
-                continue
-            except ValueError:
-                self.console.postMsg(self, "ValueError => url:"+url,True)
-                self.console.urlWorkerCnt -= 1
-                continue
             
-            if urlfp != None:
-                self.handleUrlContent(urlfp,self.console.rootPath+parser.path)
-                urlfp.close()
+            parser = urlparse(urllib.parse.unquote(url))
+            filepath = self.console.rootPath+parser.path
+            
+            retry = 3
+            while retry > 0:
+                if self.tryDownload(url,filepath):
+                    break;
+                else:
+                    retry-=1
+                    self.console.postMsg(self, "retryDownload => url:%s"%(url),True)
             self.console.urlWorkerCnt -= 1
+
     def handleUrlContent(self,urlfp, filename, mode="wb"):
         if os.path.isdir(filename):
             os.path.join(filename,"./index.html")

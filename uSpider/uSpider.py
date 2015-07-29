@@ -14,32 +14,39 @@ import queue
 from downloader import uDwonloader
 from console import uConsole
 from parser import uParser
+import logging
 
 import unittest
 
 if __name__ == '__main__':
-    baseUrl=r"yinwang.org"
-    partterns=set()
+    hostnames = [r'yinwang.org',r'yixiaoyang.github.io']
     cnt = 0
-    p = []
-    
-    baseUrl.lstrip()
-    
-    baseUrls=["http://www.%s"%(baseUrl), "www.%s"%(baseUrl), "http://%s"%(baseUrl)]
-    for url in baseUrls:
-        partterns.add("[\"\']%s/([^\'\"]+)[\"\']{1}"%(url))
+    for host in hostnames:
+        # 只接受hostname的url
+        partterns=set()
+        p = []
+        
+        host.lstrip()
+        
+        hosts=["http://www.%s"%(host), "www.%s"%(host), "http://%s"%(host)]
+        for url in hosts:
+            partterns.add("[\"\']%s/([^\'\"]+)[\"\']{1}"%(url))
 
-    console = uConsole("Monitor",baseUrl)
-    parser = uParser("Parser[%d][1]"%(cnt), console)
-    parser.addPartterns(partterns)
-    dl1 = uDwonloader("dl[%d][1]"%(cnt), console)
-    dl2 = uDwonloader("dl[%d][2]"%(cnt), console)
-    p.append(parser)
-    p.append(dl1)
-    p.append(dl2)
+        console = uConsole("Console[%d]"%(cnt),host)
+        parser = uParser("Parser[%d][1]"%(cnt), console)
+        parser.addPartterns(partterns)
+        dl1 = uDwonloader("dl[%d][1]"%(cnt), console)
+        dl2 = uDwonloader("dl[%d][2]"%(cnt), console)
+        p.append(parser)
+        p.append(dl1)
+        p.append(dl2)
 
-    for process in p:
-        process.start()
-    cnt += 1
+        for process in p:
+            process.start()
+            
+        # 等待所有进程结束
+        for process in p:
+            process.join()
+        cnt += 1
 
 

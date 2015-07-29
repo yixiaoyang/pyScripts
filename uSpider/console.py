@@ -21,6 +21,8 @@ class uConsole():
         
         rootUrl.strip(' \t')
         rootUrl.rstrip('/')
+        if rootUrl.find('http://') != 0:
+            rootUrl = 'http://'+rootUrl
         self.rootUrl = rootUrl
         
         index.lstrip('./')
@@ -81,9 +83,11 @@ class uConsole():
                 # empty URLs, sleep 50ms
                 time.sleep(0.05)    
                 continue;
-        self.postMsg(child,"getUrl %s"%(url))
+        
+        #self.postMsg(child,"getUrl %s"%(url))
         self.urlLock.release()
-        return self.rootUrl+'/'+url
+        
+        return self.rootUrl+'/'+url 
     #
     # @brief 非阻塞获取doc资源
     # @return 若没有done则一直尝试获取直到获取到一条doc，否则返回None
@@ -103,7 +107,7 @@ class uConsole():
                 # empty Docs, sleep 50ms
                 time.sleep(0.05) 
                 continue;
-        self.postMsg(child,"getDoc %s"%(doc))
+        #self.postMsg(child,"getDoc %s"%(doc))
         self.docLock.release()
         return doc
     

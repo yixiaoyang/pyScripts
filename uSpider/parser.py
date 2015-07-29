@@ -9,7 +9,6 @@ import queue
 import re
 from bs4 import BeautifulSoup
 from console import uConsole
-
 import unittest
 
 class uParser(threading.Thread):
@@ -17,8 +16,9 @@ class uParser(threading.Thread):
         threading.Thread.__init__(self)
         self.name = name
         self.console = console
-        # ["']http://yixiaoyang.github.io/([^'"]+)["']{1}
-        self.partternStr="[\"\']%s/([^\'\"]+)[\"\']{1}"%(self.console.rootUrl)
+        self.partterns=set()
+    def addPartterns(self, partterns):
+        self.partterns |= partterns
     def run(self):
         filename = ""
         while True:
@@ -29,21 +29,22 @@ class uParser(threading.Thread):
             try:
                 fp = open(filename, 'r')
                 self.parse(fp.read())
-                fp.close()    
+                fp.close()
             except IOError as errStr:
                 self.console.postMsg(self,errStr,True)
             finally:
                 self.console.docWorkerCnt -= 1  
     def parse(self,content):
-        result = re.findall(self.partternStr,content)
-        #result = re.search( self.partternStr, content)
-        if result != None:
-            # 结果去重
-            result = list(set(result))
-            for url in result:
-                if url[-1] == '/':
-                    url = url + self.console.index
-                if os.path.isfile(url):
-                    continue 
-                self.console.postMsg(self,"putUrl:%s"%url)
-                self.console.putUrl(url)
+        for parttern in self.partterns:
+            result = re.findall(parttern,content)
+            if result != None:
+                # 结果去重
+                result = list(set(result))
+                for url in result:
+                    if url[-1] == '/':
+                        url = url + self.console.index
+                    if os.path.isfile(url):
+                        self.console.postMsg(self,"skip:%s"%url)
+                        continue 
+                    self.console.postMsg(self,"putUrl:%s"%url)
+                    self.console.putUrl(url)

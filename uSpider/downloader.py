@@ -9,7 +9,7 @@ import queue
 
 from urllib.parse import urlparse
 import urllib.request
-
+import mimetypes
 from console import uConsole
 
 class uDwonloader(threading.Thread):
@@ -18,7 +18,9 @@ class uDwonloader(threading.Thread):
         self.console = console
         self.name = name
         self.count = 0
+        self.allowMimes=set(['text/html'])
     def run(self):
+        urlfp = None
         while True:
             url = self.console.getUrl(self)
             if url == None:
@@ -26,14 +28,21 @@ class uDwonloader(threading.Thread):
                 break
             parser = urlparse(url)
             try:
-                content =  urllib.request.urlopen(url).read()
+                urlfp =  urllib.request.urlopen(url)
             except urllib.error.HTTPError as e:
                 self.console.postMsg(self, e.reason +" => url:"+url,True)
                 self.console.urlWorkerCnt -= 1
                 continue
-            self.save2file(content,self.console.rootPath+parser.path)
+            except ValueError:
+                self.console.postMsg(self, "ValueError => url:"+url,True)
+                self.console.urlWorkerCnt -= 1
+                continue
+            
+            if urlfp != None:
+                self.handleUrlContent(urlfp,self.console.rootPath+parser.path)
+                urlfp.close()
             self.console.urlWorkerCnt -= 1
-    def save2file(self,doc, filename, mode="wb"):
+    def handleUrlContent(self,urlfp, filename, mode="wb"):
         if os.path.isdir(filename):
             os.path.join(filename,"./index.html")
         if not os.path.exists(os.path.dirname(filename)):
@@ -42,10 +51,21 @@ class uDwonloader(threading.Thread):
             # 不存在重复文件 
             try:
                 fp = open(filename, mode)
-                fp.write(doc)
+                fp.write(urlfp.read())
                 fp.close()
-                self.console.postMsg(self,"putDoc: %s"%(filename))
-                self.console.putDoc(filename)
+                #self.console.postMsg(self,"putDoc: %s"%(filename))
+                
+                # 解析mime类型，仅将文本网页文件加入doc
+                headers = urlfp.info()
+                # Get the mimetype from the headerlines
+                c_t = headers['Content-Type'].split(';')[0].strip()
+                if c_t: 
+                    mediatype = c_t.split(';')[0].strip()
+                    if mediatype in self.allowMimes:
+                        self.console.putDoc(filename)
+                    else:
+                        pass
+                        #self.console.postMsg(self, "file %s mime %s mismatch"%(filename,mediatype))
             except IOError as errStr:
                 self.console.postMsg(self,errStr,True)
         return True        

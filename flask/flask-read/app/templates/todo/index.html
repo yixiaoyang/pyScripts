@@ -1,3 +1,12 @@
+
+
+{% extends "layouts/application.html"%}
+
+{% block title%}
+Todos Index
+{% endblock %}
+
+{% block content %}
 <p>all todos count: {{ todos_count }}</p>
 <table class="table">
     <thead>
@@ -17,3 +26,5 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% endblock %}

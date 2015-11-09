@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}">
+      <!-- This is how you would link your custom stylesheet -->
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app.css') }}">
+      <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+      <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
+
+
+    <title> {% block title%} {%endblock%} </title>
+  </head>
+  
+  <body>
+    <div class="container">
+      {% include 'layouts/_header.html' %}
+      <div class="content-wrapper">
+	{% block content %}
+	{% endblock %}
+      </div>
+    </div>
+    
+    {% include 'layouts/_footer.html' %}
+  </body>
+</html>
+
+<script>
+  $(document).foundation();
+</script>

@@ -6,10 +6,14 @@ from flask import url_for
 from flask.ext.script import Manager,Shell
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.scss import Scss
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
+# initialization for componet
 manager = Manager(app)
 migreate = Migrate(app,db)
+Scss(app)
 
 def make_shell_context():
 	return dict(app=app, db=db)

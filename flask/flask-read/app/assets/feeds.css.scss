@@ -1,0 +1,91 @@
+// Place all the styles related to the feeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.entry-index-item{
+	border-bottom: 1px solid #E8E8E8;
+	padding: 20px;
+
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  div, ul, ol, li, pre, form, p,p{
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.feed-list{
+    position: relative;
+    margin-right: 20px;
+    margin-top: 10px;
+    width:100%;
+}
+
+.feed-item{
+  float:left;
+  height: 75px;
+  position: relative;
+  
+  min-height: 70px !important;
+  min-width: 250px !important;
+
+  padding-left: 0px;
+  padding-right:5px;
+  color: #FFF;
+  text-decoration: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background:#FFF;
+
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.feed-image{
+  float:left;
+	width: 75px;
+	height: 75px;
+  position: relative;
+}
+
+.feed-detail{
+    float:left;
+    padding-left: 5px;
+    max-width: 160px;
+}
+
+.feed-item-title{
+  float:left;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-size: 14px;
+  display: block;
+  width: auto;
+}
+
+
+.feed-item-actions{
+  float:right;
+  .tryitbtn{
+    position:relative;
+  }
+}
+
+.feed-item-count {
+  margin-left: 10px;
+}
+
+.entry-item-title{
+  margin-top: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-size: 18px;
+  font-weight:bold;
+  display: block;
+  width: auto;
+}
+
+.entry-brief{
+  margin-top: 10px;
+  font-size: 13px;
+  display: block;
+  width: auto;
+}

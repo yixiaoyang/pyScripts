@@ -1,0 +1,10 @@
+.pager{
+	font-size: 12px;
+	color: #4A4A4A;
+	padding: 0 20px 0 20px;
+	text-align: center;
+}
+
+.pager a{
+	color:#FE4C40;
+}

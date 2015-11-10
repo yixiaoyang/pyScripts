@@ -1,0 +1,32 @@
+{% extends "layouts/application.html"%}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/todo.css') }}">
+{% endblock %}
+
+{% block title%}
+Todos Show
+{% endblock %}
+
+{% block content %}
+
+{% if todo: %}
+    <table class="table">
+        <thead>
+            <tr>
+                 <td>Content</td>
+                 <td>Time</td>
+                 <td>Status</td>
+           </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ todo.content }}</td>
+            <td>{{ todo.time }}</td>
+            <td>{{ todo.status }}</td>
+       </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}

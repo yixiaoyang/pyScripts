@@ -67,43 +67,32 @@ div.field, div.actions {
   filter: none;
   width: 100% !important;
   min-height: 100%;
-  margin-bottom: -150px; }
+  min-width: 900px;
+  margin-bottom: -150px;
+  padding-right: 10px; }
 
-  .page-sidebar-expanded {
-    padding-left: auto;
-    padding-right: auto;
-    width: 1170px;
-    transition-duration: 0.3s;
-    margin: 0px auto 0px;
-    padding-bottom: 150px; }
+  .content-wrapper {
+    width: 80%;
+    height: 100%;
+    background: #FFF;
+    min-height: 600px;
+    margin: 10px auto 0px; }
 
-    .content-wrapper {
-      width: 100%;
-      height: 100%;
-      padding-left: 0px;
-      padding-top: 40px;
-      background: #FFF;
-      margin-right: auto;
-      margin-left: auto;
-      min-height: 600px; }
+    .alert .alert-notice {
+      padding-left: 0px; }
 
-      .alert .alert-notice {
-        padding-left: 0px; }
+      .content {
+        width: 80%;
+        margin: 0px auto 0px; }
 
-        .container-fluid {
-          margin-right: auto;
-          margin-left: auto;
-          padding-left: 15px;
-          padding-right: 15px; }
-
-          .debug-info {
-            padding-right: 10px; }
-            .debug-info ul {
-              float: right;
-              list-style: none; }
-              .debug-info ul li {
-                float: left;
-                margin-left: 10px; }
+        .debug-info {
+          padding-right: 10px; }
+          .debug-info ul {
+            float: right;
+            list-style: none; }
+            .debug-info ul li {
+              float: left;
+              margin-left: 10px; }
 
 footer {
   padding: 30px 0px;
@@ -112,13 +101,16 @@ footer {
   text-align: center;
   clear: both;
   height: 150px;
-  position: relative; }
+  position: relative;
+  float: bottom; }
 
   .sidebar {
-    padding-left: 15px;
-    padding-top: 15px;
-    width: 23%;
-    float: right; }
+    padding-left: 10px;
+    padding-top: 0px;
+    width: 20%;
+    height: 100%;
+    min-height: 600px;
+    float: left; }
 
     .sidebar-wrapper {
       transition-duration: 0.3s;
@@ -152,8 +144,17 @@ blockquote {
       background-color: #FFDBDC; }
 
       .flash {
-        position: fixed;
-        margin-top: 50px;
-        width: 1170px;
-        margin-left: auto;
-        padding-left: auto; }
+        background-color: #FFDBDC; }
+        .flash ul {
+          list-style-type: none;
+          padding-top: 10px;
+          padding-bottom: 10px; }
+
+table {
+  width: 100%; }
+
+  .fullw {
+    width: 100%;
+    min-width: 100%;
+    margin-left: 0px;
+    margin-right: 0px; }

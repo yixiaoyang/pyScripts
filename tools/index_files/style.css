@@ -1,0 +1,57 @@
+/* physics 按上－右－下－左的顺序作用于四边 */
+
+A:hover { COLOR: #CC0000; TEXT-DECORATION: none } 
+A:active {TEXT-DECORATION: none } 
+
+a.menu { font-family: "verdana"; font-size:12px; color: #DCCB82; text-decoration: none; }
+a.menu:hover { background-color:transparent; color:#FFFFFF;}
+
+A.red {COLOR: #FF0000} 
+A.red:visited {COLOR: #FF0000} 
+A.red:hover {COLOR: #CC0000} 
+
+A.blk {COLOR: #000000} 
+A.blk:visited {COLOR: #000000} 
+A.blk:hover {COLOR: #CC0000} 
+
+A.obv {COLOR: #0066CC; TEXT-DECORATION: underline} 
+A.obv:visited {COLOR: #006666; TEXT-DECORATION: underline} 
+A.obv:hover { COLOR: #CC0000; TEXT-DECORATION: none } 
+
+A.yel {COLOR: #808000; TEXT-DECORATION: none} 
+A.yel:visited {COLOR: #808000; TEXT-DECORATION: none} 
+A.yel:hover { COLOR: #CC0000; TEXT-DECORATION: none } 
+
+h1 {FONT: bold 15px/20px verdana;   }
+h2, h4, h5, h6, h7 {	FONT: bold 14px/20px verdana; }
+h3 { FONT: bold 20px/26px "隶书"; }
+h1, h2, h5 { TEXT-ALIGN: center; }
+h5, h6 {FONT: 14px/18px "verdana";margin : 0 }
+h7 { TEXT-ALIGN: right; }
+
+#l-UL { margin-left: 80px;  margin-right: 80px; }
+#l-UL li { 	font-size:14px; line-height: 200%;  padding: 0 0 1px 10px;}
+
+.t12 {font-family: "verdana"; font-size:12px; LINE-HEIGHT: 240%}
+.c12 {font-size:12px; text-align:center}
+.cw12 {font-family: "verdana"; font-size:12px; text-align:center; color: #ffffff; }
+.R12 {font-size:12px; text-align:right;  }
+.L12 {font-size:12px; text-align:left;  }
+.N12 {font-family: "verdana"; font-size:12px; text-indent:24px; LINE-HEIGHT: 140%}
+.tbw {font-family: "宋体"; font-size: 12px; color: #ffffff; FONT-WEIGHT:bold} 
+.tbb {font-family: "宋体"; font-size: 12px; color: #000000; FONT-WEIGHT:bold} 
+.normal {font-family: "宋体"; font-size: 14px; LINE-HEIGHT: 140%}
+.N14 {FONT: 14px/20px "verdana"; text-indent:28px; text-align:left}
+.C14 {FONT: 14px/18px "宋体"; text-align:center}
+.L14 {font-family: "verdana"; font-size:14px; line-height: 140%; text-align: left;  }
+.R14 {font-size:14px; line-height: 140%; text-align:right}
+.B14 {font-family: "宋体"; font-size: 14px; FONT-WEIGHT:bold}
+.N15 {FONT: 15px/20px "宋体"; text-indent:30px; text-align:left}
+.C15 {FONT: 15px/20px "宋体"; text-indent:0px; text-align:center}
+.L15 {FONT: 15px/20px "宋体"; text-indent:0px; text-align:left}
+
+.LS34 {font:34px "隶书"; FILTER: DropShadow(Color=#AE8ACA, OffX=2, OffY=2, Positive=2); HEIGHT: 34px}
+
+input,select,Textarea{
+font-family:Verdana; font-size: 12px; line-height: 15px;
+}

@@ -1,0 +1,277 @@
+﻿#search{
+	float: right;
+	height: 35px;
+}
+
+#navi{
+	height: 35px;
+	z-index:600;
+}
+
+#headermenu {
+	text-align: right;
+	padding-top: 15px;
+	padding-left: 525px;
+	width: 400px;
+	font-size: 12px;
+	color: white;
+}
+
+#headermenu a{
+	text-decoration: none;
+	font-size: 12px;
+	color: white;
+}
+
+.module_leftitem{
+	width: 90%;
+	height: 60px;
+	margin: auto auto 10px auto;
+	background: url(../images/leftmenuback.jpg);
+	-webkit-box-shadow: #888 0px 0px 8px;	/* webkit核心浏览器中的css阴影 */
+	-moz-box-shadow: #888 0px 0px 8px;		/* Firefox中的css阴影 */
+	box-shadow: #888 0px 0px 8px;			/* Opera & IE9.0+ css阴影 */
+	behavior: url(PIE.php);
+	position: relative;
+}
+
+.friendLink{
+	width: 90%;
+	height: 60px;
+	margin: 16px auto;
+	text-align: left;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: 微软雅黑, 黑体;
+	position: relative;
+}
+
+.leftmenutext{
+	width: 80%;
+	height: 50%;
+	float: left;
+	margin: 16px 0 0 25px;
+	text-align: left;
+	font-weight: bold;
+	color: white;
+	font-size: 20px;
+	font-family: 微软雅黑, 黑体;
+}
+
+
+.frdtext{
+	width: 100%;
+	height: 50%;
+	float: left;
+	margin: 0;
+	text-align: left;
+	font-weight: bold;
+	font-size: 16px;
+	font-family: 微软雅黑, 黑体;
+}
+
+ul {
+	list-style:none;
+}
+
+li {
+	display: list-item;
+	}
+
+
+.leftmenutext a{
+	color: white;
+	text-decoration: none;
+}
+
+.topnav li{
+z-index: 600;
+}
+
+.topnav li ul{
+	margin:0 auto;
+	display:none;
+	z-index: 600;
+}
+
+.topnav li ul li{
+	float:none;
+	margin:0;
+	position:relative;
+	padding: 0 5px 0 0;
+	z-index: 600;
+	}
+	
+.topnav li ul li a{
+	float:none;
+	position:relative;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+	text-transform: capitalize;
+}
+
+.topnav li ul li a:hover{
+	background: red;
+	color:white;
+}
+	
+	
+	
+.second-menu{
+	position:absolute;
+	top:35px;
+	left:0;
+	width: 260px;
+	z-index: 600;
+	padding-left: 0px;
+}
+
+
+
+.second-menu a {
+	background:#3a3a3a no-repeat right top;
+	display:block;
+}
+.second-menu a:hover {
+	background:#4698ca no-repeat right -32px;
+}
+
+
+ul.topnav {
+	list-style: none;
+	padding: 0 20px;	
+	margin: 0;
+	float: left;
+	width: 920px;
+	background: #222;
+	font-size: 0.8em;
+	background: url(../images/navi/topnav_bg.gif) repeat-x
+}
+ul.topnav li {
+	float: left;
+	margin: 0;	
+	padding: 0 15px 0 0;
+	position: relative; /*--Declare X and Y axis base for sub navigation--*/
+}
+ul.topnav li a{
+	padding: 10px 5px;
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+ul.topnav li a:hover{
+	background: url(../images/navi/topnav_hover.gif) no-repeat center top;
+}
+ul.topnav li span { /*--Drop down trigger styles--*/
+	width: 17px;
+	height: 35px;
+	float: left;
+	background: url(../images/navi/subnav_btn.gif) no-repeat center top;
+}
+
+.leftPointer{
+	cursor:pointer;
+}
+
+.nav-eng{
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+#headerlink {
+	line-height: 26px;
+}
+
+#loginForm {
+}
+
+#sliding-navigation h2 	
+{ 
+	color: #999;
+	margin-bottom: 0; 
+	margin-left:13px;
+	height:40px;
+}
+
+#sliding-navigation h2 span
+{
+	display: none;
+}
+
+#sliding-navigation p	
+{ 
+	color: #ffff66; 
+	margin-top: .5em;
+	font-size: .75em;
+	padding-left:15px;	
+}
+#sliding-navigation p a	
+{ 
+	color: #ffffff; 
+}
+
+#navigation-block {
+	position:relative;
+	top:200px;
+	left:200px;
+}
+
+#hide {
+	position:absolute;
+	top:30px;
+	left:-190px;
+}
+
+ul#sliding-navigation
+{
+	list-style: none;
+	font-size: .75em;
+	width: 90%;
+	padding: 0;
+	margin: auto auto 10px auto;
+}
+
+ul#sliding-navigation {
+	cursor: pointer;
+}
+
+ul#sliding-navigation li.sliding-element h3,
+ul#sliding-navigation li.sliding-element a
+{
+	display: block;
+	width: 141px;
+	padding: 4px 18px;
+	margin: 0;
+	behavior: url(PIE.php);
+	margin-top: 2px;
+}
+
+ul#sliding-navigation li.sliding-element h3
+{
+	color: #222;
+	background: white;
+	border-left: 3px solid #FE4C40;
+	font-size: 1.0em;
+	font-weight: bold;
+	-webkit-box-shadow: #888 0px 0px 2px;	/* webkit核心浏览器中的css阴影 */
+	-moz-box-shadow: #888 0px 0px 2px;		/* Firefox中的css阴影 */
+	box-shadow: #888 0px 0px 2px;			/* Opera & IE9.0+ css阴影 */
+}
+
+ul#sliding-navigation li.sliding-element a
+{
+	color: #333;
+	background: white;
+	text-decoration: none;
+	text-align: right;
+	font-size: 1.0em;
+	border-left: 3px solid white;
+	-webkit-box-shadow: #888 0px 0px 2px;	/* webkit核心浏览器中的css阴影 */
+	-moz-box-shadow: #888 0px 0px 2px;		/* Firefox中的css阴影 */
+	box-shadow: #888 0px 0px 2px;			/* Opera & IE9.0+ css阴影 */
+}
+
+ul#sliding-navigation li.sliding-element a:hover { font-weight: bold; }

@@ -8,6 +8,7 @@ class Config:
 	MAIL_SUBJECT_PREFIX = '[FLASK]'
 	MAIL_SENDER = 'leon_e@163.com'
 	FLASK_ADMIN = os.environ.get('FLASK_ADMIN')
+	SECRET_KEY = os.environ.get('SECRET_KEY') or 'Q!W@E#R$'
 
 	@staticmethod
 	def init_app(app):

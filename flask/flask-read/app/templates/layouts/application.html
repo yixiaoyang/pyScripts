@@ -5,20 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}">
       <!-- This is how you would link your custom stylesheet -->
-      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/app.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/scaffolds.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation_and_overrides.css') }}">
       <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
       <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
-
-
+      {% block custom_css %}
+      {% endblock %}
     <title> {% block title%} {%endblock%} </title>
   </head>
   
   <body>
+
     <div class="container">
+      <header>
       {% include 'layouts/_header.html' %}
+      </header>
+
       <div class="content-wrapper">
-	{% block content %}
-	{% endblock %}
+        <!-- <div class="sidebar">
+          {% block sidebar %}
+          {% endblock %}
+        </div> -->
+
+        <div class="content">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="flash">
+              <ul class="none">
+              {% for message in messages %}
+                <li class="none">{{ message }}</li>
+              {% endfor %}
+              </ul>
+              </div>
+            {% endif %}
+            {% endwith %}
+
+        	{% block content %}
+        	{% endblock %}
+        </div>
       </div>
     </div>
     

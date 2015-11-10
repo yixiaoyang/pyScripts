@@ -1,19 +1,27 @@
-
-
 {% extends "layouts/application.html"%}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/todo.css') }}">
+{% endblock %}
 
 {% block title%}
 Todos Index
 {% endblock %}
 
 {% block content %}
-<p>all todos count: {{ todos_count }}</p>
+
+<div class="form_add">
+    {% include 'todo/new_form.html' %}
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
              <td>Content</td>
              <td>Time</td>
              <td>Status</td>
+             <td></td>
        </tr>
     </thead>
     <tbody>
@@ -22,9 +30,14 @@ Todos Index
             <td>{{ t.content }}</td>
             <td>{{ t.time }}</td>
             <td>{{ t.status }}</td>
+            <td>
+            <a href="/todo/{{ t.id }}/del/" rel="nofollow">Destroy</a>
+            </td>
        </tr>
     {% endfor %}
     </tbody>
 </table>
+
+<p>all todos count: {{ todos_count }}</p>
 
 {% endblock %}

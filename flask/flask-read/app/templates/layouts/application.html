@@ -4,12 +4,21 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.min.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/normalize.css') }}">
+
       <!-- This is how you would link your custom stylesheet -->
       <link rel="stylesheet" href="{{ url_for('static', filename = 'css/scaffolds.css') }}">
       <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation_and_overrides.css') }}">
       <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+
+      <script src="{{ url_for('static', filename = 'js/vendor/jquery.js') }}"></script>
       <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
+
+
+      <!--WARNING: Make js import error:{{ moment.include_jquery() }}-->
+      {{ moment.include_moment() }}
+
       {% block custom_css %}
       {% endblock %}
     <title> {% block title%} {%endblock%} </title>
@@ -51,6 +60,6 @@
   </body>
 </html>
 
-<script>
-  $(document).foundation();
-</script>
+  <script>
+    $(document).foundation();
+  </script>

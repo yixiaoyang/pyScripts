@@ -1,0 +1,27 @@
+yixiaoyang@localhost /devel/git/github/pyScripts/flask/flask-read $ python run.py  shell
+--------------------------------------------------------------------------------
+INFO in flask_scss [/usr/lib/python2.7/site-packages/flask_scss.py:83]:
+Pyscss loaded!
+--------------------------------------------------------------------------------
+
+>>> from app.models import User
+>>> user=User()
+>>> user
+<app.models.User object at 0x8fc950c>
+>>> user.password='cat'
+>>> user.password
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/devel/git/github/pyScripts/flask/flask-read/app/models.py", line 19, in password
+    raise AttributeError('Password is not readable attriute')
+AttributeError: Password is not readable attriute
+>>> user.password_hash
+'pbkdf2:sha1:1000$s3tE0c2J$8f31ab2ba67b9154b5663215b61f50a02d35f945'
+>>> u.verify_password('cat')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'u' is not defined
+>>> user.verify_password('cat')
+True
+>>> exit()
+ 

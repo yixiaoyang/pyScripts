@@ -4,6 +4,8 @@ from ..models import Todo
 from . import main
 from .. import db
 
+from flask.ext.login import login_required,login_user
+
 #from ..models import User
 #from .froms import NameForm
 
@@ -11,6 +13,9 @@ from .. import db
 def index():
 	return render_template('index.html')
 
+#####################################################################
+# Todo
+#####################################################################
 @main.route('/todo/',methods=['get', 'post'])
 def todos():
 	error = None
@@ -51,3 +56,15 @@ def todos_del(id):
 	db.session.delete(todo)
 	db.session.commit()
 	return redirect(url_for('main.todos'))
+
+
+#####################################################################
+# User
+#####################################################################
+@main.route('/user/login/', methods=['get'])
+@main.route('/user/login/', methods=['post'])
+def login():
+	print('method = %s' % request)
+	return render_template('user/login.html')
+
+	

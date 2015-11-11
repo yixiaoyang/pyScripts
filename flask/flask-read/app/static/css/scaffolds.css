@@ -66,9 +66,8 @@ div.field, div.actions {
   padding: 0px;
   filter: none;
   width: 100% !important;
-  min-height: 100%;
+  min-height: 90%;
   min-width: 900px;
-  margin-bottom: -80px;
   padding-right: 10px; }
 
   .content-wrapper {
@@ -100,7 +99,7 @@ footer {
   font-size: 12px;
   text-align: center;
   clear: both;
-  height: 20px;
+  height: 10%;
   position: relative;
   float: bottom; }
 

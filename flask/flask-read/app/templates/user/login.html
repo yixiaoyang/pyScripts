@@ -1,0 +1,41 @@
+{% extends "layouts/application.html"%}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/user.css') }}">
+{% endblock %}
+
+{% block title%}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="large-5 large-centered columns">
+  <div class="login-box">
+  <div class="row">
+  <div class="large-12 columns">
+    <form method="POST" action="{{url_for('main.login')}}">
+       <div class="row">
+         <div class="large-12 columns">
+             <input type="text" name="username" placeholder="Username" />
+         </div>
+       </div>
+      <div class="row">
+         <div class="large-12 columns">
+             <input type="password" name="password" placeholder="Password" />
+         </div>
+      </div>
+      <div class="row">
+        <div class="large-12 large-centered columns">
+            <input type="submit" class="button postfix" value="Sign In"/>
+        </div>
+        <div class="large-12 large-centered columns">
+            <a class="button postfix">Sign up</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}

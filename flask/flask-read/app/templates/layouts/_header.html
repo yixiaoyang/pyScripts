@@ -35,11 +35,11 @@
         <a href="#"> Accounts </a>
         <ul class="dropdown">
               {% if True  %}
-                <li><a href="#">Sign in</a></li>
-                <li><a href="#">Sign up</a></li>
+                <li><a href="{{url_for('main.login')}}">Sign in</a></li>
+                <li><a href="{{url_for('main.login')}}">Sign up</a></li>
               {% else %}
-                <li><a href="#">Sign in</a></li>
-                <li><a href="#">Sign up</a></li>
+                <li><a href="{{url_for('main.login')}}">Sign in</a></li>
+                <li><a href="{{url_for('main.login')}}">Sign up</a></li>
               {% endif %}
         </ul>
       </li>

@@ -31,7 +31,10 @@ Todos Index
             <td>{{ t.time }}</td>
             <td>{{ t.status }}</td>
             <td>
-            <a href="/todo/{{ t.id }}/del/" rel="nofollow">Destroy</a>
+                <!-- <form action="{{url_for('main.todos_del',id=t.id)}}" method="delete" if-match="q1w2e3r4t5">
+                  <input type="submit" class="link" value="Delete"/>
+                </form> -->
+            <a href="{{url_for('main.todos_del',id=t.id)}}" rel="nofollow">Destroy</a>
             </td>
        </tr>
     {% endfor %}

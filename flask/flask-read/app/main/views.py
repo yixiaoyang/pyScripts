@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, session, redirect, url_for, escape, request, flash
+from flask import render_template, session, redirect, url_for, escape, request, flash, abort 
 from ..models import Todo
 from . import main
 from .. import db
@@ -28,18 +28,7 @@ def todos():
 	todos_count = Todo.query.count()
 	return render_template('todo/index.html', todos=todos,todos_count=todos_count)
 
-
-@main.route('/todo/<id>/del/',methods=['get','post'])
-def todos_del(id):
-	id = request.form['id']
-	print('id=%d' % id)
-	todo = Todo.query.filter_by(id=id).first()
-	if todo is None:
-		abort(404)
-	db.session.delete(todo)
-	db.session.commit()
-	return redirect(url_for('index'))
-
+# test:curl -i http://localhost:5000/todo/1/ -X DELETE
 @main.route('/todo/<id>/',methods=['get','post', 'delete'])
 def todos_show(id):
 	print('method = %s' % request)
@@ -49,4 +38,16 @@ def todos_show(id):
 			abort(404)
 		return render_template('todo/show.html', todo=todo)
 	elif request.method == 'DELETE':
-		return redirect(url_for('index'))
+		# url_for in blueprint 'url_for(BlueprintName.FuncName)' 
+		return redirect(url_for('main.todos'))
+
+@main.route('/todo/del/<id>',methods=['get','post','delete'])
+def todos_del(id):
+	#id = request.form['id']
+	print('id=%s' % id)
+	todo = Todo.query.filter_by(id=id).first()
+	if todo is None:
+		abort(404)
+	db.session.delete(todo)
+	db.session.commit()
+	return redirect(url_for('main.todos'))

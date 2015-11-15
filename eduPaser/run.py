@@ -1,132 +1,113 @@
 #!/usr/bin/python
-# -*- utf-8 *-*
+# -*- coding: utf-8 *-*
 
-import json
-import sqlite3
-import csv
 import sys
-
-import logging  
-import logging.handlers  
-
-from models import *
-from parser import *
 from log import *
+from config import *
+from models import *
 
-# gloabel vars
-l_dump = False
-l_colleges = list()
-l_c211_url = 'http://www.hao123.com/eduhtm/211.htm'
-# out
-l_out_dir = 'out'
-l_csv_file = 'colleges.csv'
-l_china211jfile = 'china211.json'
 logger = None
 china211 = None
 
-def path_of(file_or_dir):
-	return  os.path.join(os.getcwd(), l_out_dir,file_or_dir)
-
-def colleges_to_csv():
-	fieldnames = ['name', 'eng_name','url']
-	with open(path_of(l_csv_file),'wb') as csvfp:
-		writer = csv.DictWriter(csvfp, fieldnames=fieldnames, delimiter=',', 
-						  quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		#writer.writeheader()
-		for c in l_colleges:
-			writer.writerow({'name':c.name,'eng_name':c.eng_name,'url':c.url})
-		csvfp.close()
-	logger.info("All %d colleges save to %s done" % (len(l_colleges),path_of(l_csv_file)));
-
-def csv_to_colleges():
-	with open(path_of(l_csv_file),'rb') as csvfp:
-		fieldnames = ['name', 'eng_name','url']
-		reader = csv.DictReader(csvfp, fieldnames=fieldnames, delimiter=',', 
-						  quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		for row in reader:
-			l_colleges.append(College(row['url'],row['name'],row['eng_name']))
-		csvfp.close()
-	logger.info("All %d colleges laod from to %s done" % (len(l_colleges),path_of(l_csv_file)));
-
-def printColleges():
-	for c in l_colleges:
-		print("%s,%s,%s" % (c.name, c.eng_name, c.url))
-
-def make_output_dirs():
-	for c in l_colleges:
-		path = path_of(c.name)
-		logger.debug(path)
-		if not os.path.isdir(path):
-			os.mkdir(path)
-		print("%s,%s,%s" % (c.name, c.eng_name, c.url))
-
-
 def _init():
-	#l_dump = True
-	l_dump = False
-		
-	# set encoding
-	reload(sys)
-	sys.setdefaultencoding('utf-8')
+    # set encoding
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
-	logger = setup_custom_logger("root")
-	logger.debug("setup logger")
+    mlog = setup_custom_logger("root")
+    mlog.debug("setup logger")
 
-	path = path_of('')
-	if not os.path.isdir(path):
-		os.mkdir(path)
-		logger.debug("mkdir %s"%path)
+    mpath = path_of('')
+    if not os.path.isdir(mpath):
+        os.mkdir(mpath)
+        mlog.debug("mkdir %s" % mpath)
+
 
 if __name__ == "__main__":
-	_init()
-	logger = logging.getLogger('root')
+    _init()
+    logger = logging.getLogger('root')
 
-	ans=True
-	while ans:
-		print ("""
+    ans = True
+    while ans:
+        print ("""
 -------------------------------------------------
-			0.Exit
-			1.Fetch colleges save to csv
-			2.Fetch colleges from csv
-			3.Make output dirs
-			4.Test Academies parser
+q.Exit
+1.Fetch colleges save to csv
+2.Fetch colleges from csv
+3.Make output dirs
+4.Test Academies parser
+5.Auto Fetch all academiesUrl
+6.Auto Fetch Academy
 -------------------------------------------------
-		""")
-		ans=raw_input("\t\t\tWhat would you like to do? ") 
-		if ans=="0": 
-			logger.debug("\n Goodbye")
-			break 
-		elif ans=="1":
-			logger.debug ("load from %s" % l_c211_url)
-			hao123Parser = Hao123_211_Parser(l_c211_url)
-			hao123Parser.run()
-			l_colleges = hao123Parser.rlist
-			china211 = China211(l_c211_url,l_colleges);
-			colleges_to_csv()
-			obj_to_file(china211,path_of(l_china211jfile))
-		elif ans=="2":
-			csv_to_colleges()
-			printColleges()
-			china211 = China211(l_c211_url,l_colleges);
-		elif ans=="3":
-			make_output_dirs()	
-		elif ans=="4":	
-			china211 = obj_from_file(path_of(l_china211jfile))
-			logger.debug("china211(%d colleges) load from json done"%(len(china211.colleges)))
-			for college in china211.colleges:				
-				# do something
-				logger.debug('parsing [%s], url:[%s]'%(college.name,college.academiesUrl))
-				aparser = SimpleAParser(college.academiesUrl,college.rule)
-				aparser.run()
-				#if len(aparser.rlist) != 0:
-				#	print(aparser.rlist)
-				
-				for tag in aparser.rlist:
-					college.academies.append(Academy(tag['href']))
-				obj_to_file(college,path_of("%s/%s.json"%(college.name,college.eng_name)))
-				#FIXME
-				break;
-		elif ans=="4":
-			print("\n Goodbye") 
-		else:
-			ans = True
+""")
+        ans = raw_input("What would you like to do? ")
+        if ans == "q":
+            logger.debug("\n Goodbye")
+            break
+        elif ans == "1":
+            logger.debug("load from %s" % Config.c211_url)
+            if not china211:
+                china211 = China211(Config.c211_url)
+            china211.parse_colleges()
+            if china211.colleges:
+                china211.colleges_to_csv()
+                obj_to_file(china211, path_of(Config.c211_file))
+            else:
+                logger.error("china211 parsing colleges failed")
+        elif ans == "2":
+            china211 = China211(Config.c211_url)
+            china211.csv_to_colleges()
+            china211.printColleges()
+        elif ans == "3":
+            if not china211:
+                china211 = obj_from_file(path_of(Config.c211_file))
+            china211.mkdirs()
+        elif ans == "4":
+            if not china211:
+                china211 = obj_from_file(path_of(Config.c211_file))
+                logger.debug("china211(%d colleges) load from json done" % (len(china211.colleges)))
+            
+            china211.printColleges()
+            ans = raw_input("Which college would you like to parse? ")
+            college = china211.colleges[int(ans)]
+            logger.debug("start parsing %s"%college.name)
+            
+            if college:
+                if not college.academiesUrl:
+                    college.parse_aurl_auto()
+                path = path_of("%s/%s.json" % (college.name, college.eng_name))
+                obj_to_file(college, path)
+                # break
+        elif ans == "5":
+            if not china211:
+                china211 = obj_from_file(path_of(Config.c211_file))
+                logger.debug("china211(%d colleges) load from json done" % (len(china211.colleges)))
+            logger.debug("auto parsing academy link...")
+            for i,college in enumerate(china211.colleges):
+                college.parse_aurl_auto()
+                path = path_of("%s/%s.json" % (college.name, college.eng_name))
+                obj_to_file(college, path)
+                #if i > 20:
+                #    break;
+            obj_to_file(china211, path_of(Config.c211_file))
+            china211.printColleges()
+            break;
+        elif ans == "6":
+            if not china211:
+                china211 = obj_from_file(path_of(Config.c211_file))
+                logger.debug("china211(%d colleges) load from json done" % (len(china211.colleges)))
+            
+            china211.printColleges()
+            ans = raw_input("Which college would you like to parse? ")
+            college = china211.colleges[int(ans)]
+
+            if len(college.academiesUrl) != 0:
+                if len(college.academies) != 0:
+                    college.print_academies()
+                    ans = raw_input("academy to parse? ")
+                    academy = college.academies[int(ans)]
+                    logger.debug("start parsing %s"%academy.name)
+                else:
+                    logger.debug("no academies parsed")
+        else:
+            ans = True

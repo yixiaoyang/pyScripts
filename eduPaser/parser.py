@@ -7,6 +7,7 @@ import logging
 import logging.handlers
 # import requests
 from bs4 import BeautifulSoup
+from bs4.element import Tag as Bs4Tag
 from config import Config
 
 logger = logging.getLogger('root')
@@ -87,9 +88,10 @@ class SimpleAParser(Parser):
             if len(value) == 0:
                 return False
             if tag.has_attr(attr):
-                if tag[attr] == value:
+                if value in tag[attr]:
                     return True
         elif value.__class__.__name__ == 'bool':
+            #logger.debug("tag has attr %s ?= %s"%( attr,value))
             if tag.has_attr(attr) == value:
                 return True
         elif value.__class__.__name__ == 'dict':
@@ -103,18 +105,52 @@ class SimpleAParser(Parser):
             logger.error("Rule should has a tag")
             return False
         if self.soup:
-            logger.debug("url: %s", self.url)
             res = self.soup.find_all(name=self.rule.tag_name)
-            logger.debug("find_all(\'%s\') count %d" % (self.rule.tag_name, len(res)))
-            for tag in res:
-                valid = True
+            logger.debug("find_(\'%s\') in %s count %d" % (self.rule.tag_name, self.url, len(res)))
+            for idx, tag in enumerate(res):
+                valid = True if (len(self.rule.select) == 0) else False
+                # 查看目标是否在规定范围
+                for rg in self.rule.select:
+                    if rg.contains(idx):
+                        valid = True
+                        break
+                if not valid:
+                    continue
+
                 # 验证目标属性
                 for attr, value in self.rule.attrs.items():
                     if not self.check(tag, attr, value):
                         valid = False
-                        continue
+                        break
+                if not valid:
+                    continue
+
+                #logger.debug(tag)
+
+                # 验证父亲节点
+                for i, t in enumerate(tag.parents):
+                    if i >= len(self.rule.parents):
+                        break
+                    logger.debug("<%s>"%self.rule.parents[i])
+
+                    if t.name != self.rule.parents[i]:
+                        valid = False
+                        logger.debug("parents not incorrect")
+                        break
+                if not valid:
+                    continue
+
+                # 提取带href属性的子节点
                 if valid:
-                    self.rlist.append(tag)
+                    if tag.has_attr('href'):
+                        self.rlist.append(tag)
+                    else:
+                        for child in tag.descendants:
+                            if isinstance(child, Bs4Tag):
+                                if child.has_attr('href'):
+                                    self.rlist.append(child)
+                                    logger.debug(child)
+                    continue
             return True
 
 
@@ -139,18 +175,22 @@ class TsinghuaAcademyParser(Parser):
 
 
 def aca_guess_name(url):
-    request = urllib2.urlopen(url, timeout=Config.URL_TIMEOUT)
-    doc = request.read()
-    request.close()
-    soup = BeautifulSoup(doc, Config.SOUP_PARSER)
-    if soup.title:
-        return soup.title.string
-    return ''
-
+    try:
+        request = urllib2.urlopen(url, timeout=Config.URL_TIMEOUT)
+        doc = request.read()
+        request.close()
+        soup = BeautifulSoup(doc, Config.SOUP_PARSER)
+        if soup.title:
+            print soup.title.string
+            return soup.title.string
+        return ''
+    except Exception as e:
+        logger.error("guess name of url %s failed"%url)
+        return ''
 
 def aca_filter(col_name, col_url, url, name):
     # 检查col_url
-    if col_url == None:
+    if col_url is None or url is None:
         logger.erorr("col_url None")
         return None, None
 
@@ -163,9 +203,14 @@ def aca_filter(col_name, col_url, url, name):
             url = col_url + url
 
     # 检查name. 如果没有找到了url但是没有找到院系名称，则打开院系url，根据title猜测院系名称
+    if name:
+        # 对于链接名==链接地址的重新识别
+        if name == url:
+            name = None
     name = name or aca_guess_name(url)
     logger.debug(name)
     if len(name) != 0:
+        name = name.strip(' \t\n\r')
         idx = name.find(col_name)
         if idx != -1:
             # "XX大学数学系首页XXXX" => "数学系"
@@ -174,6 +219,15 @@ def aca_filter(col_name, col_url, url, name):
             if key in name:
                 return url, name
     return None, None
+
+
+def is_sublist(parents, sublist):
+    if len(sublist) >= len(parents):
+        return False
+    for i, s in enumerate(sublist):
+        if s != parents[i]:
+            return False
+    return True
 
 
 l_parsers = {

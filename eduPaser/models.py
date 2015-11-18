@@ -26,21 +26,29 @@ def get_sname(eng_name):
                 return nameList[0]
         return ''
 
-class ParseRule:
-    def __init__(self, tag_name=None):
-        # @param tag:要抓取的目标标签
-        self.tag_name = tag_name or ''
+class Range:
+    def __init__(self):
+        self.min = 0
+        self.max = 0
 
-        # 1. 目标节点属性
+    def contains(self, idx):
+        return (idx >= self.min) and (self.idx < max)
+
+class ParseRule:
+    def __init__(self, tag_name=None,parents=None):
+        # 要抓取的目标标签
+        self.tag_name = tag_name or ''
+        # 要抓取的目标标签的父标签列表
+        self.parents = parents or []
+        # 目标节点属性
         # {
         #   'class':True, true或者false表示是否含有此标签
         #   'width':'21%'，标签为具体值则表示仅当标签=值时抓取
         #   'class':['class1','class2'], 标签为列表时表示仅当标签值为列表中的值才成立
         # }
         self.attrs = {}
-
-        # 2. 父节点属性
-        self.parent_attrs = {}
+        # 结果筛选
+        self.select = []
 
 
 class ItemBase:
@@ -190,7 +198,7 @@ class China211:
 
     def to_json_file(self):
         path = path_of(Config.C211_FILE)
-        #if not os.path.exists(path):
+        # if not os.path.exists(path):
         obj_to_file(self, path)
 
 _l_classes = {
@@ -199,7 +207,8 @@ _l_classes = {
     "College": College,
     "Academy": Academy,
     "ParseRule": ParseRule,
-    "Employee":Employee
+    "Employee":Employee,
+    "Range": Range
 }
 
 

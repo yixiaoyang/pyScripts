@@ -30,7 +30,7 @@ class Config:
     ACA_NAME_FILTER = set([u'数学', u'计算机', u'物理', u'化学', u'化工', u'环境', u'材料', u'机电'])
     ACA_MODFILE = 'MyParser.py'
 
-    URL_TIMEOUT = 10
+    URL_TIMEOUT = 5
 
 
 class DevConfig(Config):

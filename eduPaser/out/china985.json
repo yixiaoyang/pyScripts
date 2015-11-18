@@ -1,0 +1,804 @@
+{
+    "__classname__": "China211", 
+    "__module__": "models", 
+    "colleges": [
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.tsinghua.edu.cn/publish/newthu/newthu_cnt/faculties/index.html", 
+            "done": false, 
+            "eng_name": "tsinghua.edu.cn", 
+            "name": "清华大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "area"
+            }, 
+            "sname": "tsinghua", 
+            "url": "http://www.tsinghua.edu.cn/publish/newthu/index.html"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.pku.edu.cn/academics/index.htm", 
+            "done": false, 
+            "eng_name": "pku.edu.cn", 
+            "name": "北京大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "style": false, 
+                    "target": "_blank"
+                }, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "pku", 
+            "url": "http://www.pku.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.cau.edu.cn/col/col10227/index.html", 
+            "done": false, 
+            "eng_name": "www.cau.edu.cn", 
+            "name": "中国农业大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "class": "depar-t"
+                }, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "span"
+            }, 
+            "sname": "cau", 
+            "url": "http://www.cau.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.buaa.edu.cn/xyykc/index.htm", 
+            "done": false, 
+            "eng_name": "buaa.edu.cn", 
+            "name": "北京航空航天大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "title": true
+                }, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "buaa", 
+            "url": "http://www.buaa.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.bit.edu.cn/gbxxgk/gbxysz2/index.htm", 
+            "done": false, 
+            "eng_name": "bit.edu.cn", 
+            "name": "北京理工大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "target": false
+                }, 
+                "parents": ["td"], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "bit", 
+            "url": "http://www.bit.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.sjtu.edu.cn/xbdh/yjdh/yx.htm", 
+            "done": false, 
+            "eng_name": "sjtu.edu.cn", 
+            "name": "上海交通大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "class":"c51057"
+                }, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "sjtu", 
+            "url": "http://www.sjtu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.fudan.edu.cn/channels/view/37", 
+            "done": false, 
+            "eng_name": "fudan.edu.cn", 
+            "name": "复旦大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "target":"_blank"
+                }, 
+                "parents": ["td"], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "fudan", 
+            "url": "http://www.fudan.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.tongji.edu.cn/yuanxizonglan.html", 
+            "done": false, 
+            "eng_name": "tongji.edu.cn", 
+            "name": "同济大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "map"
+            }, 
+            "sname": "tongji", 
+            "url": "http://www.tongji.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.nankai.edu.cn/213/list.htm", 
+            "done": false, 
+            "eng_name": "nankai.edu.cn", 
+            "name": "南开大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": ["td"], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "nankai", 
+            "url": "http://www.nankai.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.tju.edu.cn/tdgk/jgsz/xyb/", 
+            "done": false, 
+            "eng_name": "tju.edu.cn", 
+            "name": "天津大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {
+                    "_fcksavedurl":true,
+                    "target":true,
+                    "class":false
+                },
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a"
+            }, 
+            "sname": "tju", 
+            "url": "http://www.tju.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "cqu.edu.cn", 
+            "name": "重庆大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "cqu", 
+            "url": "http://www.cqu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.neu.edu.cn/org_index.html#collegeNav", 
+            "done": false, 
+            "eng_name": "neu.edu.cn", 
+            "name": "东北大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "neu", 
+            "url": "http://www.neu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "www.neuq.edu.cn", 
+            "name": "东北大学秦皇岛分校", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "neuq", 
+            "url": "http://www.neuq.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "dlut.edu.cn", 
+            "name": "大连理工大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "dlut", 
+            "url": "http://www.dlut.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.jlu.edu.cn/jgsz.htm", 
+            "done": false, 
+            "eng_name": "jlu.edu.cn", 
+            "name": "吉林大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "jlu", 
+            "url": "http://www.jlu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.hit.edu.cn/223/list.htm", 
+            "done": false, 
+            "eng_name": "hit.edu.cn", 
+            "name": "哈尔滨工业大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "hit", 
+            "url": "http://www.hit.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.hitwh.edu.cn/Organizations.asp", 
+            "done": false, 
+            "eng_name": "hitwh.edu.cn", 
+            "name": "哈尔滨工业大学(威海)", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "hitwh", 
+            "url": "http://www.hitwh.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "nju.edu.cn", 
+            "name": "南京大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "nju", 
+            "url": "http://www.nju.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.seu.edu.cn/33/list.htm", 
+            "done": false, 
+            "eng_name": "seu.edu.cn", 
+            "name": "东南大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "seu", 
+            "url": "http://www.seu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.zju.edu.cn/c2505465/catalog.html", 
+            "done": false, 
+            "eng_name": "zju.edu.cn", 
+            "name": "浙江大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "ustc.edu.cn", 
+            "name": "中国科学技术大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "ustc", 
+            "url": "http://www.ustc.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "xmu.edu.cn", 
+            "name": "厦门大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "xmu", 
+            "url": "http://www.xmu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "sdu.edu.cn", 
+            "name": "山东大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "sdu", 
+            "url": "http://www.sdu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "ouc.edu.cn", 
+            "name": "中国海洋大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "ouc", 
+            "url": "http://www.ouc.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.wh.sdu.edu.cn/html/jxyb.html", 
+            "done": false, 
+            "eng_name": "wh.sdu.edu.cn", 
+            "name": "山东大学(威海)", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "wh", 
+            "url": "http://www.wh.sdu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "nuaa.edu.cn", 
+            "name": "南京航空航天大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "nuaa", 
+            "url": "http://www.nuaa.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "njust.edu.cn", 
+            "name": "南京理工大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "njust", 
+            "url": "http://www.njust.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.whu.edu.cn/jgsz/yxsz.htm", 
+            "done": false, 
+            "eng_name": "whu.edu.cn", 
+            "name": "武汉大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "whu", 
+            "url": "http://www.whu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.hust.edu.cn/SchoolProfiles4.html", 
+            "done": false, 
+            "eng_name": "hust.edu.cn", 
+            "name": "华中科技大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "hust", 
+            "url": "http://www.hust.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.hnu.edu.cn/html/xueyuanyuxueke/xueyuanshezhi/", 
+            "done": false, 
+            "eng_name": "hnu.edu.cn", 
+            "name": "湖南大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "hnu", 
+            "url": "http://www.hnu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.csu.edu.cn/jgsz/ejxy.htm", 
+            "done": false, 
+            "eng_name": "csu.edu.cn", 
+            "name": "中南大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "csu", 
+            "url": "http://www.csu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "nudt.edu.cn", 
+            "name": "国防科技大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "nudt", 
+            "url": "http://www.nudt.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.scut.edu.cn/webpage/jg.htm", 
+            "done": false, 
+            "eng_name": "scut.edu.cn", 
+            "name": "华南理工大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "scut", 
+            "url": "http://www.scut.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "sysu.edu.cn", 
+            "name": "中山大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "sysu", 
+            "url": "http://www.sysu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.scu.edu.cn/portal2013/jg/xxjg/I081301index_1.htm", 
+            "done": false, 
+            "eng_name": "scu.edu.cn", 
+            "name": "四川大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "scu", 
+            "url": "http://www.scu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "http://www.uestc.edu.cn/?ch/4", 
+            "done": false, 
+            "eng_name": "uestc.edu.cn", 
+            "name": "电子科技大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "uestc", 
+            "url": "http://www.uestc.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "javascript:;", 
+            "done": false, 
+            "eng_name": "xjtu.edu.cn", 
+            "name": "西安交通大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "xjtu", 
+            "url": "http://www.xjtu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "nwpu.edu.cn", 
+            "name": "西北工业大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "nwpu", 
+            "url": "http://www.nwpu.edu.cn/"
+        }, 
+        {
+            "__classname__": "College", 
+            "__module__": "models", 
+            "academies": [], 
+            "academiesUrl": "", 
+            "done": false, 
+            "eng_name": "lzu.edu.cn", 
+            "name": "兰州大学", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": ""
+            }, 
+            "sname": "lzu", 
+            "url": "http://www.lzu.edu.cn/"
+        }
+    ], 
+    "url": "http://www.hao123.com/eduhtm/211.htm"
+}

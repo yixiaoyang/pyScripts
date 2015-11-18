@@ -102,6 +102,7 @@ menu1 = """
 -------------------------------------------------
 q.Exit
 p.Print colleges
+s.Save to china211
 1.Fetch colleges save to json
 2.Fetch colleges from json
 3.Make output dirs
@@ -141,6 +142,9 @@ if __name__ == "__main__":
                     china211 = obj_from_file(path_of(Config.C211_FILE))
                     colleges = china211.colleges
 
+            if ans == "s":
+                china211.to_json_file()
+                continue
             if ans == "2" or ans == "p":
                 print_colleges()
                 continue
@@ -174,10 +178,14 @@ if __name__ == "__main__":
                 print_colleges()
                 c_ans = raw_input("Which college would you like to parse? ")
                 c = colleges[int(c_ans)]
-                obj = obj_from_file(c.json_filename())
-                college = obj or c
 
-                if len(college.academies) == 0:
+                college = c
+                if os.path.exists(c.json_filename()):
+                    obj = obj_from_file(c.json_filename())
+                    if 0 != len(obj.academies):
+                        college = obj
+
+                if 0 == len(college.academies):
                     if ans == "6":
                         college.parse_academies()
                         if len(college.academies) != 0:

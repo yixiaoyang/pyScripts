@@ -18,14 +18,8 @@ def handler(tag):
 # @output:输出employee，如果没有检测到内容返回None
 
 def profile_handler(doc,name,url,path):
-    # 太乱了，只保存名称和个人主页，个人简历文件另存当前目录
-    soup = BeautifulSoup(doc, Config.SOUP_PARSER)
-    div = soup.find_all(id="s2_right_con",limit=1)
     filename = path+name+".html"
-    if not div or len(div) == 0:
-        return Employee(name=name,url=url)
     with open(filename,'wb') as fp:
-        content = div[0].prettify()
-        fp.write(content)
+        fp.write(doc)
         fp.close()
     return Employee(name=name,url=url)

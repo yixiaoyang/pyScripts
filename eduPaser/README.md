@@ -45,16 +45,14 @@
  - handler：将找到的目标转化为员工数据实体
  - profile_handler：保存简历正文到文件，模糊匹配员工数据并返回
 
+json中的主要数据结构如下所示：
 
-
-{
     "__classname__": "Academy",     表示数据的类型，自动写好的
     "__module__": "models",         表示类的模块，自动写好的
     "departments": {                [*] 找到一个学院的所有教师名单的索引页面，并填写进去,这个页面将用来解析employee（在职员工）
                                     格式为名字：网址
         "全职教员":"http://www.math.pku.edu.cn/static/quanzhijiaoyuan.html"
-    },          
-                    
+    },
     departmentsRule结构暂时不用管，没用到
     "departmentsRule": {
         "__classname__": "ParseRule", 

@@ -5,21 +5,18 @@ import sys
 import csv
 import os
 import imp
-
 from log import *
 from config import Config
 from config import path_of
-from parser import SimpleAParser
-from parser import AutoAcademyParser
-from parser import Parser
-from parser import Hao123_211_Parser
+from mparser import Hao123_211_Parser
+from mparser import get_doc_bySelenium, selenium_close
 from models import College, China211
-from models import unserialize_object,serialize_instance,obj_to_json,obj_to_file,obj_from_file
+from models import obj_to_file, obj_from_file
+import html2text
 
 logger = None
 china211 = None
 colleges = list()
-
 
 def parse_colleges():
     if len(colleges) != 0:
@@ -50,7 +47,7 @@ def colleges_to_csv():
         for c in colleges:
             writer.writerow({'name': c.name, 'eng_name': c.eng_name, 'url': c.url})
         csvfp.close()
-    logger.info("All %d colleges save to %s done" % (len(colleges), path_of(Config.COL_CSV_FILE)));
+    logger.info("All %d colleges save to %s done" % (len(colleges), path_of(Config.COL_CSV_FILE)))
 
 
 def csv_to_colleges():
@@ -61,20 +58,12 @@ def csv_to_colleges():
         for row in reader:
             colleges.append(College(row['url'], row['name'], row['eng_name']))
         csvfp.close()
-    logger.info("All %d colleges laod from to %s done" % (len(colleges), path_of(Config.COL_CSV_FILE)));
-
-
-def mkdirs():
-    for c in colleges:
-        path = path_of(c.sname)
-        logger.debug(path)
-        if not os.path.isdir(path):
-            os.mkdir(path)
-            c.to_json_file()
-        print("%s,%s,%s" % (c.name, c.eng_name, c.url))
+    logger.info("All %d colleges laod from to %s done" % (len(colleges), path_of(Config.COL_CSV_FILE)))
 
 
 def _init():
+    global  logger
+
     # set encoding
     reload(sys)
     sys.setdefaultencoding('utf-8')
@@ -86,6 +75,8 @@ def _init():
     if not os.path.isdir(mpath):
         os.mkdir(mpath)
         mlog.debug("mkdir %s" % mpath)
+
+    logger = logging.getLogger('root')
 
 menu0 = '''
 q. 退出
@@ -104,103 +95,158 @@ q.Exit
 p.Print colleges
 s.Save to china211
 1.Fetch colleges save to json
-2.Fetch colleges from json
-3.Make output dirs
-4.Test Academies parser
-5.Auto Fetch all academiesUrl
-6.Auto Fetch Academy
-7.Academy test
-8.MyParser Test
+2.Make output dirs
+3.Test Academies parser
+4.Auto Fetch all academiesUrl
+5.Auto Fetch Academy
+6.Auto Fetch Employees
+7.MyParser Test
 -------------------------------------------------
 """
+def menu_save_china985_json():
+    china211.to_json_file()
+
+
+def menu_mkdirs():
+    for c in colleges:
+        path = path_of(c.sname)
+        logger.debug(path)
+        if not os.path.isdir(path):
+            os.mkdir(path)
+            c.to_json_file()
+        print("%s,%s,%s" % (c.name, c.eng_name, c.url))
+
+
+def menu_parse211():
+    global china211
+    parse_colleges()
+
+    logger.debug("This operation is danger, china985.json will be overwrite with data from %s" % Config.C211_URL)
+    ans = raw_input("press 'yes' to continue or ignore it: ")
+    if ans != "yes":
+        return
+
+    if not china211:
+        colleges_to_csv()
+        china211 = China211(Config.C211_URL, colleges)
+        china211.to_json_file()
+    else:
+        logger.warnning("parsing colleges ignored")
+
+
+def menu_load211_from_json():
+    global colleges
+    global china211
+    if len(colleges) == 0:
+        if not china211:
+            china211 = obj_from_file(path_of(Config.C211_FILE))
+            colleges = china211.colleges
+
+
+def menu_parse_academy():
+    print_colleges()
+    ans = raw_input("Which college would you like to parse? ")
+    college = colleges[int(ans)]
+    logger.debug("start parsing %s" % college.name)
+    if college:
+        if not college.academiesUrl:
+            college.parse_aurl_auto()
+        obj_to_file(college, college.json_filename())
+
+
+def menu_parse_academy_url_auto():
+    logger.debug("auto parsing academy link...")
+    for i, college in enumerate(colleges):
+        college.parse_aurl_auto()
+        obj_to_file(college, college.json_filename())
+    china211.colleges = colleges
+    china211.to_json_file()
+    print_colleges()
+
+
+def menu_parse_academies():
+    print_colleges()
+    c_ans = raw_input("Which college would you like to parse? ")
+    c = colleges[int(c_ans)]
+
+    college = c
+    if os.path.exists(c.json_filename()):
+        obj = obj_from_file(c.json_filename())
+        if 0 != len(obj.academies):
+            college = obj
+
+    if 0 == len(college.academies):
+        college.parse_academies()
+        if len(college.academies) != 0:
+            obj_to_file(college, college.json_filename())
+            college.mkdirs()
+
+
+def menu_parse_employees():
+    print_colleges()
+    c_ans = raw_input("Which college would you like to parse? ")
+    c = colleges[int(c_ans)]
+
+    college = c
+    if os.path.exists(c.json_filename()):
+        obj = obj_from_file(c.json_filename())
+        if 0 != len(obj.academies):
+            college = obj
+
+    if 0 != len(college.academies):
+        college.print_academies()
+        a_ans = raw_input("Academy to parse? ")
+        academy = college.academies[int(a_ans)]
+        academy.parse_employees(college)
+        logger.debug("parsed employees count %d"%len(academy.employees))
+
+        if academy.employees_existed(college):
+            academy.employees_to_csv(college)
+            academy.to_json_file(college)
+        academy.print_employees()
+
+
+def menu_test_imp():
+    foo = imp.load_source('MyParser', '/devel/git/github/pyScripts/eduPaser/out/pku/MyParser.py')
+    foo.handler()
+
+
+# menus
+menus = {
+    "p":print_colleges,
+    "s":menu_save_china985_json,
+    "1":menu_parse211,
+    "2":menu_mkdirs,
+    "3":menu_parse_academy,
+    "4":menu_parse_academy_url_auto,
+    "5":menu_parse_academies,
+    "6":menu_parse_employees,
+    "7":menu_test_imp,
+}
+
 
 if __name__ == "__main__":
     _init()
-    logger = logging.getLogger('root')
 
     ans = True
+
     while ans:
         print (menu1)
         ans = raw_input("What would you like to do? ")
         if ans == "q":
             logger.debug("\n Goodbye")
             break
-
-        elif ans == "1":
-            logger.debug("load from %s" % Config.C211_URL)
-            parse_colleges()
-            if not china211:
-                colleges_to_csv()
-                china211 = China211(Config.C211_URL, colleges)
-                china211.to_json_file()
-            else:
-                logger.error("parsing colleges failed")
-            continue
         else:
-            if len(colleges) == 0:
-                if not china211:
-                    china211 = obj_from_file(path_of(Config.C211_FILE))
-                    colleges = china211.colleges
+            if ans != "1":
+                menu_load211_from_json()
 
-            if ans == "s":
+            foo = menus.get(ans)
+            if foo:
+                foo()
+            elif ans == "s":
                 china211.to_json_file()
                 continue
-            if ans == "2" or ans == "p":
-                print_colleges()
-                continue
 
-            elif ans == "3":
-                mkdirs()
-                continue
-
-            elif ans == "4":
-                print_colleges()
-                ans = raw_input("Which college would you like to parse? ")
-                college = colleges[int(ans)]
-                logger.debug("start parsing %s" % college.name)
-                if college:
-                    if not college.academiesUrl:
-                        college.parse_aurl_auto()
-                    obj_to_file(college,college.json_filename())
-                continue
-
-            elif ans == "5":
-                logger.debug("auto parsing academy link...")
-                for i, college in enumerate(colleges):
-                    college.parse_aurl_auto()
-                    obj_to_file(college,college.json_filename())
-                china211.colleges = colleges
-                china211.to_json_file()
-                print_colleges()
-                continue
-
-            elif ans == "6" or ans == "7":
-                print_colleges()
-                c_ans = raw_input("Which college would you like to parse? ")
-                c = colleges[int(c_ans)]
-
-                college = c
-                if os.path.exists(c.json_filename()):
-                    obj = obj_from_file(c.json_filename())
-                    if 0 != len(obj.academies):
-                        college = obj
-
-                if 0 == len(college.academies):
-                    if ans == "6":
-                        college.parse_academies()
-                        if len(college.academies) != 0:
-                            obj_to_file(college,college.json_filename())
-                            college.mkdirs()
-                elif ans == "7":
-                    a_ans = raw_input("Academy to parse? ")
-                    academy = college.academies[int(a_ans)]
-                    #logger.debug("start parsing %s" % academy.name)
-                continue
-            elif ans == "8":
-                foo = imp.load_source('MyParser', '/devel/git/github/pyScripts/eduPaser/out/pku/MyParser.py')
-                parser = foo.MyParser()
-                parser.test()
-            else:
-                ans = True
-                continue
-# end of file
+    # do something clean
+    selenium_close()
+    # end of file

@@ -1,2 +1,7 @@
 *.tmp
 *.pyc
+*.html
+*.json
+*.csv
+*.tar.gz
+

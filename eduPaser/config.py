@@ -6,7 +6,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-# gloabel vars
+# globel vars
 class Config:
     SOUP_PARSER = "html.parser"
     OUT_DIR = 'out'
@@ -27,12 +27,31 @@ class Config:
     # Chemical Engineering
     # Environmental Engineering
     # Materials Engineering
-    ACA_NAME_FILTER = set([u'数学', u'计算机', u'物理', u'化学', u'化工', u'环境', u'材料', u'机电'])
-    ACA_MODFILE = 'MyParser.py'
+    ACA_NAME_FILTER = set([u'数学', u'计算机', u'物理', u'化学', u'化工', u'环境', u'材料', u'机电',u'信息科学'])
 
-    URL_TIMEOUT = 5
+    ACA_MY_MODFILE = 'MyHandler.py'
+    ACA_MY_MODNAME = 'MyHandler'
+    ACA_MY_HANDLER = 'handler'
+    ACA_MY_PHANDLER = 'profile_handler'
+    ACA_MY_EHANDLER = 'engine_handler'
 
 
+    URL_TIMEOUT = 8
+
+    DEFAULT_WEB_ENGINE = "urllib2"
+
+    PROFILE_SYMBOLS = {
+        u'个人主页': 'profile',
+        u'方向': 'research',
+        u'邮箱': 'email',
+        u'信箱': 'email',
+        u'邮件': 'email',
+        u'Email': 'email',
+        u'E-mail':'email',
+        u'职称': 'title',
+        u'电话': 'tel',
+        u'传真': 'fax'
+    }
 class DevConfig(Config):
     DEBUG = True
     pass
@@ -49,6 +68,9 @@ class ProConfig(Config):
 
 def path_of(file_or_dir):
     return os.path.join(os.getcwd(), Config.OUT_DIR, file_or_dir)
+
+def relative_path_of(file_or_dir):
+    return os.path.join(".", Config.OUT_DIR, file_or_dir)
 
 
 config = {

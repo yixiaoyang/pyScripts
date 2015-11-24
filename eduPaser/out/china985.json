@@ -17,7 +17,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "area"
+                "tag_name": "area", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "tsinghua", 
             "url": "http://www.tsinghua.edu.cn/publish/newthu/index.html"
@@ -40,7 +42,9 @@
                 }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "pku", 
             "url": "http://www.pku.edu.cn/"
@@ -62,7 +66,9 @@
                 }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "span"
+                "tag_name": "span", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "cau", 
             "url": "http://www.cau.edu.cn/"
@@ -84,7 +90,9 @@
                 }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "buaa", 
             "url": "http://www.buaa.edu.cn/"
@@ -104,9 +112,13 @@
                 "attrs": {
                     "target": false
                 }, 
-                "parents": ["td"], 
+                "parents": [
+                    "td"
+                ], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "bit", 
             "url": "http://www.bit.edu.cn/"
@@ -124,11 +136,13 @@
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {
-                    "class":"c51057"
+                    "class": "c51057"
                 }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "sjtu", 
             "url": "http://www.sjtu.edu.cn/"
@@ -146,11 +160,15 @@
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {
-                    "target":"_blank"
+                    "target": "_blank"
                 }, 
-                "parents": ["td"], 
+                "parents": [
+                    "td"
+                ], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "fudan", 
             "url": "http://www.fudan.edu.cn/"
@@ -170,7 +188,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "map"
+                "tag_name": "map", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "tongji", 
             "url": "http://www.tongji.edu.cn/"
@@ -188,9 +208,13 @@
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {}, 
-                "parents": ["td"], 
+                "parents": [
+                    "td"
+                ], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "nankai", 
             "url": "http://www.nankai.edu.cn/"
@@ -208,13 +232,15 @@
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {
-                    "_fcksavedurl":true,
-                    "target":true,
-                    "class":false
-                },
+                    "_fcksavedurl": true, 
+                    "class": false, 
+                    "target": true
+                }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "a"
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "tju", 
             "url": "http://www.tju.edu.cn/"
@@ -223,7 +249,7 @@
             "__classname__": "College", 
             "__module__": "models", 
             "academies": [], 
-            "academiesUrl": "", 
+            "academiesUrl": "http://www.cqu.edu.cn/Channel/CquTeachingUnit/1/index.html", 
             "done": false, 
             "eng_name": "cqu.edu.cn", 
             "name": "重庆大学", 
@@ -231,10 +257,15 @@
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
-                "attrs": {}, 
+                "attrs": {
+                    "class": "size12", 
+                    "target": "_blank"
+                }, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "cqu", 
             "url": "http://www.cqu.edu.cn/"
@@ -252,9 +283,13 @@
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {}, 
-                "parents": [], 
+                "parents": [
+                    "td"
+                ], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "neu", 
             "url": "http://www.neu.edu.cn/"
@@ -274,7 +309,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "neuq", 
             "url": "http://www.neuq.edu.cn/"
@@ -294,7 +331,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "dlut", 
             "url": "http://www.dlut.edu.cn/"
@@ -314,7 +353,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "jlu", 
             "url": "http://www.jlu.edu.cn/"
@@ -334,7 +375,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "hit", 
             "url": "http://www.hit.edu.cn/"
@@ -354,7 +397,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "hitwh", 
             "url": "http://www.hitwh.edu.cn/"
@@ -374,7 +419,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "nju", 
             "url": "http://www.nju.edu.cn/"
@@ -394,7 +441,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "seu", 
             "url": "http://www.seu.edu.cn/"
@@ -414,7 +463,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "zju", 
             "url": "http://www.zju.edu.cn/"
@@ -434,7 +485,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "ustc", 
             "url": "http://www.ustc.edu.cn/"
@@ -454,7 +507,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "xmu", 
             "url": "http://www.xmu.edu.cn/"
@@ -474,7 +529,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "sdu", 
             "url": "http://www.sdu.edu.cn/"
@@ -494,7 +551,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "ouc", 
             "url": "http://www.ouc.edu.cn/"
@@ -514,7 +573,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "wh", 
             "url": "http://www.wh.sdu.edu.cn/"
@@ -534,7 +595,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "nuaa", 
             "url": "http://www.nuaa.edu.cn/"
@@ -554,7 +617,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "njust", 
             "url": "http://www.njust.edu.cn/"
@@ -574,7 +639,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "whu", 
             "url": "http://www.whu.edu.cn/"
@@ -594,7 +661,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "hust", 
             "url": "http://www.hust.edu.cn/"
@@ -614,7 +683,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "hnu", 
             "url": "http://www.hnu.edu.cn/"
@@ -634,7 +705,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "csu", 
             "url": "http://www.csu.edu.cn/"
@@ -654,7 +727,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "nudt", 
             "url": "http://www.nudt.edu.cn/"
@@ -674,7 +749,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "scut", 
             "url": "http://www.scut.edu.cn/"
@@ -694,7 +771,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "sysu", 
             "url": "http://www.sysu.edu.cn/"
@@ -714,7 +793,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "scu", 
             "url": "http://www.scu.edu.cn/"
@@ -734,7 +815,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "uestc", 
             "url": "http://www.uestc.edu.cn/"
@@ -754,7 +837,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "xjtu", 
             "url": "http://www.xjtu.edu.cn/"
@@ -774,7 +859,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "nwpu", 
             "url": "http://www.nwpu.edu.cn/"
@@ -794,7 +881,9 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": ""
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
             }, 
             "sname": "lzu", 
             "url": "http://www.lzu.edu.cn/"

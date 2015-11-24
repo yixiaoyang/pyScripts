@@ -27,14 +27,13 @@ class Config:
     # Chemical Engineering
     # Environmental Engineering
     # Materials Engineering
-    ACA_NAME_FILTER = set([u'数学', u'计算机', u'物理', u'化学', u'化工', u'环境', u'材料', u'机电',u'信息科学'])
+    ACA_NAME_FILTER = set([u'数学', u'计算机', u'物理', u'化学', u'化工', u'环境', u'材料', u'机电', u'信息科学'])
 
     ACA_MY_MODFILE = 'MyHandler.py'
     ACA_MY_MODNAME = 'MyHandler'
     ACA_MY_HANDLER = 'handler'
     ACA_MY_PHANDLER = 'profile_handler'
     ACA_MY_EHANDLER = 'engine_handler'
-
 
     URL_TIMEOUT = 8
 
@@ -47,11 +46,15 @@ class Config:
         u'信箱': 'email',
         u'邮件': 'email',
         u'Email': 'email',
-        u'E-mail':'email',
+        u'E-mail': 'email',
+        u'单位':  'departments',
         u'职称': 'title',
         u'电话': 'tel',
         u'传真': 'fax'
     }
+    PROFILE_TITLES = [u'副教授', u'助理教授', u'教授', u'讲师', u'院长', u'副院长', u'工程师', u'院士', u'副研究员', u'研究员']
+
+
 class DevConfig(Config):
     DEBUG = True
     pass
@@ -68,6 +71,7 @@ class ProConfig(Config):
 
 def path_of(file_or_dir):
     return os.path.join(os.getcwd(), Config.OUT_DIR, file_or_dir)
+
 
 def relative_path_of(file_or_dir):
     return os.path.join(".", Config.OUT_DIR, file_or_dir)

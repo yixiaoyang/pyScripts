@@ -18,7 +18,7 @@ logger = logging.getLogger('root')
 
 def get_sname(eng_name):
     if eng_name:
-        name_list= eng_name.split('.')
+        name_list = eng_name.split('.')
         if name_list[0] == 'www':
             if len(name_list) >= 2:
                 return name_list[1]
@@ -42,6 +42,7 @@ class ParseRule:
         # 目标所在的区域
         self.zone_tag = ''
         self.zone_attr = {}
+        self.zone_index = 0
 
         # 要抓取的目标标签
         self.tag_name = tag_name or ''
@@ -57,7 +58,6 @@ class ParseRule:
 
         # 2. 结果筛选
         self.select = []
-
 
 class ItemBase:
     def __init__(self, url=None, name=None, eng=None, parser=None):
@@ -106,6 +106,18 @@ class Employee:
         self.fax = fax
         self.addr = addr
 
+    def set_value(self, employ):
+        if employ:
+            self.name = self.name if len(self.name) != 0 else employ.name
+            self.tel = self.tel if len(self.tel) != 0 else employ.tel
+            self.email = self.email if len(self.email) != 0 else employ.email
+            self.title = self.title if len(self.title) != 0 else employ.title
+            self.profile = self.profile if len(self.profile) != 0 else employ.profile
+            self.research = self.research if len(self.research) != 0 else employ.research
+            self.url = self.url if len(self.url) != 0 else employ.url
+            self.fax = self.fax if len(self.fax) != 0 else employ.fax
+            self.addr = self.addr if len(self.addr) != 0 else employ.addr
+
     def try_set_attr(self, name, value):
         if hasattr(self, name):
             setattr(self, name, value)
@@ -140,7 +152,7 @@ class Academy(ItemBase):
         return os.path.join(self.json_dirname(col), Config.ACA_MY_MODFILE)
 
     def index_filename(self, col, name):
-        path = os.path.join(self.json_dirname(col), name+".html")
+        path = os.path.join(self.json_dirname(col), name + ".html")
         return path
 
     def to_json_file(self, col):
@@ -157,7 +169,7 @@ class Academy(ItemBase):
         # if parser.run():
         #     for tag in parser.rlist:
         #         if tag.has_attr('href'):
-        #             self.departments[tag.string] = tag['href']
+        #             self.departments[tag.string] = tag['href'
 
     def load_user_handler(self, name, col):
         handler = None
@@ -188,7 +200,7 @@ class Academy(ItemBase):
         if self.parser:
             my_parser = get_parser(self.parser)
             if my_parser:
-                logger.debug('get parser %s'%my_parser)
+                logger.debug('get parser %s' % my_parser)
         my_parser = my_parser or SimpleAParser
 
         # load user's custom handler
@@ -197,7 +209,7 @@ class Academy(ItemBase):
         engine_handler = self.load_user_handler(Config.ACA_MY_EHANDLER, col)
 
         for name, url in self.departments.items():
-            parser = my_parser(file=self.index_filename(col,name), url=url, rule=self.rule, web_engine=self.web_engine)
+            parser = my_parser(file=self.index_filename(col, name), url=url, rule=self.rule, web_engine=self.web_engine)
             if parser.run():
                 if len(parser.rlist) != 0:
                     if handler:
@@ -210,8 +222,9 @@ class Academy(ItemBase):
                                 employ1.url, employ1.name = employee_filter(self.sname, url, employ1.url, employ1.name)
                                 if employ1.name:
                                     # 学院+部门名称
-                                    employ1.departments = (self.name+'-'+name)
-                                    logger.debug("try parsing " + employ1.name + ", url=%s"%(employ1.url if employ1.url else 'None'))
+                                    employ1.departments = (self.name + '-' + name)
+                                    logger.debug("try parsing " + employ1.name + ", url=%s" % (
+                                        employ1.url if employ1.url else 'None'))
                                     if employ1.url:
                                         if phandler:
                                             logger.debug("try get profile of " + employ1.name)
@@ -223,23 +236,20 @@ class Academy(ItemBase):
                                             if not employ2:
                                                 logger.warning("profile handler failed")
                                                 continue
-                                            employ2.name = employ2.name or employ1.name
-                                            employ2.url = employ2.url or employ1.url
-                                            if employ2:
-                                                logger.debug("parsed: " + employ2.name + " done")
-                                                self.employees.append(employ2)
                                             else:
-                                                logger.warning("profile handler failed")
+                                                employ2.set_value(employ1)
+                                                logger.debug("parsed: " + employ2.name + ":" + employ2.email + " done")
+                                                self.employees.append(employ2)
                                     else:
                                         logger.debug("parsed: " + employ1.name + " done")
                                         self.employees.append(employ1)
-                                    # if employ1.url
-                                # if employ1.name
+                                        # if employ1.url
+                                        # if employ1.name
                             except Exception as e:
                                 logger.error("Exception %s" % e)
                                 continue
-                            # if count >= 1:
-                            #    break
+                                # if count >= 1:
+                                #    break
                     else:
                         logger.error("handler not found")
 
@@ -293,7 +303,7 @@ class College(ItemBase):
         if parser.run():
             for tag in parser.rlist:
                 if tag.has_attr('href'):
-                    url, name = aca_filter(self.name, self.url, tag['href'], tag.string)
+                    url, name = aca_filter(self.name, parser.url, tag['href'], tag.string)
                     if url and name:
                         aca = Academy(url=url, name=name)
                         self.academies.append(aca)

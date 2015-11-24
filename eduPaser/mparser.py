@@ -203,8 +203,8 @@ class SimpleAParser(Parser):
             zone = self.soup
             if len(self.rule.zone_tag) != 0:
                 zones = self.soup.find_all(name=self.rule.zone_tag, attrs=self.rule.zone_attr,limit=1)
-                if len(zones) != 0:
-                    zone = zones[0]
+                if len(zones) > self.rule.zone_index:
+                    zone = zones[self.rule.zone_index]
                     #print zone
                 else:
                     logger.debug("can not parse zone")
@@ -281,7 +281,7 @@ class AutoAcademyParser(Parser):
 
 
 class ProfileParser():
-    def __init__(self,employee,text=None,max_line=32,min_char=2,lines=None, set_attr_hook=None):
+    def __init__(self,employee,text=None,max_line=32,min_char=2,lines=None, set_attr_hook=None,force_inline=False):
         self.text = text
         self.max_line = max_line
         self.employee = employee
@@ -289,12 +289,23 @@ class ProfileParser():
         self.lines = lines
         self.symbols = Config.PROFILE_SYMBOLS
         self.split_str = [':', '：']
+
+        # 在设置真正的数据前再次调用用户过滤函数，如在解析email时将'（at）'更改为'@'
         self.set_attr_hook = set_attr_hook
 
 
     def line_pipe(self, line):
         # new_line = line.replace('：',':')
-        return line
+
+        # TODO:清除文本中的多余空格，注意此处如果为英文，所有空格都会被清除
+        new_line = ''.join(line.split())
+        return new_line
+
+    def check_symbols(self,line):
+        for symbol, name in self.symbols.items():
+            if symbol in line:
+                return True
+        return False
 
     # 返回1：是否需要在下行进行解析，如果时返回值为需要解析的key
     # 返回2：不需要在下行解析，正常返回键值对
@@ -303,9 +314,10 @@ class ProfileParser():
         names, symbols, indexes = [], [], []
         indexes_set = set()
 
-        # 使用这个管道过滤是为了消除中文字符带来处理上的不便
-        # line = self.line_pipe(line)
+        # 使用这个管道过滤是为了消除处理上的不便
+        line = self.line_pipe(line)
 
+        # 根据预定的symbol推测字段和值
         for symbol, name in self.symbols.items():
             idx = line.find(symbol)
             if idx != -1:
@@ -341,8 +353,8 @@ class ProfileParser():
             # remove split chars
             for str in self.split_str:
                 split_idx = value.find(str)
-                if split_idx == 0:
-                    value = value.replace(str,'')
+                if split_idx != -1:
+                    value = value[split_idx+len(str):]
                     # value = value[split_idx+len(str):]
                     # print("handle split:"+name+","+value+",len=%d,str=%s"%(len(str),str))
                     break
@@ -352,6 +364,14 @@ class ProfileParser():
                 return name, name_values
 
             name_values[name] = value
+
+        # 根据预定的关键词推测身分
+        if len(name_values) == 0 and len(self.employee.title) == 0:
+            for keywords in Config.PROFILE_TITLES:
+                if keywords in line:
+                    self.employee.title = keywords
+                    break
+
         return None, name_values
 
     def parse(self):
@@ -366,16 +386,24 @@ class ProfileParser():
         # parse each line
         to_parse_value = None
         for count,line in enumerate(self.lines):
+            # 下行解析
             if to_parse_value:
-                if self.set_attr_hook:
-                    line = ''.join(line.split())
-                    line = self.set_attr_hook(to_parse_value,line)
-                self.employee.try_set_attr(to_parse_value,line)
-                to_parse_value = None
-                continue
+                # 只有当下行不包含关键字才认为是合法值
+                if self.check_symbols(line):
+                    to_parse_value = None
+                    pass
+                else:
+                    if self.set_attr_hook:
+                        line = ''.join(line.split())
+                        line = self.set_attr_hook(to_parse_value,line)
+                    self.employee.try_set_attr(to_parse_value,line)
+                    to_parse_value = None
+                    continue
             if count >= self.max_line:
                 break
+
             to_parse_value,name_values = self.parse_inline(line)
+            # 正常解析
             if not to_parse_value:
                 for name, value in name_values.items():
                     if self.set_attr_hook:
@@ -418,7 +446,9 @@ def aca_guess_name(url):
         return ''
 
 def aca_filter(col_name, col_url, url, name):
+    logger.debug(url)
     url = check_url(col_url,url)
+    logger.debug(url)
     if not url:
         return None,None
 
@@ -444,13 +474,14 @@ def aca_filter(col_name, col_url, url, name):
 def employee_filter(aca_name, aca_url, url, name):
     url = check_url(aca_url,url)
     if not url:
-        logger.warning("url null in employee_filter")
-        #return None,None
+        logger.warning("url null in employee_filter, name = "+name)
+        # return None,None
     if len(name) != 0:
         name = ''.join(name.split())
     # 太长的不识别为名称
-    if len(name) >= 8:
-        return None,None
+    if len(name) >= 32:
+        logger.warning("name is too long, ignore it")
+        return url,name
     # logger.debug(url)
     return url,name
 

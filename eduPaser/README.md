@@ -12,31 +12,32 @@
 1. 解析hao123的211/985名单
 2. 数据 《=》csv/json相互转化
 3. 按照用户选择解析各个学校、学院的在职员工数据（模糊匹配职称、电子邮件、电话等等基本信息），并抓取简历保存在学院目录。
-4. 按照设置规则文件抓取目标内容
-    规则内容如下：
-            # 目标所在的区域的tag和attrs（属性）
-            self.zone_tag = ''
-            self.zone_attr = {}
-            
-            # 要抓取的目标标签tag
-            self.tag_name = tag_name or ''
-            # 要抓取的目标标签的递归父亲tag列表
-            # <span><p>
-            #   <a>something</a>
-            #  </p></span>
-            # 如<a> tag的父亲列表为["p","span"]
-            self.parents = []
-            
-            # 1. 目标节点属性
-            # {
-            #   'class':true, true或者false表示是否含有此标签
-            #   'width':'21%'，标签为具体值则表示仅当标签=值时抓取
-            #   'class':['class1','class2'], 标签为列表时表示仅当标签值为列表中的值才成立。暂未用到
-            # }
-            self.attrs = {}
-            
-            # 2. 结果筛选，暂未用到
-            self.select = []
+4. 按照设置规则文件抓取目标内容,规则内容如下：
+
+    # 目标所在的区域的tag和attrs（属性）
+    self.zone_tag = ''
+    self.zone_attr = {}
+
+    # 要抓取的目标标签tag
+    self.tag_name = tag_name or ''
+    # 要抓取的目标标签的递归父亲tag列表
+    # <span><p>
+    #   <a>something</a>
+    #  </p></span>
+    # 如<a> tag的父亲列表为["p","span"]
+    self.parents = []
+    
+    # 1. 目标节点属性
+    # {
+    #   'class':true, true或者false表示是否含有此标签
+    #   'width':'21%'，标签为具体值则表示仅当标签=值时抓取
+    #   'class':['class1','class2'], 标签为列表时表示仅当标签值为列表中的值才成立。暂未用到
+    # }
+    self.attrs = {}
+    
+    # 2. 结果筛选，暂未用到
+    self.select = []
+
 一般来说，找到合适的zone、目标的tag、属性就能找到要找的内容。
 
 解析员工数据时，先编辑对应**学校**下面的json文件，在目标**学院**的json结构里添加抓取规则。然后在**学院**目录下定义MyHandler.py文件，写合适的解析脚本进行解析即可得到想要的数据。
@@ -89,19 +90,16 @@ json中的主要数据结构如下所示：
 ####菜单
 
     q.Exit
-    g.Test Ghost.py
     p.Print colleges
     s.Save to china211
     1.Fetch colleges save to json
-    2.Fetch colleges from json
-    3.Make output dirs
-    4.Test Academies parser
-    5.Auto Fetch all academiesUrl
-    6.Auto Fetch Academy
-    7.Auto Fetch Employees
-    8.MyParser Test
-
-    What would you like to do? 
+    2.Make output dirs
+    3.Test Academies parser
+    4.Auto Fetch all academiesUrl
+    5.Auto Fetch Academy
+    6.Auto Fetch Employees
+    7.MyParser Test
+        What would you like to do? 
 
 1. out目录下如果存在`china211.json`则将其大学目录数据导入。如果不存在，可运行`python run.py`选择菜单1从hao123抓取。
 
@@ -109,7 +107,7 @@ json中的主要数据结构如下所示：
 
 3. 运行
     $ python run.py
-    选择7菜单
+    选择6菜单
     选择学校
     选择院系
     开始解析
@@ -118,16 +116,29 @@ json中的主要数据结构如下所示：
 ### 数据结构
 
     China211
-        collges + rule
-            academies
-                Department
-                    employees
-            
+    collges + rule
+    academies
+    Department
+    employees
+
     
 ####Parser
 
+    l_parsers = {
+        "Parser": Parser,
+        "Hao123_211_Parser": Hao123_211_Parser,
+        "SimpleAParser": SimpleAParser,
+        "AutoAcademyParser": AutoAcademyParser,
+        "SimpleTableParser":SimpleTableParser
+    }
+
+
 ####Models
 
+
+###浏览器
+
+对于一些比较变态的主页（主要是javascript数据），使用selenium调用firefox获取数据
 
 ### 其他
 

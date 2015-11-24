@@ -1,7 +1,400 @@
 {
     "__classname__": "College", 
     "__module__": "models", 
-    "academies": [], 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "全职教员":"http://www.math.pku.edu.cn/static/quanzhijiaoyuan.html"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [],
+            "eng_name": "www.math.pku.edu.cn", 
+            "hasDepartments": false, 
+            "name": "数学科学学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"id":"main"},
+                "zone_tag": "div"
+            }, 
+            "sname": "math", 
+            "url": "http://www.math.pku.edu.cn/", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.phy.pku.edu.cn/personnel/faculty.xml"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.phy.pku.edu.cn", 
+            "hasDepartments": false, 
+            "name": "物理学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":false},
+                "parents": ["td"],
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"id":"main"},
+                "zone_tag": "div"
+            }, 
+            "sname": "phy", 
+            "url": "http://www.phy.pku.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.chem.pku.edu.cn/index.php?id=115"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.chem.pku.edu.cn", 
+            "hasDepartments": false, 
+            "name": "化学与分子工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"bd-content"},
+                "zone_tag": "td"
+            }, 
+            "sname": "chem", 
+            "url": "http://www.chem.pku.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.ues.pku.edu.cn/szdw/personal/teachers.asp"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.ues.pku.edu.cn", 
+            "hasDepartments": false, 
+            "name": "城市与环境学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"id":"list"},
+                "zone_tag": "table"
+            }, 
+            "sname": "ues", 
+            "url": "http://www.ues.pku.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "基础实验教学研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=700&language=cn",
+                "物理电子学研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=676&language=cn",
+                "量子电子学研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=678&language=cn",
+                "应用电子学研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=679&language=cn",
+                "现代通信研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=677&language=cn",
+                "微纳电子学研究院":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=685&language=cn",
+                "系统结构研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=681&language=cn",
+                "网络与信息系统研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=684&language=cn",
+                "软件研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=683&language=cn",
+                "计算语言学研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=682&language=cn",
+                "数字媒体研究所":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=680&language=cn",
+                "高能效计算与应用中心":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=757&language=cn",
+                "信息科学中心":"http://eecs.pku.edu.cn/index.aspx?menuid=8&type=articleinfo&lanmuid=31&infoid=686&language=cn"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "",
+                "zone_attr": {},
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "eecs.pku.edu.cn",
+            "hasDepartments": false, 
+            "name": "信息科学技术学院",
+            "parser": "SimpleTableParser",
+            "rule": {
+
+                "__classname__": "ParseRule",
+                "__module__": "models",
+                "attrs": {},
+                "parents": [],
+                "select": [],
+                "tag_name": "tr",
+                "zone_attr": {"id":"Infor_Content"},
+                "zone_tag": "div"
+            }, 
+            "sname": "eecs",
+            "url": "http://eecs.pku.edu.cn/",
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://cese.pku.edu.cn/teacher.asp"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {},
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "cese.pku.edu.cn", 
+            "hasDepartments": false, 
+            "name": "环境科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"valign":"top","bgcolor":false},
+                "zone_tag": "td"
+            }, 
+            "sname": "cese", 
+            "url": "http://cese.pku.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "Faculty1":"http://bicmr.pku.edu.cn/people/faculty/list_28_1.html",
+                "Faculty2":"http://bicmr.pku.edu.cn/people/faculty/list_28_2.html",
+                "Faculty3":"http://bicmr.pku.edu.cn/people/faculty/list_28_3.html",
+                "Faculty4":"http://bicmr.pku.edu.cn/people/faculty/list_28_4.html"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.bicmr.org", 
+            "hasDepartments": false, 
+            "name": "北京国际数学研究中心", 
+            "parser": "SimpleTableParser",
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"person-container"},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "div",
+                "zone_attr": {"class":"col_9"},
+                "zone_tag": "div"
+            }, 
+            "sname": "bicmr", 
+            "url": "http://www.bicmr.org/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "生物学部":"http://scbb.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=864",
+                "计算化学与药物设计学部":"http://scbb.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=866",
+                "合成化学部":"http://scbb.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=865",
+                "创新药物研发中心":"http://scbb.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=868",
+                "纳米学部":"http://scbb.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=867"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.scbb.pkusz.edu.cn", 
+            "hasDepartments": false, 
+            "name": "化学生物学与生物技术学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"teacher-list"},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "li",
+                "zone_attr": {"class":"teacher-box"},
+                "zone_tag": "div"
+            }, 
+            "sname": "scbb", 
+            "url": "http://www.scbb.pkusz.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "全职教师":"http://see.pkusz.edu.cn/faculty_cn.aspx",
+                "兼职教师":"http://see.pkusz.edu.cn/faculty11_cn.aspx"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "see.pkusz.edu.cn", 
+            "hasDepartments": false, 
+            "name": "环境与能源学院", 
+            "parser": "SimpleTableParser",
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"black01"},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "td",
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "sname": "see", 
+            "url": "http://see.pkusz.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "1":"http://sam.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=392&page=1",
+                "2":"http://sam.pkusz.edu.cn/index.php?m=content&c=index&a=lists&catid=392&page=2"
+            },
+            "departmentsRule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "",
+                "zone_attr": {}, 
+                "zone_tag": ""
+            }, 
+            "departmentsUrl": "", 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "sam.pkusz.edu.cn", 
+            "hasDepartments": false, 
+            "name": "新材料学院", 
+            "parser": "SimpleTableParser",
+            "rule": {
+                "__classname__": "ParseRule",
+                "__module__": "models",
+                "attrs": {"id":"dt_1"},
+                "parents": [],
+                "select": [],
+                "tag_name": "div",
+                "zone_attr": {"id":"dt_right"},
+                "zone_tag": "div"
+            }, 
+            "sname": "sam", 
+            "url": "http://sam.pkusz.edu.cn/", 
+            "web_engine": "urllib2"
+        }
+    ], 
     "academiesUrl": "http://www.pku.edu.cn/academics/index.htm", 
     "done": false, 
     "eng_name": "pku.edu.cn", 

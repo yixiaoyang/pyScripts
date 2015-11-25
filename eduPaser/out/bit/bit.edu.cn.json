@@ -1,0 +1,227 @@
+{
+    "__classname__": "College", 
+    "__module__": "models", 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.mse.bit.edu.cn",
+            "name": "材料学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "mse",
+            "url": "http://www.mse.bit.edu.cn/",
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "smen.bit.edu.cn",
+            "name": "机电学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "smen",
+            "url": "http://smen.bit.edu.cn/",
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {"all":"http://scee.bit.edu.cn/szdw/hgkzx/index.htm"},
+            "done": false, 
+            "employees": [], 
+            "eng_name": "scee.bit.edu.cn",
+            "name": "化工与环境学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"rt_zhengwen"},
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "scee",
+            "url": "http://scee.bit.edu.cn/",
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "数学系":"http://math.bit.edu.cn/szdw/sxx/index.htm",
+                "应用数学系":"http://math.bit.edu.cn/szdw/yysxx/index.htm",
+                "概率统计系":"http://math.bit.edu.cn/szdw/gstjx/index.htm",
+                "数学研究所":"http://math.bit.edu.cn/szdw/sxyjs/index.htm",
+                "应用数学所":"http://math.bit.edu.cn/szdw/yysxs/index.htm",
+                "数学实验中心":"http://math.bit.edu.cn/szdw/sxsyzx/index.htm"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "math.bit.edu.cn", 
+            "name": "数学与统计学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"box_rt01 list"},
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "math", 
+            "url": "http://math.bit.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "physics.bit.edu.cn", 
+            "name": "物理学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "physics", 
+            "url": "http://physics.bit.edu.cn", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "ac.bit.edu.cn", 
+            "name": "自动化学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "ac", 
+            "url": "http://ac.bit.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "sc.bit.edu.cn", 
+            "name": "化学学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "sc", 
+            "url": "http://sc.bit.edu.cn", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.bit.edu.cn", 
+            "name": "计算机学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "bit", 
+            "url": "http://www.bit.edu.cn/gbxxgk/gbxysz2/jsjxy/index.htm", 
+            "web_engine": "urllib2"
+        }
+    ], 
+    "academiesUrl": "http://www.bit.edu.cn/gbxxgk/gbxysz2/index.htm", 
+    "done": false, 
+    "eng_name": "bit.edu.cn", 
+    "name": "北京理工大学", 
+    "parser": null, 
+    "rule": {
+        "__classname__": "ParseRule", 
+        "__module__": "models", 
+        "attrs": {
+            "target": false
+        }, 
+        "parents": [
+            "td"
+        ], 
+        "select": [], 
+        "tag_name": "a", 
+        "zone_attr": {}, 
+        "zone_index": 0, 
+        "zone_tag": "table"
+    }, 
+    "sname": "bit", 
+    "url": "http://www.bit.edu.cn/"
+}

@@ -53,8 +53,12 @@ def get_doc_byUrllib2(url,handler=None):
 
 def get_doc_bySelenium(url,handler=None):
     global l_tab_opened
+    global l_driver
+
     charset = None
 
+    if not l_driver:
+        l_driver = webdriver.Firefox()
     driver = l_driver
 
     doc = None
@@ -70,7 +74,7 @@ def get_doc_bySelenium(url,handler=None):
     driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
     l_tab_opened = True
 
-    return doc,charset
+    return doc
 
 def selenium_close():
     if l_driver:
@@ -352,12 +356,16 @@ class ProfileParser():
 
             # remove split chars
             for str in self.split_str:
-                split_idx = value.find(str)
-                if split_idx != -1:
-                    value = value[split_idx+len(str):]
+                splits = value.split(str)
+                if len(splits) >= 2:
+                    value = splits[1]
+                    break
+                #split_idx = value.find(str)
+                #if split_idx != -1:
+                    #value = value[split_idx+len(str):]
                     # value = value[split_idx+len(str):]
                     # print("handle split:"+name+","+value+",len=%d,str=%s"%(len(str),str))
-                    break
+                    #break
 
             if len(value) == 0:
                 print(name+":"+value+" =>next line2=>%d"%index)

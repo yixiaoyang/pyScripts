@@ -31,11 +31,12 @@ class Config:
 
     ACA_MY_MODFILE = 'MyHandler.py'
     ACA_MY_MODNAME = 'MyHandler'
+    ACA_MY_PREHANDLER = 'pre_handler'
     ACA_MY_HANDLER = 'handler'
     ACA_MY_PHANDLER = 'profile_handler'
     ACA_MY_EHANDLER = 'engine_handler'
 
-    URL_TIMEOUT = 8
+    URL_TIMEOUT = 20
 
     DEFAULT_WEB_ENGINE = "urllib2"
 

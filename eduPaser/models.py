@@ -207,20 +207,31 @@ class Academy(ItemBase):
         handler = self.load_user_handler(Config.ACA_MY_HANDLER, col)
         phandler = self.load_user_handler(Config.ACA_MY_PHANDLER, col)
         engine_handler = self.load_user_handler(Config.ACA_MY_EHANDLER, col)
+        pre_handler = self.load_user_handler(Config.ACA_MY_PREHANDLER, col)
 
+        name_set = set()
         for name, url in self.departments.items():
-            parser = my_parser(file=self.index_filename(col, name), url=url, rule=self.rule, web_engine=self.web_engine)
+            index_filename = self.index_filename(col, name)
+            if pre_handler and not os.path.exists(index_filename):
+                pre_handler(url=url,filename=index_filename)
+            parser = my_parser(file=index_filename, url=url, rule=self.rule, web_engine=self.web_engine)
             if parser.run():
                 if len(parser.rlist) != 0:
                     if handler:
                         for count, tag in enumerate(parser.rlist):
-                            try:
+                            #try:
+                            if True:
                                 employ1 = handler(tag)
                                 if not employ1 or not employ1.name:
                                     logger.warning("parse failed employee none")
                                     continue
                                 employ1.url, employ1.name = employee_filter(self.sname, url, employ1.url, employ1.name)
                                 if employ1.name:
+                                    if employ1.name in name_set:
+                                        continue
+                                    else:
+                                        name_set.add(employ1.name)
+
                                     # 学院+部门名称
                                     employ1.departments = (self.name + '-' + name)
                                     logger.debug("try parsing " + employ1.name + ", url=%s" % (
@@ -245,8 +256,9 @@ class Academy(ItemBase):
                                         self.employees.append(employ1)
                                         # if employ1.url
                                         # if employ1.name
-                            except Exception as e:
-                                logger.error("Exception %s" % e)
+                            #except Exception as e:
+                            else:
+                                #logger.error("Exception %s" % e)
                                 continue
                                 # if count >= 1:
                                 #    break

@@ -118,7 +118,7 @@
                 "select": [], 
                 "tag_name": "a", 
                 "zone_attr": {}, 
-                "zone_tag": ""
+                "zone_tag": "table"
             }, 
             "sname": "bit", 
             "url": "http://www.bit.edu.cn/"

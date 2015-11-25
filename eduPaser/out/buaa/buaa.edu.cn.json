@@ -8,7 +8,7 @@
             "departments": {"all":"http://www.mse.buaa.edu.cn/szdw/jslb/index.htm"},
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "www.mse.buaa.edu.cn",
             "name": "材料科学与工程学院", 
             "parser": null, 
             "rule": {
@@ -29,102 +29,119 @@
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
+            "departments": {
+                "all":"http://scse.buaa.edu.cn/buaa-css-web/navigationTemplateListAction.action?firstSelId=CARD_TMPL_OF_FIRST_NAVI_CN&updateSelFirstNav=true&language=0"
+            },
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "www.scse.buaa.edu.cn",
             "name": "计算机学院", 
-            "parser": null, 
+            "parser": "SimpleTableParser",
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
-                "attrs": {}, 
+                "attrs": {"class":"card_div"},
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_tag": ""
+                "tag_name": "div",
+                "zone_attr": {"class":"article_list"},
+                "zone_tag": "div"
             }, 
-            "sname": "buaa", 
-            "url": "http://www.buaa.edu.cn/xyykc/bhyxjs/lgk/66792.htm", 
+            "sname": "scse",
+            "url": "http://scse.buaa.edu.cn/buaa-css-web/initAction.action",
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
+            "departments": {
+                "全体教工":"http://www.me.buaa.edu.cn/szll/qtjg/index.htm"
+            },
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "www.me.buaa.edu.cn",
             "name": "机械工程及自动化学院", 
             "parser": null, 
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {}, 
-                "parents": [], 
+                "parents": ["span"],
                 "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_tag": ""
+                "tag_name": "a",
+                "zone_attr": {"style":"line-height:24px; font-size:14px"},
+                "zone_tag": "div"
             }, 
-            "sname": "buaa", 
-            "url": "http://www.buaa.edu.cn/xyykc/bhyxjs/lgk/66803.htm", 
+            "sname": "me",
+            "url": "http://www.me.buaa.edu.cn/",
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
+            "departments": {
+                "All":"http://smss.buaa.edu.cn/szdw/axbck/index.htm"
+            },
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "www.smss.buaa.edu.cn",
             "name": "数学与系统科学学院", 
-            "parser": null, 
+            "parser": "SimpleTableParser",
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_tag": ""
+                "tag_name": "a",
+                "zone_attr": {"class":"list09"},
+                "zone_tag": "div"
             }, 
-            "sname": "buaa", 
-            "url": "http://www.buaa.edu.cn/xyykc/bhyxjs/lgk/66809.htm", 
+            "sname": "smss",
+            "url": "http://smss.buaa.edu.cn/",
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
+            "departments": {
+                "物理系":"http://physics.buaa.edu.cn/xygk/szdw/jslb_20140928165850209830/wlx1/index.htm",
+                "应用物理系":"http://physics.buaa.edu.cn/xygk/szdw/jslb_20140928165850209830/yywlx1/index.htm",
+                "核科学与技术系 ":"http://physics.buaa.edu.cn/xygk/szdw/jslb_20140928165850209830/hkxyjzx1/index.htm",
+                "教学实验中心":"http://physics.buaa.edu.cn/xygk/szdw/jslb_20140928165850209830/jxysyzx1/index.htm"
+
+            },
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "physics.buaa.edu.cn",
             "name": "物理科学与核能工程学院", 
             "parser": null, 
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
-                "attrs": {}, 
+                "attrs": {"class":"teacher-div"},
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_tag": ""
+                "tag_name": "div",
+                "zone_attr": {"class":"frame890"},
+                "zone_tag": "div"
             }, 
-            "sname": "buaa", 
-            "url": "http://www.buaa.edu.cn/xyykc/bhyxjs/lgk/66828.htm", 
+            "sname": "physics",
+            "url": "http://physics.buaa.edu.cn/",
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
+            "departments": {
+                "0":"http://sce.buaa.edu.cn/shizililiang.jsp?totalpage=4&PAGENUM=1&urltype=tree.TreeTempUrl&wbtreeid=1004",
+                "2":"http://sce.buaa.edu.cn/shizililiang.jsp?totalpage=4&PAGENUM=2&urltype=tree.TreeTempUrl&wbtreeid=1004",
+                "3":"http://sce.buaa.edu.cn/shizililiang.jsp?totalpage=4&PAGENUM=3&urltype=tree.TreeTempUrl&wbtreeid=1004",
+                "4":"http://sce.buaa.edu.cn/shizililiang.jsp?totalpage=4&PAGENUM=4&urltype=tree.TreeTempUrl&wbtreeid=1004"
+            },
             "done": false, 
             "employees": [], 
-            "eng_name": "www.buaa.edu.cn", 
+            "eng_name": "sce.buaa.edu.cn",
             "name": "化学与环境学院", 
             "parser": null, 
             "rule": {
@@ -133,12 +150,12 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_tag": ""
+                "tag_name": "a",
+                "zone_attr": {"width":"98%"},
+                "zone_tag": "table"
             }, 
-            "sname": "buaa", 
-            "url": "http://www.buaa.edu.cn/xyykc/bhyxjs/lgk/66844.htm", 
+            "sname": "sce",
+            "url": "http://sce.buaa.edu.cn/",
             "web_engine": "urllib2"
         }
     ], 

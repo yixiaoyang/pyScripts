@@ -1,0 +1,272 @@
+{
+    "__classname__": "College", 
+    "__module__": "models", 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "教职员工":"http://math.fudan.edu.cn/MemberbySort.aspx?info_lb=566&flag=548"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "math.fudan.edu.cn", 
+            "name": "数学科学学院", 
+            "parser": "SimpleTableParser", 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"people_text"}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "div", 
+                "zone_attr": {"class":"people"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "math", 
+            "url": "http://math.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "教师":"http://phys.fudan.edu.cn/7481/list.htm",
+                "工程技术人员":"http://phys.fudan.edu.cn/7483/list.htm"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.physics.fudan.edu.cn", 
+            "name": "物理学系", 
+            "parser": "SimpleTableParser", 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "tr", 
+                "zone_attr": {"border":"1"}, 
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "physics", 
+            "url": "http://www.physics.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "无机化学":"http://www.chemistry.fudan.edu.cn/data/list/wjhx",
+                "有机化学":"http://www.chemistry.fudan.edu.cn/data/list/yjhx",
+                "物理化学":"http://www.chemistry.fudan.edu.cn/data/list/wlhx",
+                "分析化学":"http://www.chemistry.fudan.edu.cn/data/list/fxhx",
+                "化学生物学":"http://www.chemistry.fudan.edu.cn/data/list/hxswx"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.chemistry.fudan.edu.cn", 
+            "name": "化学系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"right-nr"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "chemistry", 
+            "url": "http://www.chemistry.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://environment.fudan.edu.cn/content.aspx?info_lb=98&flag=98"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "environment.fudan.edu.cn", 
+            "name": "环境科学与工程系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"right_nr"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "environment", 
+            "url": "http://environment.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.it.fudan.edu.cn/teacher.aspx?info_lb=6&flag=6"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.it.fudan.edu.cn", 
+            "name": "信息科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"right_nr"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "it", 
+            "url": "http://www.it.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.cs.fudan.edu.cn/?page_id=351"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.cs.fudan.edu.cn", 
+            "name": "计算机科学技术学院", 
+            "parser": "SimpleTableParser",
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "tr",
+                "zone_attr": {"width":"471"},
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "cs", 
+            "url": "http://www.cs.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://mse.fudan.edu.cn/Data/List/szdw"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "mse.fudan.edu.cn", 
+            "name": "材料科学系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"right-nr"},
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "mse", 
+            "url": "http://mse.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://imp.fudan.edu.cn/100004szdw/list.htm"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "imp.fudan.edu.cn", 
+            "name": "现代物理研究所-核科学与技术系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"wp_column_article"},
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "imp", 
+            "url": "http://imp.fudan.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "高级pi1":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%B8%DF%BC%B6PI",
+                "高级pi2":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%B8%DF%BC%B6PI&page=2",
+                "高级pi3":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%B8%DF%BC%B6PI&page=3",
+                "普通pi":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%C6%D5%CD%A8PI",
+                "固定研究人员1":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%B9%CC%B6%A8%D1%D0%BE%BF%C8%CB%D4%B1",
+                "固定研究人员2":"http://www.lam.fudan.edu.cn/kydw.asp?BigClass=%BF%C6%D1%D0%B6%D3%CE%E9&SmallClass=%B9%CC%B6%A8%D1%D0%BE%BF%C8%CB%D4%B1&page=2"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.lam.fudan.edu.cn", 
+            "name": "先进材料实验室", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"font"},
+                "zone_index": 0,
+                "zone_tag": "td"
+            }, 
+            "sname": "lam", 
+            "url": "http://www.lam.fudan.edu.cn/", 
+            "web_engine": "selenium"
+        }
+    ], 
+    "academiesUrl": "http://www.fudan.edu.cn/channels/view/37", 
+    "done": false, 
+    "eng_name": "fudan.edu.cn", 
+    "name": "复旦大学", 
+    "parser": null, 
+    "rule": {
+        "__classname__": "ParseRule", 
+        "__module__": "models", 
+        "attrs": {
+            "target": "_blank"
+        }, 
+        "parents": [
+            "td"
+        ], 
+        "select": [], 
+        "tag_name": "a", 
+        "zone_attr": {}, 
+        "zone_index": 0, 
+        "zone_tag": ""
+    }, 
+    "sname": "fudan", 
+    "url": "http://www.fudan.edu.cn/"
+}

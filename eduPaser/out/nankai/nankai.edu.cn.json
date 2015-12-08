@@ -5,115 +5,38 @@
         {
             "__classname__": "Academy", 
             "__module__": "models", 
-            "departments": {}, 
-            "done": false, 
-            "employees": [], 
-            "eng_name": "www.mse.bit.edu.cn",
-            "name": "材料学院", 
-            "parser": null, 
-            "rule": {
-                "__classname__": "ParseRule", 
-                "__module__": "models", 
-                "attrs": {}, 
-                "parents": [], 
-                "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_index": 0, 
-                "zone_tag": ""
-            }, 
-            "sname": "mse",
-            "url": "http://www.mse.bit.edu.cn/",
-            "web_engine": "urllib2"
-        }, 
-        {
-            "__classname__": "Academy", 
-            "__module__": "models", 
-            "departments": {}, 
-            "done": false, 
-            "employees": [], 
-            "eng_name": "smen.bit.edu.cn",
-            "name": "机电学院", 
-            "parser": null, 
-            "rule": {
-                "__classname__": "ParseRule", 
-                "__module__": "models", 
-                "attrs": {}, 
-                "parents": [], 
-                "select": [], 
-                "tag_name": "", 
-                "zone_attr": {}, 
-                "zone_index": 0, 
-                "zone_tag": ""
-            }, 
-            "sname": "smen",
-            "url": "http://smen.bit.edu.cn/",
-            "web_engine": "urllib2"
-        }, 
-        {
-            "__classname__": "Academy", 
-            "__module__": "models", 
-            "departments": {"all":"http://scee.bit.edu.cn/szdw/hgkzx/index.htm"},
-            "done": false, 
-            "employees": [], 
-            "eng_name": "scee.bit.edu.cn",
-            "name": "化工与环境学院", 
-            "parser": null, 
-            "rule": {
-                "__classname__": "ParseRule", 
-                "__module__": "models", 
-                "attrs": {}, 
-                "parents": [], 
-                "select": [], 
-                "tag_name": "a",
-                "zone_attr": {"class":"rt_zhengwen"},
-                "zone_index": 0, 
-                "zone_tag": "div"
-            }, 
-            "sname": "scee",
-            "url": "http://scee.bit.edu.cn/",
-            "web_engine": "selenium"
-        }, 
-        {
-            "__classname__": "Academy", 
-            "__module__": "models", 
             "departments": {
-                "数学系":"http://math.bit.edu.cn/szdw/sxx/index.htm",
-                "应用数学系":"http://math.bit.edu.cn/szdw/yysxx/index.htm",
-                "概率统计系":"http://math.bit.edu.cn/szdw/gstjx/index.htm",
-                "数学研究所":"http://math.bit.edu.cn/szdw/sxyjs/index.htm",
-                "应用数学所":"http://math.bit.edu.cn/szdw/yysxs/index.htm",
-                "数学实验中心":"http://math.bit.edu.cn/szdw/sxsyzx/index.htm"
+                "all":"http://sms.nankai.edu.cn/teacher/szdw"
             },
             "done": false, 
             "employees": [], 
-            "eng_name": "math.bit.edu.cn", 
-            "name": "数学与统计学院", 
+            "eng_name": "sms.nankai.edu.cn", 
+            "name": "数学学院", 
             "parser": null, 
             "rule": {
-                "__classname__": "ParseRule", 
-                "__module__": "models", 
-                "attrs": {}, 
-                "parents": [], 
-                "select": [], 
-                "tag_name": "a",
-                "zone_attr": {"class":"box_rt01 list"},
-                "zone_index": 0, 
+                "__classname__": "ParseRule",
+                "__module__": "models",
+                "attrs": {},
+                "parents": [],
+                "select": [],
+                "tag_name": "li",
+                "zone_attr": {"class":"neirong-right"},
+                "zone_index": 0,
                 "zone_tag": "div"
             }, 
-            "sname": "math", 
-            "url": "http://math.bit.edu.cn/", 
+            "sname": "sms", 
+            "url": "http://sms.nankai.edu.cn/", 
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
             "departments": {
-                "all":"http://physics.bit.edu.cn/szdw/zzjzg/index.htm"
+                "全体教职工":"http://physics.nankai.edu.cn/3193/list.htm"
             },
             "done": false, 
             "employees": [], 
-            "eng_name": "physics.bit.edu.cn", 
+            "eng_name": "physics.nankai.edu.cn", 
             "name": "物理学院", 
             "parser": null, 
             "rule": {
@@ -123,77 +46,55 @@
                 "parents": [], 
                 "select": [], 
                 "tag_name": "a",
-                "zone_attr": {"class":"box_list"},
+                "zone_attr": {"id":"wp_column_article"},
                 "zone_index": 0, 
                 "zone_tag": "div"
             }, 
             "sname": "physics", 
-            "url": "http://physics.bit.edu.cn", 
+            "url": "http://physics.nankai.edu.cn/", 
             "web_engine": "urllib2"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
             "departments": {
-              "all":"http://ac.bit.edu.cn/szdw/jsdw/index.htm"
+                "全体教师":"http://chem.nankai.edu.cn/ejym_wide.aspx?m=1.2&n=-1&t=3"
             },
             "done": false, 
             "employees": [], 
-            "eng_name": "ac.bit.edu.cn", 
-            "name": "自动化学院", 
-            "parser": null, 
-            "rule": {
-                "__classname__": "ParseRule", 
-                "__module__": "models", 
-                "attrs": {}, 
-                "parents": [], 
-                "select": [], 
-                "tag_name": "a",
-                "zone_attr": {"class":"rt_list"},
-                "zone_index": 0, 
-                "zone_tag": "div"
-            }, 
-            "sname": "ac", 
-            "url": "http://ac.bit.edu.cn/", 
-            "web_engine": "urllib2"
-        }, 
-        {
-            "__classname__": "Academy", 
-            "__module__": "models", 
-            "departments": {
-              "all":"http://sc.bit.edu.cn/szll/jsms/index.htm"
-            },
-            "done": false, 
-            "employees": [], 
-            "eng_name": "sc.bit.edu.cn", 
+            "eng_name": "chem.nankai.edu.cn", 
             "name": "化学学院", 
             "parser": null, 
             "rule": {
                 "__classname__": "ParseRule", 
                 "__module__": "models", 
-                "attrs": {}, 
+                "attrs": {},
                 "parents": [], 
                 "select": [], 
                 "tag_name": "a",
-                "zone_attr": {"style":"min-height:328px;_height:328px;"},
+                "zone_attr": {"id":"tbxm"},
                 "zone_index": 0, 
-                "zone_tag": "ul"
-
+                "zone_tag": "td"
             }, 
-            "sname": "sc", 
-            "url": "http://sc.bit.edu.cn", 
-            "web_engine": "urllib2"
+            "sname": "chem", 
+            "url": "http://chem.nankai.edu.cn", 
+            "web_engine": "selenium"
         }, 
         {
             "__classname__": "Academy", 
             "__module__": "models", 
             "departments": {
-              "all":"http://cs.bit.edu.cn/szdw/jsml/index.htm"
+                "博士生导师":"http://cc.nankai.edu.cn/Teachers/Search.aspx?type=11",
+                "硕士生导师":"http://cc.nankai.edu.cn/Teachers/Search.aspx?type=12",
+                "教授和研究员":"http://cc.nankai.edu.cn/Teachers/Search.aspx?type=13",
+                "副教授和副研究员":"http://cc.nankai.edu.cn/Teachers/Search.aspx?type=14",
+                "讲师":"http://cc.nankai.edu.cn/Teachers/Search.aspx?type=15"
+
             },
             "done": false, 
             "employees": [], 
-            "eng_name": "cs.bit.edu.cn",
-            "name": "计算机学院", 
+            "eng_name": "cc.nankai.edu.cn", 
+            "name": "计算机与控制工程学院", 
             "parser": null, 
             "rule": {
                 "__classname__": "ParseRule", 
@@ -202,26 +103,120 @@
                 "parents": [], 
                 "select": [], 
                 "tag_name": "a",
-                "zone_attr": {"class":"rt_list"},
-                "zone_index": 0,
-                "zone_tag": "div"
+                "zone_attr": {"id":"teachers"},
+                "zone_index": 0, 
+                "zone_tag": "table"
             }, 
-            "sname": "cs",
-            "url": "http://cs.bit.edu.cn/",
+            "sname": "cc", 
+            "url": "http://cc.nankai.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "it.nankai.edu.cn", 
+            "name": "电子信息与光学工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "it", 
+            "url": "http://it.nankai.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "env.nankai.edu.cn", 
+            "name": "环境科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "env", 
+            "url": "http://env.nankai.edu.cn/", 
+            "web_engine": "urllib2"
+        },
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "teda.nankai.edu.cn", 
+            "name": "泰达应用物理研究院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "teda", 
+            "url": "http://teda.nankai.edu.cn/aps/index.asp", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "mse.nankai.edu.cn", 
+            "name": "材料科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "mse", 
+            "url": "http://mse.nankai.edu.cn/", 
             "web_engine": "urllib2"
         }
     ], 
-    "academiesUrl": "http://www.bit.edu.cn/gbxxgk/gbxysz2/index.htm", 
+    "academiesUrl": "http://www.nankai.edu.cn/213/list.htm", 
     "done": false, 
-    "eng_name": "bit.edu.cn", 
-    "name": "北京理工大学", 
+    "eng_name": "nankai.edu.cn", 
+    "name": "南开大学", 
     "parser": null, 
     "rule": {
         "__classname__": "ParseRule", 
         "__module__": "models", 
-        "attrs": {
-            "target": false
-        }, 
+        "attrs": {}, 
         "parents": [
             "td"
         ], 
@@ -229,8 +224,8 @@
         "tag_name": "a", 
         "zone_attr": {}, 
         "zone_index": 0, 
-        "zone_tag": "table"
+        "zone_tag": ""
     }, 
-    "sname": "bit", 
-    "url": "http://www.bit.edu.cn/"
+    "sname": "nankai", 
+    "url": "http://www.nankai.edu.cn/"
 }

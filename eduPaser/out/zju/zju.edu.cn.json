@@ -1,0 +1,256 @@
+{
+    "__classname__": "College", 
+    "__module__": "models", 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.math.zju.edu.cn/webpagenew/teachers.asp"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "数学科学学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"linkto"}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {}, 
+                "zone_index": 1, 
+                "zone_tag": "table"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106157/catalog.html", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "聚变理论与模拟中心":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4108",
+                "浙江近代物理中心1":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4109",
+                "浙江近代物理中心2":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4109&page=1",
+                "浙江近代物理中心3":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4109&page=2",
+                "光学研究所1":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4110",
+                "光学研究所2":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4110&page=1",
+                "电子与无线电物理技术研究所":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4111",
+                "凝聚态物理研究所1":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4112",
+                "凝聚态物理研究所2":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4112&page=1",
+                "凝聚态物理研究所3":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4112&page=2",
+                "凝聚态物理研究所4":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4112&page=3",
+                "大学物理教研室":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4113",
+                "物理实验中心":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4114",
+                "物理实验中心":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4114&page=1",
+                "物理实验中心":"http://physics.zju.edu.cn/chinese/redir.php?catalog_id=4114&page=2"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "物理学系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"id":"arthd"}, 
+                "zone_index": 0, 
+                "zone_tag": "ul"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106158/catalog.html", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.chem.zju.edu.cn/chinese/redir.php?catalog_id=471"
+            }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "化学系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"class":"shizidw_yz"}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "div", 
+                "zone_attr": {}, 
+                "zone_index": 0, 
+                "zone_tag": ""
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106159/catalog.html", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "正高职教师1":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8994",
+                "正高职教师2":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8994&page=1",
+                "正高职教师3":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8994&page=2",
+                "正高职教师4":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8994&page=3",
+                "副高职教师1":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8995",
+                "副高职教师2":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8995&page=1",
+                "副高职教师3":"http://mse.zju.edu.cn/chinese/redir.php?catalog_id=8995&page=2"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "材料科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"cellpadding":"5"}, 
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106149/catalog.html", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {"all":"http://ee.zju.edu.cn/chinese/redir.php?catalog_id=54228"}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "电气工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"id":"cus_cat_con"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106151/catalog.html", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://che.zju.edu.cn/cn/redir.php?catalog_id=61439"
+            },  
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "化学工程与生物工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"teacher"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106153/catalog.html", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://www.cs.zju.edu.cn/chinese/redir.php?cust=jiaoshiml&id=256"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "计算机科学与技术学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"right_content"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106165/catalog.html", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all1":"http://www.cers.zju.edu.cn/chinese/redir.php?catalog_id=18202",
+                "all2":"http://www.cers.zju.edu.cn/chinese/redir.php?catalog_id=18202&page=1",
+                "all3":"http://www.cers.zju.edu.cn/chinese/redir.php?catalog_id=18202&page=2",
+                "all4":"http://www.cers.zju.edu.cn/chinese/redir.php?catalog_id=18202&page=3",
+                "all5":"http://www.cers.zju.edu.cn/chinese/redir.php?catalog_id=18202&page=4"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.zju.edu.cn", 
+            "name": "环境与资源学院", 
+            "parser": "SimpleTableParser", 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "tr", 
+                "zone_attr": {"class":"table_style"}, 
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "zju", 
+            "url": "http://www.zju.edu.cn/c2106145/catalog.html", 
+            "web_engine": "urllib2"
+        }
+    ], 
+    "academiesUrl": "http://www.zju.edu.cn/c2505465/catalog.html", 
+    "done": false, 
+    "eng_name": "zju.edu.cn", 
+    "name": "浙江大学", 
+    "parser": null, 
+    "rule": {
+        "__classname__": "ParseRule", 
+        "__module__": "models", 
+        "attrs": {}, 
+        "parents": [], 
+        "select": [], 
+        "tag_name": "a", 
+        "zone_attr": {
+            "class": "right-box main"
+        }, 
+        "zone_index": 0, 
+        "zone_tag": "div"
+    }, 
+    "sname": "zju", 
+    "url": "http://www.zju.edu.cn/"
+}

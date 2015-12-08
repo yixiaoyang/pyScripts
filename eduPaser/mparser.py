@@ -40,11 +40,11 @@ def get_doc_byUrllib2(url,handler=None):
             charset = re_result[0]
     if not charset:
         result = chardet.detect(doc)
-        if not result:
+        if result:
             charset = result['encoding']
 
     if charset and charset != 'utf-8':
-        if charset == 'gb2312':
+        if charset == 'gb2312' or charset == 'GB2312':
             doc = unicode(doc,'gb18030')
 
     request.close()
@@ -174,7 +174,7 @@ class Hao123_211_Parser(Parser):
 
 
 class SimpleAParser(Parser):
-    def __init__(self, rule, file=None,url=None, rlist=None, web_engine=Config.DEFAULT_WEB_ENGINE, force_href=False):
+    def __init__(self, rule, file=None,url=None, rlist=None, web_engine=Config.DEFAULT_WEB_ENGINE, force_href=True):
         Parser.__init__(self, file=file, url=url,rlist=rlist,web_engine=web_engine)
         self.rule = rule
         self.force_href = force_href
@@ -206,12 +206,12 @@ class SimpleAParser(Parser):
             # 查看zone
             zone = self.soup
             if len(self.rule.zone_tag) != 0:
-                zones = self.soup.find_all(name=self.rule.zone_tag, attrs=self.rule.zone_attr,limit=1)
+                zones = self.soup.find_all(name=self.rule.zone_tag, attrs=self.rule.zone_attr)
                 if len(zones) > self.rule.zone_index:
                     zone = zones[self.rule.zone_index]
                     #print zone
                 else:
-                    logger.debug("can not parse zone")
+                    logger.debug("can not parse zone, out of range %d of %d" %(self.rule.zone_index,len(zones)))
             
             res = zone.find_all(name=self.rule.tag_name)
             logger.debug("find_(\'%s\') in %s count %d" % (self.rule.tag_name, self.url, len(res)))
@@ -253,7 +253,7 @@ class SimpleAParser(Parser):
                     if tag.has_attr('href'):
                         self.rlist.append(tag)
                     else:
-                        if(self.force_href):
+                        if self.force_href:
                             for child in tag.descendants:
                                 if isinstance(child, Bs4Tag):
                                     if child.has_attr('href'):
@@ -285,7 +285,7 @@ class AutoAcademyParser(Parser):
 
 
 class ProfileParser():
-    def __init__(self,employee,text=None,max_line=32,min_char=2,lines=None, set_attr_hook=None,force_inline=False):
+    def __init__(self,employee,text=None,max_line=32,min_char=2,lines=None, set_attr_hook=None,force_inline=False,ignore=set()):
         self.text = text
         self.max_line = max_line
         self.employee = employee
@@ -293,6 +293,7 @@ class ProfileParser():
         self.lines = lines
         self.symbols = Config.PROFILE_SYMBOLS
         self.split_str = [':', '：']
+        self.ignore = ignore
 
         # 在设置真正的数据前再次调用用户过滤函数，如在解析email时将'（at）'更改为'@'
         self.set_attr_hook = set_attr_hook
@@ -306,8 +307,9 @@ class ProfileParser():
         return new_line
 
     def check_symbols(self,line):
+        value = ''.join(line.split())
         for symbol, name in self.symbols.items():
-            if symbol in line:
+            if symbol in value:
                 return True
         return False
 
@@ -323,6 +325,8 @@ class ProfileParser():
 
         # 根据预定的symbol推测字段和值
         for symbol, name in self.symbols.items():
+            if name in self.ignore:
+                continue
             idx = line.find(symbol)
             if idx != -1:
                 pos = idx + len(symbol)
@@ -330,6 +334,7 @@ class ProfileParser():
                 if not (pos in indexes_set):
                     symbols.append(symbol)
                     names.append(name)
+                    logger.debug("detect field [" + name + "]")
                     name_values[name] = None
                     indexes.append(pos)
                     indexes_set.add(pos)
@@ -346,6 +351,7 @@ class ProfileParser():
                     logger.error("parse failed, end_idx %d >= index %d" % (end_idx,index))
             else:
                 value = line[index:]
+                print("parsing name:"+name+",value:"+value)
 
             if not value:
                 return name, name_values
@@ -359,7 +365,10 @@ class ProfileParser():
                 splits = value.split(str)
                 if len(splits) >= 2:
                     value = splits[1]
+                    logger.debug("detect split, select value="+value)
                     break
+                else:
+                    value = splits[0]
                 #split_idx = value.find(str)
                 #if split_idx != -1:
                     #value = value[split_idx+len(str):]
@@ -367,8 +376,11 @@ class ProfileParser():
                     # print("handle split:"+name+","+value+",len=%d,str=%s"%(len(str),str))
                     #break
 
-            if len(value) == 0:
-                print(name+":"+value+" =>next line2=>%d"%index)
+            # 除去关键字后剩下的小于2则认为下行才是内容，如研究方向一，正文在下行
+            if len(value) <= 1:
+                logger.debug(name+":"+value+" =>next line2=>%d"%index)
+                return name, name_values
+            if name == 'research' and value.find('（') == 0:
                 return name, name_values
 
             name_values[name] = value
@@ -380,15 +392,31 @@ class ProfileParser():
                     self.employee.title = keywords
                     break
 
+        # 这个太暴力了，视情况开启
+        #if len(self.employee.email) == 0 and '@' in line:
+        #    self.employee.email = line
         return None, name_values
+
+    def set_next_line(self,name,value):
+        line = value
+        if self.set_attr_hook:
+            line = ''.join(line.split())
+            if len(line) < self.min_char:
+                return False
+            line = self.set_attr_hook(name,line)
+        if not line:
+            #logger.warning("set name:" +name + " none failed")
+            return False
+        # logger.debug("try set name:"+name+", value:"+line)
+        self.employee.try_set_attr(name,line)
 
     def parse(self):
         if not self.lines:
             for line in self.text.splitlines():
-                line = line.strip()
+                line = line.strip(' \t\n')
                 # line = ''.join(line.split())
                 if len(line) >= self.min_char:
-                    print "origin:"+line
+                    #print "origin:"+line
                     self.lines.append(line)
 
         # parse each line
@@ -401,11 +429,20 @@ class ProfileParser():
                     to_parse_value = None
                     pass
                 else:
-                    if self.set_attr_hook:
-                        line = ''.join(line.split())
-                        line = self.set_attr_hook(to_parse_value,line)
-                    self.employee.try_set_attr(to_parse_value,line)
-                    to_parse_value = None
+                    if self.set_next_line(to_parse_value,line):
+                        to_parse_value = None
+                        self.employee.try_set_attr(to_parse_value,line)
+                    else:
+                         continue
+                    # if self.set_attr_hook:
+                    #     line = ''.join(line.split())
+                    #     if len(line) < self.min_char:
+                    #         continue
+                    #     line = self.set_attr_hook(to_parse_value,line)
+                    # if not value:
+                    #         continue
+                    #self.employee.try_set_attr(to_parse_value,line)
+                    #to_parse_value = None
                     continue
             if count >= self.max_line:
                 break
@@ -414,10 +451,17 @@ class ProfileParser():
             # 正常解析
             if not to_parse_value:
                 for name, value in name_values.items():
-                    if self.set_attr_hook:
-                        value = ''.join(value.split())
-                        value = self.set_attr_hook(name,value)
-                    self.employee.try_set_attr(name,value)
+                    if self.set_next_line(name,value):
+                        self.employee.try_set_attr(name,value)
+                    # if self.set_attr_hook:
+                    #     value = ''.join(value.split())
+                    #     value = self.set_attr_hook(name,value)
+                    #     if len(value) < self.min_char:
+                    #         continue
+                    #
+                    #     if not value:
+                    #         continue
+
         return self.employee
 
 
@@ -465,7 +509,8 @@ def aca_filter(col_name, col_url, url, name):
         # 对于链接名==链接地址的重新识别
         if name == url:
             name = None
-        name = ''.join(name.split())
+        else:
+            name = ''.join(name.split())
     name = name or aca_guess_name(url)
     logger.debug(name)
     if len(name) != 0:
@@ -476,6 +521,10 @@ def aca_filter(col_name, col_url, url, name):
             name = name[idx + len(col_name):]
         for key in Config.ACA_NAME_FILTER:
             if key in name:
+                for bkey in Config.ACA_NAME_BFILTER:
+                    if bkey in name:
+                        return None,None
+                logger.debug("key " + key + " foud in " + name)
                 return url, name
     return None, None
 

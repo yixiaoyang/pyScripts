@@ -1,0 +1,174 @@
+{
+    "__classname__": "College", 
+    "__module__": "models", 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://smse.sjtu.edu.cn/jiaogongminglu.asp"
+            }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "smse.sjtu.edu.cn", 
+            "name": "材料科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"id":"right_2"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "smse", 
+            "url": "http://smse.sjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {"all":"http://math.sjtu.edu.cn/ListInfo.aspx"},
+            "done": false, 
+            "employees": [], 
+            "eng_name": "math.sjtu.edu.cn", 
+            "name": "数学系", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {"style":"float: left; text-align:center; width:80px"},
+                "parents": [], 
+                "select": [],
+                "tag_name": "span",
+                "zone_attr": {"class":"th_nr"},
+                "zone_index": 0,
+                "zone_tag": "div"
+            }, 
+            "sname": "math", 
+            "url": "http://math.sjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "院士":"http://www.physics.sjtu.edu.cn/node/1374",
+                "教师0":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=0" ,
+                "教师1":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=1" ,
+                "教师2":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=2" ,
+                "教师3":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=3" ,
+                "教师4":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=4" ,
+                "教师5":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=5" ,
+                "教师6":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=6" ,
+                "教师7":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=7" ,
+                "教师8":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=8" ,
+                "教师9":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=9" ,
+                "教师10":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=10" ,
+                "教师11":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=11" ,
+                "教师12":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=12" ,
+                "教师13":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=13" ,
+                "教师14":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=14" ,
+                "教师15":"http://www.physics.sjtu.edu.cn/faculty/teachers/95&page=15",
+                "实验人员0":"http://www.physics.sjtu.edu.cn/faculty/labtechs/95&page=0",
+                "实验人员1":"http://www.physics.sjtu.edu.cn/faculty/labtechs/95&page=1",
+                "博士后0":"http://www.physics.sjtu.edu.cn/faculty/postdocs/95&page=0",
+                "博士后1":"http://www.physics.sjtu.edu.cn/faculty/postdocs/95&page=0"
+            },
+            "done": false,
+            "employees": [], 
+            "eng_name": "www.physics.sjtu.edu.cn", 
+            "name": "物理与天文系", 
+            "parser": "SimpleTableParser",
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "dl",
+                "zone_attr": {"class":"pane-content"},
+                "zone_index": 3,
+                "zone_tag": "div"
+            }, 
+            "sname": "physics", 
+            "url": "http://www.physics.sjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://scce.sjtu.edu.cn/jiaoshi.php?c=3"
+            },
+            "done": false, 
+            "employees": [], 
+            "eng_name": "scce.sjtu.edu.cn", 
+            "name": "化学化工学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {},
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a",
+                "zone_attr": {"class":"people_list2"},
+                "zone_index": 0, 
+                "zone_tag": "ul"
+            },
+            "sname": "scce", 
+            "url": "http://scce.sjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "全职教师":"http://sese.sjtu.edu.cn/TeacherTeam/TeacherList.php?num=2&cnum=0&ID=2"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "sese.sjtu.edu.cn", 
+            "name": "环境科学与工程学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"tclass"}, 
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "sese", 
+            "url": "http://sese.sjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }
+    ], 
+    "academiesUrl": "http://www.sjtu.edu.cn/xbdh/yjdh/yx.htm", 
+    "done": false, 
+    "eng_name": "sjtu.edu.cn", 
+    "name": "上海交通大学", 
+    "parser": null, 
+    "rule": {
+        "__classname__": "ParseRule", 
+        "__module__": "models", 
+        "attrs": {
+            "class": "c51057"
+        }, 
+        "parents": [], 
+        "select": [], 
+        "tag_name": "a", 
+        "zone_attr": {}, 
+        "zone_index": 0, 
+        "zone_tag": ""
+    }, 
+    "sname": "sjtu", 
+    "url": "http://www.sjtu.edu.cn/"
+}

@@ -59,6 +59,7 @@ class ParseRule:
         # 2. 结果筛选
         self.select = []
 
+
 class ItemBase:
     def __init__(self, url=None, name=None, eng=None, parser=None):
         self.url = url or ''
@@ -79,6 +80,12 @@ class ItemBase:
 
     def mkdirs(self):
         pass
+
+class Paginator:
+    def __init__(self, page_min=0, page_max=1, param_name='page'):
+        self.page_min = page_min
+        self.page_max = page_max
+        self.param_name = param_name
 
 
 class VisitingCard:
@@ -120,8 +127,13 @@ class Employee:
 
     def try_set_attr(self, name, value):
         if hasattr(self, name):
-            setattr(self, name, value)
-            logger.debug(name + ":" + value)
+            old_value = getattr(self,name)
+            # 如果存在值，不覆盖，忽略
+            if old_value and len(old_value) != 0:
+                return
+            else:
+                setattr(self, name, value)
+                logger.debug(name + ":[" + value + "], len=%d"%len(value))
         else:
             logger.debug("no attr %s in employee" % name)
 
@@ -135,6 +147,10 @@ class Academy(ItemBase):
         # self.departmentsUrl = ''
         # self.departmentsRule = ParseRule()
         self.departments = {}
+
+        # ‘全体教师’导航页面是否分页，默认为1整页，若分页需要在配置文件写上具体的页数。
+        # 另外需要在departments字段填写基本的字段“page1”：“url”
+        # self.pages = 1
 
         self.web_engine = Config.DEFAULT_WEB_ENGINE
         self.employees = []
@@ -160,23 +176,21 @@ class Academy(ItemBase):
         # if not os.path.exists(path):
         obj_to_file(self, path)
 
-    # TODO: test me
-    def parse_departments(self):
-        pass
-        # if len(self.departmentsUrl) == 0:
-        #     return
-        # parser = SimpleAParser(self.departmentsUrl, self.rule)
-        # if parser.run():
-        #     for tag in parser.rlist:
-        #         if tag.has_attr('href'):
-        #             self.departments[tag.string] = tag['href'
+    # TODO: 如果存在用户定义的分析器则使用用户定义的DEPARTMENTS_HANDLER
+    def parse_departments(self,col):
+        handler = self.load_user_handler(Config.ACA_MY_DEPARTMENTS_HANDLER, col)
+        if handler:
+            self.departments = handler()
 
     def load_user_handler(self, name, col):
         handler = None
         mod_path = self.mypaser_filename(col)
         mod_path = mod_path.decode('utf-8')
+
+        # in windows 
+        # mod_path = "./out/MyHandler.py"
         if os.path.exists(mod_path):
-            # logger.debug("load MyHandler.py mode %s from: " % name + mod_path)
+            logger.debug("load MyHandler.py mode %s from: " % name + mod_path)
             mod = imp.load_source(Config.ACA_MY_MODNAME, mod_path)
             # 检查函数handler有没有实现
             handler = getattr(mod, name, None)
@@ -188,7 +202,7 @@ class Academy(ItemBase):
 
     def parse_employees(self, col):
         if len(self.departments) == 0:
-            self.parse_departments()
+            self.parse_departments(col)
             logger.debug("departments none")
             return
         if self.employees_existed(col):
@@ -216,11 +230,15 @@ class Academy(ItemBase):
                 pre_handler(url=url,filename=index_filename)
             parser = my_parser(file=index_filename, url=url, rule=self.rule, web_engine=self.web_engine)
             if parser.run():
+                #logger.debug("parser.rlist=%d"%len(parser.rlist))
                 if len(parser.rlist) != 0:
                     if handler:
                         for count, tag in enumerate(parser.rlist):
-                            #try:
-                            if True:
+                            #if count >= 32:
+                            #    break
+                            try:
+                            #if True:
+                                #print(tag), "\n"
                                 employ1 = handler(tag)
                                 if not employ1 or not employ1.name:
                                     logger.warning("parse failed employee none")
@@ -228,6 +246,7 @@ class Academy(ItemBase):
                                 employ1.url, employ1.name = employee_filter(self.sname, url, employ1.url, employ1.name)
                                 if employ1.name:
                                     if employ1.name in name_set:
+                                        logger.warning("name: " + employ1.name + " already pasred")
                                         continue
                                     else:
                                         name_set.add(employ1.name)
@@ -239,9 +258,15 @@ class Academy(ItemBase):
                                     if employ1.url:
                                         if phandler:
                                             logger.debug("try get profile of " + employ1.name)
-                                            engine = parser.engine()
-                                            # logger.debug(parser.web_engine)
-                                            doc = engine(employ1.url, handler=engine_handler)
+                                            profile_file = os.path.join(self.json_dirname(col), (employ1.name + ".html"))
+                                            doc = None
+
+                                            if os.path.exists(profile_file):
+                                                doc = open(profile_file,'rb').read()
+                                            else:
+                                                engine = parser.engine()
+                                                # logger.debug(parser.web_engine)
+                                                doc = engine(employ1.url, handler=engine_handler)
                                             employ2 = phandler(doc=doc, name=employ1.name, url=employ1.url,
                                                                path=self.json_dirname(col))
                                             if not employ2:
@@ -256,14 +281,14 @@ class Academy(ItemBase):
                                         self.employees.append(employ1)
                                         # if employ1.url
                                         # if employ1.name
-                            #except Exception as e:
-                            else:
-                                #logger.error("Exception %s" % e)
+                            except Exception as e:
+                            #else:
+                                logger.error("Exception %s" % e)
                                 continue
-                                # if count >= 1:
-                                #    break
                     else:
                         logger.error("handler not found")
+            else: # if parser.run()
+                logger.error("parser run failed")
 
     def print_employees(self):
         for i, e in enumerate(self.employees):
@@ -274,7 +299,7 @@ class Academy(ItemBase):
         fieldnames = ['name', 'title', 'email', 'tel', 'fax', 'research', 'departments', 'url', 'profile']
         with open(path_of(filename), 'wb') as csvfp:
             writer = csv.DictWriter(csvfp, fieldnames=fieldnames, delimiter=',',
-                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                                    quotechar=' ', quoting=csv.QUOTE_MINIMAL)
             writer.writeheader()
             for e in self.employees:
                 writer.writerow({'name': e.name,

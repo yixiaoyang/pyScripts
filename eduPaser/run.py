@@ -5,18 +5,20 @@ import sys
 import csv
 import os
 import imp
-from log import *
+import logging
+from log import setup_custom_logger
 from config import Config
 from config import path_of
 from mparser import Hao123_211_Parser
-from mparser import get_doc_bySelenium, selenium_close
+from mparser import selenium_close
 from models import College, China211
 from models import obj_to_file, obj_from_file
-import html2text
+#import html2text
 
 logger = None
 china211 = None
 colleges = list()
+
 
 def parse_colleges():
     if len(colleges) != 0:
@@ -32,10 +34,9 @@ def parse_colleges():
 
 def print_colleges():
     for i, c in enumerate(colleges):
-        symbol = ' '
-        if len(c.academiesUrl) != 0:
-            symbol = '#'
-        print("[%2s][%3d] %s , %s , %s " % (symbol, i, c.name, c.eng_name, c.url))
+        index_symbol = ' ' if len(c.academiesUrl) == 0 else '#'
+        done_symbol = '#' if c.done else ' '
+        print("[%2s][%2s][%3d] %s , %s , %s " % (done_symbol, index_symbol, i, c.name, c.eng_name, c.url))
 
 
 def colleges_to_csv():
@@ -223,7 +224,6 @@ menus = {
     "6":menu_parse_employees,
     "7":menu_test_imp,
 }
-
 
 if __name__ == "__main__":
     _init()

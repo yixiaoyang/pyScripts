@@ -1,0 +1,164 @@
+{
+    "__classname__": "College", 
+    "__module__": "models", 
+    "academies": [
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://phych.xjtu.edu.cn/szdw/jsdw.htm"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.xjtu.edu.cn", 
+            "name": "理学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"d_detail"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "xjtu", 
+            "url": "http://phych.xjtu.edu.cn/", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {"all":"http://202.117.3.94/sxtjxy/szdw/article.jsp?articleId=4445"}, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.xjtu.edu.cn", 
+            "name": "数学学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"d_detail"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "xjtu", 
+            "url": "http://math.xjtu.edu.cn/sxtjxy/home.jsp", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "1":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=1",
+                "2":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=2",
+                "3":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=3",
+                "4":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=4",
+                "5":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=5",
+                "6":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=6",
+                "7":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=7",
+                "8":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=8",
+                "9":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=9",
+                "10":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=10",
+                "11":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=11",
+                "12":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=12",
+                "13":"http://ee.xjtu.edu.cn/new_ee/content.php?page=search_teacher&name=&zhicheng=&department=&major=&offset=13"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.xjtu.edu.cn", 
+            "name": "电气学院", 
+            "parser": "SimpleTableParser", 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "tr", 
+                "zone_attr": {"id":"data1"}, 
+                "zone_index": 0, 
+                "zone_tag": "table"
+            }, 
+            "sname": "xjtu", 
+            "url": "http://ee.xjtu.edu.cn/new_ee/", 
+            "web_engine": "selenium"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://mse.xjtu.edu.cn/"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.xjtu.edu.cn", 
+            "name": "材料学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"class":"teacher-t"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "xjtu", 
+            "url": "http://mse.xjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }, 
+        {
+            "__classname__": "Academy", 
+            "__module__": "models", 
+            "departments": {
+                "all":"http://clet.xjtu.edu.cn/szdw/jsml.htm"
+                }, 
+            "done": false, 
+            "employees": [], 
+            "eng_name": "www.xjtu.edu.cn", 
+            "name": "化工学院", 
+            "parser": null, 
+            "rule": {
+                "__classname__": "ParseRule", 
+                "__module__": "models", 
+                "attrs": {}, 
+                "parents": [], 
+                "select": [], 
+                "tag_name": "a", 
+                "zone_attr": {"id":"vsb_content"}, 
+                "zone_index": 0, 
+                "zone_tag": "div"
+            }, 
+            "sname": "xjtu", 
+            "url": "http://clet.xjtu.edu.cn/", 
+            "web_engine": "urllib2"
+        }
+    ], 
+    "academiesUrl": "javascript:;", 
+    "done": false, 
+    "eng_name": "xjtu.edu.cn", 
+    "name": "西安交通大学", 
+    "parser": null, 
+    "rule": {
+        "__classname__": "ParseRule", 
+        "__module__": "models", 
+        "attrs": {}, 
+        "parents": [], 
+        "select": [], 
+        "tag_name": "a", 
+        "zone_attr": {}, 
+        "zone_index": 0, 
+        "zone_tag": ""
+    }, 
+    "sname": "xjtu", 
+    "url": "http://www.xjtu.edu.cn/"
+}

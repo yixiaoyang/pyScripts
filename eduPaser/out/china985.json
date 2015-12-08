@@ -453,7 +453,7 @@
             "__module__": "models", 
             "academies": [], 
             "academiesUrl": "http://www.zju.edu.cn/c2505465/catalog.html", 
-            "done": false, 
+            "done": true, 
             "eng_name": "zju.edu.cn", 
             "name": "浙江大学", 
             "parser": null, 
@@ -474,7 +474,7 @@
             "__classname__": "College", 
             "__module__": "models", 
             "academies": [], 
-            "academiesUrl": "", 
+            "academiesUrl": "http://www.ustc.edu.cn/yxjs/", 
             "done": false, 
             "eng_name": "ustc.edu.cn", 
             "name": "中国科学技术大学", 
@@ -485,12 +485,15 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
+                "tag_name": "area", 
                 "zone_attr": {}, 
-                "zone_tag": ""
+                "zone_index": 0, 
+                "zone_tag": "map"
             }, 
             "sname": "ustc", 
-            "url": "http://www.ustc.edu.cn/"
+            "url": "http://www.ustc.edu.cn/",
+            "web_engine": "selenium"
+
         }, 
         {
             "__classname__": "College", 
@@ -837,7 +840,7 @@
                 "attrs": {}, 
                 "parents": [], 
                 "select": [], 
-                "tag_name": "", 
+                "tag_name": "a", 
                 "zone_attr": {}, 
                 "zone_tag": ""
             }, 

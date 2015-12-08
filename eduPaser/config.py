@@ -57,6 +57,7 @@ class Config:
         u'EMAIL': 'email',
         u'E-mail': 'email',
         u"E－mail":'email',
+        u'E-MAIL':'email',
         u'电邮':'email',
         u'机构' : 'departments',
         u'单位':  'departments',

@@ -38,14 +38,17 @@ def get_doc_byUrllib2(url,handler=None):
         re_result = re.compile('charset=(.*)"').findall(doc)
         if re_result and len(re_result) > 0:
             charset = re_result[0]
+
+    print "charset="+charset
     if not charset:
         result = chardet.detect(doc)
         if result:
             charset = result['encoding']
 
-    if charset and charset != 'utf-8':
-        if charset == 'gb2312' or charset == 'GB2312':
+    if charset and (not charset in set(['utf-8','UTF-8'])):
+        if charset in set(['gb2312','GB2312','GBK','gbk']):
             doc = unicode(doc,'gb18030')
+    print "charset="+charset
 
     request.close()
     return doc
@@ -300,10 +303,11 @@ class ProfileParser():
 
 
     def line_pipe(self, line):
-        # new_line = line.replace('：',':')
+        new_line = line.replace('  ',' ')
 
         # TODO:清除文本中的多余空格，注意此处如果为英文，所有空格都会被清除
-        new_line = ''.join(line.split())
+        # new_line = ''.join(line.split())
+        new_line = new_line.strip()
         return new_line
 
     def check_symbols(self,line):
@@ -398,7 +402,7 @@ class ProfileParser():
         return None, name_values
 
     def set_next_line(self,name,value):
-        line = value
+        line = value.replace(',','，')
         if self.set_attr_hook:
             line = ''.join(line.split())
             if len(line) < self.min_char:

@@ -1,0 +1,96 @@
+.card {
+ background:url("_page_bg.png");
+ font-family: literata;
+ text-align: left;
+ color:#212121;
+}
+
+.section {
+ position: relative;
+ text-align: left;
+ /*border-top-left-radius: 15px;*/
+ box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+.word_header_star{
+ position: absolute;
+ right: 5px;
+ top: -5px;
+}
+
+.button{
+ position: absolute;
+ right: 5px;
+ bottom: 5px;
+ width: 16px;
+}
+
+.sample {
+ font-size: 16px;
+ background-color: #ffffff;
+ border: #dedede solid 1px;
+ /*border-bottom-right-radius: 15px;*/
+ box-shadow: 0 3px 10px rgba(0,0,0,0.23);
+ padding: 16px;
+ display:none;
+}
+
+#en{
+ font-family: arial;
+ font-size: 30px;
+ line-height: 75%;
+ font-weight:bold;
+ /*border-top-left-radius: 15px;*/
+ text-shadow: 1px 0 0 #ffffff,0 1px 0 #ffffff,-1px 0 0 #ffffff,0 -1px 0 #ffffff;
+ background:#ffcdd2 url(_lulu_search.png) scroll 10px center no-repeat;
+ padding: 15px 10px 10px 52px;
+}
+
+
+#cn{
+ font-family: Arial;
+ font-size: 16px;
+ /*border-top-left-radius: 15px;*/
+ background:#bce5fc url(_lulu_lightbuble.png) scroll 10px 10px no-repeat;
+ padding: 10px 10px 10px 52px;
+}
+
+
+#sample_cn{
+ font-family: Arial;
+}
+
+
+#sample_vocab{
+ display:block;
+}
+
+
+#sample_collins{
+ display:block;
+  font-family: arial;
+  font-size: 16px;
+ background-color: #ffffff;
+ border: #dedede solid 1px;
+ /*border-bottom-right-radius: 15px;*/
+ box-shadow: 0 3px 10px rgba(0,0,0,0.23);
+ padding: 16px;
+ display:none;
+}
+
+#vocab{
+ font-size: 16px;
+ background:#dcedc8 url(_lulu_clipboard.png) scroll 10px 10px no-repeat;
+ padding: 10px 10px 10px 52px;
+}
+
+#collins{
+ font-family: Arial;
+ color:#ffffff;
+ font-size: 25px;
+ background:#4682B4 url(_lulu_clipboard.png) scroll 10px center no-repeat;
+ padding: 10px 10px 10px 52px;
+}
+.phonetic{
+	font-size:45%;
+}

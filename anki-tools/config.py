@@ -14,6 +14,7 @@ class Config:
     URL_TIMEOUT = 30
     DEFAULT_WEB_ENGINE = "urllib2"
     BASE_URL = 'http://www.iciba.com'
+    SPLIT_CH = "\t"
 
 class DevConfig(Config):
     DEBUG = True

@@ -185,6 +185,8 @@ def parse(word):
         div_base = soup.find("li",class_="clearfix")
         if div_base:
             card.cdef = "".join(div_base.stripped_strings)
+            card.cdef = card.cdef.replace("\t","")
+
 
         # collins
         div_collins = soup.find("div",class_="collins-section")
@@ -225,10 +227,10 @@ def parse(word):
 
     return card
 
-def mkcard_loop(words):
+def mkcard_loop(words,filename):
     cards = {}
     total = len(words)
-    with open("export.txt",'wb') as fp:
+    with open(filename,'wb') as fp:
         for cnt, word in enumerate(words):
             card = parse(word)
             cards[word] = card
@@ -236,7 +238,7 @@ def mkcard_loop(words):
             logStr = "%d/%d %s %s"%(cnt+1,total,card.word,card.cdef)
             logger.debug(logStr)
 
-            outStr = "%s # %s # %s # %s # %s # %s # %s\n"%(card.word,card.rate,card.phonetic,card.cdef,card.img, card.sound, card.collins)
+            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,card.phonetic,card.cdef,card.img, card.sound, card.collins)
             fp.write(outStr)
         fp.close()
 
@@ -256,8 +258,19 @@ if __name__ == "__main__":
 
     _init()
 
-    words = get_words_from_txt("/home/yixiaoyang/anki/vocab-toefl-leon.txt")
-    mkcard_loop(words)
+    wordlist = {
+        "/devel/git/github/pyScripts/anki-tools/wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
+        "/devel/git/github/pyScripts/anki-tools/wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
+        "/devel/git/github/pyScripts/anki-tools/wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
+        "/devel/git/github/pyScripts/anki-tools/wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
+        "/devel/git/github/pyScripts/anki-tools/wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt"
+    }
+
+    for listFile,exportFile in wordlist.items():
+        if os.path.exists(exportFile):
+            continue
+        words = get_words_from_txt(listFile)
+        mkcard_loop(words,exportFile)
 
     logger.debug("Goodbye")
 

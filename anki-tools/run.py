@@ -165,6 +165,9 @@ def get_def_from_youdao(word):
 def parse(word):
     url = Config.BASE_URL + "/" + word
     doc = get_doc_byUrllib2(url)
+    if not doc:
+        logger.error("doc none")
+        return 
     soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
 
     if soup:
@@ -188,6 +191,8 @@ def parse(word):
             for item in div_base:
                 cdef = "".join(item.stripped_strings)
                 card.cdef = card.cdef+cdef+"<br>"
+            if len(card.cdef) > 4:
+                card.cdef = card.cdef[:-4]
             card.cdef = card.cdef.replace("\t","")
             card.cdef = card.cdef.replace("\n","<br>")
         else:

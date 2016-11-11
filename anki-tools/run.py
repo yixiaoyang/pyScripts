@@ -182,12 +182,17 @@ def parse(word):
             card.phonetic =  ",".join(div_speak.stripped_strings)
 
         # base defination
-        div_base = soup.find("li",class_="clearfix")
+        div_base = soup.find_all("li",class_="clearfix")
         if div_base:
-            card.cdef = "".join(div_base.stripped_strings)
+            card.cdef = ""
+            for item in div_base:
+                cdef = "".join(item.stripped_strings)
+                card.cdef = card.cdef+cdef+"<br>"
             card.cdef = card.cdef.replace("\t","")
-
-
+            card.cdef = card.cdef.replace("\n","<br>")
+        else:
+            logger.debug("div_base not found")
+        
         # collins
         div_collins = soup.find("div",class_="collins-section")
         collins_def = ""
@@ -259,11 +264,11 @@ if __name__ == "__main__":
     _init()
 
     wordlist = {
-        "/devel/git/github/pyScripts/anki-tools/wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
-        "/devel/git/github/pyScripts/anki-tools/wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
-        "/devel/git/github/pyScripts/anki-tools/wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
-        "/devel/git/github/pyScripts/anki-tools/wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
-        "/devel/git/github/pyScripts/anki-tools/wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt"
+        "./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
+        "./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
+        "./wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
+        "./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
+        "./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt"
     }
 
     for listFile,exportFile in wordlist.items():

@@ -137,7 +137,7 @@ def get_img_from_bing(word):
     return imgUrl
 
 class Card:
-    def __init__(self,word,rate="star0",edef="",cdef="",img="",sound="",phonetic="",collins=""):
+    def __init__(self,word,rate="star0",edef="",cdef="",img="",sound="",phonetic="",collins="",cSentense="",eSentense=""):
         self.word = word
         self.rate = rate
         self.edef = edef
@@ -147,6 +147,8 @@ class Card:
         self.sound = sound
         self.phonetic = phonetic
         self.collins = collins
+        self.cSentense = cSentense
+        self.eSentense = eSentense
 
 def get_def_from_youdao(word):
     url = "http://dict.youdao.com/w/eng/%s"%(word)
@@ -161,6 +163,22 @@ def get_def_from_youdao(word):
         html = html.replace("  ","")
         return html
     return ""
+
+def get_sentense_from_iciba(word):
+    enStr, cnStr = "",""
+    url = "http://dj.iciba.com/%s"%(word)
+    doc = get_doc_byUrllib2(url)
+    soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
+    span_en = soup.find("span",class_="stc_en_txt")
+    if span_en:
+        enStr = " ".join(span_en.stripped_strings)
+        if len(enStr) > 3:
+            if enStr[0:3] == "1. ":
+                enStr = enStr[3:]
+    span_cn = soup.find("span",class_="stc_cn_txt")
+    if span_cn:
+        cnStr = "".join(span_cn.stripped_strings)
+    return enStr,cnStr
 
 def parse(word):
     url = Config.BASE_URL + "/" + word
@@ -197,6 +215,10 @@ def parse(word):
             card.cdef = card.cdef.replace("\n","<br>")
         else:
             logger.debug("div_base not found")
+
+        card.eSentense,card.cSentense = get_sentense_from_iciba(word)
+        print(card.eSentense)
+        print(card.cSentense)
         
         # collins
         div_collins = soup.find("div",class_="collins-section")
@@ -248,7 +270,9 @@ def mkcard_loop(words,filename):
             logStr = "%d/%d %s %s"%(cnt+1,total,card.word,card.cdef)
             logger.debug(logStr)
 
-            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,card.phonetic,card.cdef,card.img, card.sound, card.collins)
+            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,
+                card.phonetic,card.cdef,card.img,card.sound, 
+                card.eSentense,card.cSentense,card.collins)
             fp.write(outStr)
         fp.close()
 

@@ -151,8 +151,12 @@ class Card:
         self.eSentense = eSentense
 
 def get_def_from_youdao(word):
+    base_def, collins = "",""
     url = "http://dict.youdao.com/w/eng/%s"%(word)
     doc = get_doc_byUrllib2(url)
+    if not doc:
+        logger.error("doc none")
+        return base_def, collins
     soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
     div_define = soup.find("div",id="collinsResult")
     if div_define:
@@ -161,13 +165,26 @@ def get_def_from_youdao(word):
         html = html.replace("\n","")
         html = html.replace("\t","")
         html = html.replace("  ","")
-        return html
-    return ""
+        collins = html
+    div_base = soup.find("div",class_="trans-container")
+    if div_base:
+        lis = div_base.find_all("li")
+        if lis:
+            for li in lis:
+                li_str = li.string
+                if li_str:
+                    base_def = base_def + li.string + "； "
+    else:
+        logger.error("div_base not found")
+    return base_def, collins
 
 def get_sentense_from_iciba(word):
     enStr, cnStr = "",""
     url = "http://dj.iciba.com/%s"%(word)
     doc = get_doc_byUrllib2(url)
+    if not doc:
+        logger.error("doc none")
+        return enStr,cnStr
     soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
     span_en = soup.find("span",class_="stc_en_txt")
     if span_en:
@@ -178,6 +195,7 @@ def get_sentense_from_iciba(word):
     span_cn = soup.find("span",class_="stc_cn_txt")
     if span_cn:
         cnStr = "".join(span_cn.stripped_strings)
+    enStr = enStr.replace(word, "<b class=\"keyword\">%s</b>"%(word))
     return enStr,cnStr
 
 def parse(word):
@@ -185,7 +203,7 @@ def parse(word):
     doc = get_doc_byUrllib2(url)
     if not doc:
         logger.error("doc none")
-        return 
+        return None
     soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
 
     if soup:
@@ -203,22 +221,25 @@ def parse(word):
             card.phonetic =  ",".join(div_speak.stripped_strings)
 
         # base defination
-        div_base = soup.find_all("li",class_="clearfix")
+        div_base = soup.find_all("ul",class_="base-list switch_part")
         if div_base:
-            card.cdef = ""
-            for item in div_base:
-                cdef = "".join(item.stripped_strings)
-                card.cdef = card.cdef+cdef+"<br>"
-            if len(card.cdef) > 4:
-                card.cdef = card.cdef[:-4]
-            card.cdef = card.cdef.replace("\t","")
-            card.cdef = card.cdef.replace("\n","<br>")
-        else:
-            logger.debug("div_base not found")
+            print(div_base.stripped_strings)
+        #div_base = soup.find_all("li",class_="clearfix")
+        #if div_base:
+        #    card.cdef = ""
+        #    for item in div_base:
+        #        cdef = " ".join(item.stripped_strings)
+        #        card.cdef = card.cdef+cdef+" "
+        #    if len(card.cdef) > 4:
+        #        card.cdef = card.cdef[:-4]
+        #    card.cdef = card.cdef.replace("\t","")
+        #    card.cdef = card.cdef.replace("\n"," ")
+        #else:
+        #    logger.debug("div_base not found")
 
         card.eSentense,card.cSentense = get_sentense_from_iciba(word)
-        print(card.eSentense)
-        print(card.cSentense)
+        #print(card.eSentense)
+        #print(card.cSentense)
         
         # collins
         div_collins = soup.find("div",class_="collins-section")
@@ -231,8 +252,7 @@ def parse(word):
             html = html.replace("  ","")
             card.edef = html
 
-        collins_html = get_def_from_youdao(word)
-        card.collins = collins_html
+        card.cdef ,card.collins = get_def_from_youdao(word)
 
         # 重命名文件使其以下划线开头，如“_logo.jpg”。 下划线提示Anki该文件被模板使用并在分享记忆库（牌组）时同时导出。
         # sound 
@@ -254,9 +274,6 @@ def parse(word):
             dl_byUrllib2(imgUrl,filename)
             print(filename)
         card.img = "./images/_%s.jpg"%(word)
-
-        
-
     return card
 
 def mkcard_loop(words,filename):
@@ -265,6 +282,8 @@ def mkcard_loop(words,filename):
     with open(filename,'wb') as fp:
         for cnt, word in enumerate(words):
             card = parse(word)
+            if not card:
+                continue
             cards[word] = card
             #logStr = "%d %s %s %s %s %d"%(cnt,card.word,card.rate,card.phonetic,card.cdef,len(card.edef))
             logStr = "%d/%d %s %s"%(cnt+1,total,card.word,card.cdef)
@@ -294,10 +313,11 @@ if __name__ == "__main__":
 
     wordlist = {
         "./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
+        "./wordlist/vocab-toefl-leon2.txt":"anki-vocab-toefl-leon2.txt",
         "./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
         "./wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
         "./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
-        "./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt"
+        "./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt",
     }
 
     for listFile,exportFile in wordlist.items():

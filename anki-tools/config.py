@@ -11,6 +11,7 @@ class Config:
     OUT_DIR = 'out'
     IMG_DIR = 'images'
     SOUND_DIR = 'sounds'
+    SOUND_RENREN_DIR = 'renren'
     URL_TIMEOUT = 30
     DEFAULT_WEB_ENGINE = "urllib2"
     BASE_URL = 'http://www.iciba.com'

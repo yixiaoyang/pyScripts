@@ -53,6 +53,9 @@ def path_of_img(file_or_dir):
 def path_of_sound(file_or_dir):
     return os.path.join(os.getcwd(), Config.SOUND_DIR, file_or_dir)
 
+def path_of_renrenSound(file_or_dir):
+    return os.path.join(os.getcwd(), Config.SOUND_RENREN_DIR, file_or_dir)
+
 def get_doc_byUrllib2(url):
     charset = None
     headers = {
@@ -115,7 +118,10 @@ def get_doc_bySelenium(url):
     return doc
 
 def dl_byUrllib2(url, filename):
-    urlretrieve(url, filename)
+    try:
+        urlretrieve(url, filename)
+    except Exception,e:
+        print(e)
 
 def get_img_from_bing(word):
     imgUrl = None
@@ -137,7 +143,8 @@ def get_img_from_bing(word):
     return imgUrl
 
 class Card:
-    def __init__(self,word,rate="star0",edef="",cdef="",img="",sound="",phonetic="",collins="",cSentense="",eSentense=""):
+    def __init__(self,word,rate="star0",edef="",cdef="",img="",sound="",
+        phonetic="",collins="",cSentense="",eSentense="",sSentense=""):
         self.word = word
         self.rate = rate
         self.edef = edef
@@ -149,6 +156,7 @@ class Card:
         self.collins = collins
         self.cSentense = cSentense
         self.eSentense = eSentense
+        self.sSentense = sSentense
 
 def get_def_from_youdao(word):
     base_def, collins = "",""
@@ -198,6 +206,48 @@ def get_sentense_from_iciba(word):
     enStr = enStr.replace(word, "<b class=\"keyword\">%s</b>"%(word))
     return enStr,cnStr
 
+def get_sentense_from_renren(word):
+    url = "http://www.91dict.com/seek.php?keyword=%s"%word
+    mp3_file, enStr, cnStr = "","",""
+    sound_url = ""
+    doc = get_doc_byUrllib2(url)
+    if not doc:
+        logger.error("doc none from renren")
+        return enStr,cnStr
+    soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
+    div_rightBody = soup.find("div",id="rightBody")
+    if div_rightBody:
+        ps = div_rightBody.find_all("p")
+        if ps:
+            if len(ps) > 1:
+                ps1 = ps[1]
+                
+                mp3_file = path_of_renrenSound("_%s.mp3"%(word))
+                if True:
+                #if not os.path.exists(mp3_file):
+                    a_mp3 = ps1.find("a",class_="play")
+                    if a_mp3:
+                        if a_mp3.has_attr("onclick"):
+                            sound_str = a_mp3["onclick"]
+                            if len(sound_str) >= 10:
+                                strings = sound_str.split("\"")
+                                if len(strings) >= 2:
+                                    sound_url = strings[1]
+                                dl_byUrllib2(sound_url,mp3_file)
+                span_sub = ps1.find("span",class_="sub-mask")
+                if span_sub:
+                    span_cn = ps1.find("span",class_="sub-black")
+                    if span_cn:
+                        cnStr = "".join(span_cn.stripped_strings)
+                        span_cn.extract()
+
+                    enStr = " ".join(span_sub.stripped_strings)
+
+    #print(enStr)
+    #print(cnStr)
+    #print(sound_url)
+    return enStr,cnStr
+    
 def parse(word):
     url = Config.BASE_URL + "/" + word
     doc = get_doc_byUrllib2(url)
@@ -237,7 +287,9 @@ def parse(word):
         #else:
         #    logger.debug("div_base not found")
 
-        card.eSentense,card.cSentense = get_sentense_from_iciba(word)
+        #card.eSentense,card.cSentense = get_sentense_from_iciba(word)
+        card.eSentense,card.cSentense = get_sentense_from_renren(word)
+        card.sSentense = "./renren/_%s.mp3"%(word)
         #print(card.eSentense)
         #print(card.cSentense)
         
@@ -279,8 +331,18 @@ def parse(word):
 def mkcard_loop(words,filename):
     cards = {}
     total = len(words)
-    with open(filename,'wb') as fp:
+
+    num_lines = 0
+    if os.path.exists(filename):
+        with open(filename,'r') as fp:
+            num_lines = sum(1 for line in fp)
+            fp.close()
+    print("file:%s, aready parsed:%d"%(filename,num_lines))
+
+    with open(filename,'a') as fp:
         for cnt, word in enumerate(words):
+            if cnt < num_lines:
+                continue
             card = parse(word)
             if not card:
                 continue
@@ -289,9 +351,9 @@ def mkcard_loop(words,filename):
             logStr = "%d/%d %s %s"%(cnt+1,total,card.word,card.cdef)
             logger.debug(logStr)
 
-            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,
+            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,
                 card.phonetic,card.cdef,card.img,card.sound, 
-                card.eSentense,card.cSentense,card.collins)
+                card.eSentense,card.cSentense,card.sSentense,card.collins)
             fp.write(outStr)
         fp.close()
 
@@ -311,18 +373,21 @@ if __name__ == "__main__":
 
     _init()
 
+    #get_sentense_from_renren("sustain")
+    #exit(0)
+
     wordlist = {
         "./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
         "./wordlist/vocab-toefl-leon2.txt":"anki-vocab-toefl-leon2.txt",
-        "./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
-        "./wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
-        "./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
-        "./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt",
+        #"./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
+        #"./wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
+        #"./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
+        #"./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt",
     }
 
     for listFile,exportFile in wordlist.items():
-        if os.path.exists(exportFile):
-            continue
+        #if os.path.exists(exportFile):
+        #   continue
         words = get_words_from_txt(listFile)
         mkcard_loop(words,exportFile)
 

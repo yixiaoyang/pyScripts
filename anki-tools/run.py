@@ -289,7 +289,10 @@ def parse(word):
 
         #card.eSentense,card.cSentense = get_sentense_from_iciba(word)
         card.eSentense,card.cSentense = get_sentense_from_renren(word)
-        card.sSentense = "./renren/_%s.mp3"%(word)
+        if len(card.eSentense) == 0:
+            card.eSentense,card.cSentense = get_sentense_from_iciba(word)
+        else:
+            card.sSentense = "./renren/_%s.mp3"%(word)
         #print(card.eSentense)
         #print(card.cSentense)
         

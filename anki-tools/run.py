@@ -93,7 +93,7 @@ def get_doc_byUrllib2(url):
     return doc
 
 
-def get_doc_bySelenium(url):
+def get_doc_bySelenium_waitFor(url,tagName):
     global l_tab_opened
     global l_driver
     charset = None
@@ -103,9 +103,9 @@ def get_doc_bySelenium(url):
     driver = l_driver
     driver.get(url)
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "dg_u")))
-    finally:
-        pass
+        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, tagName)))
+    except Exception,e:
+        return None
 
     print(url)
 
@@ -126,7 +126,7 @@ def dl_byUrllib2(url, filename):
 def get_img_from_bing(word):
     imgUrl = None
     url = "https://cn.bing.com/images/search?q=%s"%(word)
-    doc = get_doc_bySelenium(url)
+    doc = get_doc_bySelenium_waitFor(url,"dg_u")
     if doc:
         soup = BeautifulSoup(doc, Config.SOUP_PARSER,from_encoding="utf-8")
         div_img = soup.find("div",class_="dg_u")
@@ -189,7 +189,8 @@ def get_def_from_youdao(word):
 def get_sentense_from_iciba(word):
     enStr, cnStr = "",""
     url = "http://dj.iciba.com/%s"%(word)
-    doc = get_doc_byUrllib2(url)
+    doc = get_doc_bySelenium_waitFor(url,"stc_cn_txt")
+    #doc = get_doc_byUrllib2(url)
     if not doc:
         logger.error("doc none")
         return enStr,cnStr
@@ -288,11 +289,11 @@ def parse(word):
         #    logger.debug("div_base not found")
 
         #card.eSentense,card.cSentense = get_sentense_from_iciba(word)
-        card.eSentense,card.cSentense = get_sentense_from_renren(word)
-        if len(card.eSentense) == 0:
-            card.eSentense,card.cSentense = get_sentense_from_iciba(word)
-        else:
-            card.sSentense = "./renren/_%s.mp3"%(word)
+        #card.eSentense,card.cSentense = get_sentense_from_renren(word)
+        #if len(card.eSentense) == 0:
+        card.eSentense,card.cSentense = get_sentense_from_iciba(word)
+        #else:
+        #    card.sSentense = "./renren/_%s.mp3"%(word)
         #print(card.eSentense)
         #print(card.cSentense)
         
@@ -354,9 +355,9 @@ def mkcard_loop(words,filename):
             logStr = "%d/%d %s %s"%(cnt+1,total,card.word,card.cdef)
             logger.debug(logStr)
 
-            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,
+            outStr = "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"%(card.word,card.rate,
                 card.phonetic,card.cdef,card.img,card.sound, 
-                card.eSentense,card.cSentense,card.sSentense,card.collins)
+                card.eSentense,card.cSentense,card.collins)
             fp.write(outStr)
         fp.close()
 
@@ -380,6 +381,7 @@ if __name__ == "__main__":
     #exit(0)
 
     wordlist = {
+        #"./wordlist/test.txt":"anki-test.txt",
         "./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
         "./wordlist/vocab-toefl-leon2.txt":"anki-vocab-toefl-leon2.txt",
         #"./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",

@@ -1,0 +1,22 @@
+.container{
+    width:75%;    
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Museo,Hack,Droid Sans Mono, Consoles";
+}
+
+button, optgroup, input, button, select, textarea, pre {
+    font-family: "Iosevka,Hack,Droid Sans Mono, Consoles";
+}
+
+div.text_cell {
+    border-color: white;
+}
+
+div.cell.selected ,
+.edit_mode div.cell.selected {
+    border-color: #aa00ff;
+    border-width: 1px;
+    padding-left: 5px;
+}

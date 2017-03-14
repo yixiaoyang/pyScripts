@@ -38,6 +38,8 @@ def get_doc_byUrllib2(url):
         return None
     except urllib2.HTTPError:
         return None
+    except Exception,e:
+        return None
     doc = request.read()
 
     # detect charset
@@ -223,7 +225,7 @@ if __name__ == "__main__":
     #])
 
     parser = Parser58(
-        ["http://sz.58.com/nanshan/zufang/0/j1/?minprice=0_2500&PGTID=0d300008-0071-3f5c-78fc-4306be39860a&ClickID=6"])
+            ["http://sz.58.com/nanshan/zufang/0/j1/?minprice=0_2500&PGTID=0d300008-0071-313e-79b2-411e3ccffeb5&ClickID=8"])
 
     while True:
         parser.parse2()

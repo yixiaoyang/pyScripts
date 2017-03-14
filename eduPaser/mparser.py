@@ -304,10 +304,10 @@ class ProfileParser():
 
     def line_pipe(self, line):
         new_line = line.replace('  ',' ')
-
         # TODO:清除文本中的多余空格，注意此处如果为英文，所有空格都会被清除
-        # new_line = ''.join(line.split())
+        #new_line = ''.join(line.split())
         new_line = new_line.strip()
+        new_line = new_line.lower()
         return new_line
 
     def check_symbols(self,line):
@@ -338,7 +338,7 @@ class ProfileParser():
                 if not (pos in indexes_set):
                     symbols.append(symbol)
                     names.append(name)
-                    logger.debug("detect field [" + name + "]")
+                    #logger.debug("detect field [" + name + "]")
                     name_values[name] = None
                     indexes.append(pos)
                     indexes_set.add(pos)
@@ -355,7 +355,7 @@ class ProfileParser():
                     logger.error("parse failed, end_idx %d >= index %d" % (end_idx,index))
             else:
                 value = line[index:]
-                print("parsing name:"+name+",value:"+value)
+                #print("parsing name:"+name+",value:"+value)
 
             if not value:
                 return name, name_values
@@ -369,7 +369,7 @@ class ProfileParser():
                 splits = value.split(str)
                 if len(splits) >= 2:
                     value = splits[1]
-                    logger.debug("detect split, select value="+value)
+                    #logger.debug("detect split, select value="+value)
                     break
                 else:
                     value = splits[0]

@@ -9,7 +9,7 @@
  position: relative;
  text-align: left;
  /*border-top-left-radius: 15px;*/
- box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+ /*box-shadow: 0 3px 10px rgba(0,0,0,0.25);*/
 }
 
 .word_header_star{
@@ -42,8 +42,8 @@
  font-weight:bold;
  /*border-top-left-radius: 15px;*/
  text-shadow: 1px 0 0 #ffffff,0 1px 0 #ffffff,-1px 0 0 #ffffff,0 -1px 0 #ffffff;
- background:#ffcdd2 url(_lulu_search.png) scroll 10px center no-repeat;
- padding: 15px 10px 10px 52px;
+ background:#ffcdd2;
+ padding: 15px 10px 10px 10px;
 }
 
 
@@ -51,8 +51,8 @@
  font-family: Arial;
  font-size: 16px;
  /*border-top-left-radius: 15px;*/
- background:#bce5fc url(_lulu_lightbuble.png) scroll 10px 10px no-repeat;
- padding: 10px 10px 10px 52px;
+ background:#bce5fc;
+ padding: 10px 10px 10px 10px;
 }
 
 
@@ -67,12 +67,12 @@
 
 
 #sample_collins{
- display:block;
+  display:block;
   font-family: arial;
-  font-size: 16px;
- background-color: #ffffff;
- border: #dedede solid 1px;
- /*border-bottom-right-radius: 15px;*/
+  font-size: 14px;
+  background-color: #ffffff;
+  border: #dedede solid 1px;
+  /*border-bottom-right-radius: 15px;*/
  box-shadow: 0 3px 10px rgba(0,0,0,0.23);
  padding: 16px;
  display:none;
@@ -80,16 +80,16 @@
 
 #vocab{
  font-size: 16px;
- background:#dcedc8 url(_lulu_clipboard.png) scroll 10px 10px no-repeat;
- padding: 10px 10px 10px 52px;
+ background:#dcedc8;
+ padding: 10px 10px 10px 10px;
 }
 
 #collins{
  font-family: Arial;
  color:#ffffff;
  font-size: 25px;
- background:#4682B4 url(_lulu_clipboard.png) scroll 10px center no-repeat;
- padding: 10px 10px 10px 52px;
+ background:#4682B4;
+ padding: 10px 10px 10px 10px;
 }
 .phonetic{
 	font-size:45%;

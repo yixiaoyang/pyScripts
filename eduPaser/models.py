@@ -234,8 +234,8 @@ class Academy(ItemBase):
                 if len(parser.rlist) != 0:
                     if handler:
                         for count, tag in enumerate(parser.rlist):
-                            #if count >= 32:
-                            #    break
+                            # if count >= 4:
+                            #     break
                             try:
                             #if True:
                                 #print(tag), "\n"
@@ -257,7 +257,7 @@ class Academy(ItemBase):
                                         employ1.url if employ1.url else 'None'))
                                     if employ1.url:
                                         if phandler:
-                                            logger.debug("try get profile of " + employ1.name)
+                                            #logger.debug("try get profile of " + employ1.name)
                                             profile_file = os.path.join(self.json_dirname(col), (employ1.name + ".html"))
                                             doc = None
 
@@ -277,7 +277,7 @@ class Academy(ItemBase):
                                                 logger.debug("parsed: " + employ2.name + ":" + employ2.email + " done")
                                                 self.employees.append(employ2)
                                     else:
-                                        logger.debug("parsed: " + employ1.name + " done")
+                                        #logger.debug("parsed: " + employ1.name + " done")
                                         self.employees.append(employ1)
                                         # if employ1.url
                                         # if employ1.name

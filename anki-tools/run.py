@@ -107,7 +107,7 @@ def get_doc_bySelenium_waitFor(url,tagName):
     except Exception,e:
         return None
 
-    print(url)
+    #print(url)
 
     doc = driver.page_source
     if l_tab_opened:
@@ -273,8 +273,8 @@ def parse(word):
 
         # base defination
         div_base = soup.find_all("ul",class_="base-list switch_part")
-        if div_base:
-            print(div_base.stripped_strings)
+        #if div_base:
+        #    print(div_base.stripped_strings)
         #div_base = soup.find_all("li",class_="clearfix")
         #if div_base:
         #    card.cdef = ""
@@ -320,15 +320,19 @@ def parse(word):
                     sound_str = tag_sound["ms-on-mouseover"]
                     if len(sound_str) >= 10:
                         sound_url = sound_str[7:-2]
-                        print(filename)
+                        #print(filename)
                         dl_byUrllib2(sound_url,filename)
+                else:
+                    logging.error("parse sound failed")
+            else:
+                logging.error("parse sound failed")
         card.sound = "./sounds/_%s.mp3"%(word)
 
         filename = path_of_img("_%s.jpg"%(word))
         if not os.path.exists(filename):
             imgUrl = get_img_from_bing(word)
             dl_byUrllib2(imgUrl,filename)
-            print(filename)
+            #print(filename)
         card.img = "./images/_%s.jpg"%(word)
     return card
 
@@ -382,12 +386,13 @@ if __name__ == "__main__":
 
     wordlist = {
         #"./wordlist/test.txt":"anki-test.txt",
-        "./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
-        "./wordlist/vocab-toefl-leon2.txt":"anki-vocab-toefl-leon2.txt",
-        #"./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
+        #"./wordlist/vocab-toefl-leon.txt":"anki-vocab-toefl-leon.txt",
+        #"./wordlist/vocab-toefl-leon2.txt":"anki-vocab-toefl-leon2.txt",
+        #"./wordlist/vocab-cet4-leon.txt":"anki-vocab-cet4-leon.txt",
+        "./wordlist/word-power-mde-easy-500.txt":"anki-word-power-mde-easy-500.txt",
         #"./wordlist/vocab-top-1000.txt":"anki-vocab-top-1000.txt",   
-        #"./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
-        #"./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt",
+        "./wordlist/gre-high-frequency.txt":"anki-gre-high-frequency.txt",
+        "./wordlist/400-Must-have-words-for-TOEFL.txt":"anki-400-Must-have-words-for-TOEFL.txt",
     }
 
     for listFile,exportFile in wordlist.items():

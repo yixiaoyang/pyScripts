@@ -1,0 +1,39 @@
+p{
+    color:#353535;
+}
+
+.item{
+  padding-left: 10px;
+  padding-right: 10px;
+  margin:0;
+}
+
+.pitem{
+    margin:0;
+}
+
+.excepted_rome{
+  color:blue;
+}
+
+.unexcepted_rome{
+  color:gray;
+}
+
+.low_price{
+  color: red;
+}
+
+.delicate{
+  color: red;
+}
+
+.recommend-normal{
+  background-color: white;
+}
+.recommend-better{
+  background-color: #ccf;
+}
+.recommend-best{
+  background-color: #ffbebe;
+}

@@ -6,12 +6,10 @@ from respider.items import RespiderItem
 
 import time
 import datetime
+import sqlite3
+import sys
 
-class RentSpider(scrapy.Spider):
-    name = "rent_spider"
-    start_urls = [
-        # 南山，用前三页
-        "http://sz.58.com/nanshan/zufang/0/j1/?minprice=1000_3000",
+'''
         "http://sz.58.com/nanshan/zufang/0/j1/pn2/?minprice=1000_3000",
         "http://sz.58.com/nanshan/zufang/0/j1/pn3/?minprice=1000_3000",
         # 宝安
@@ -26,6 +24,13 @@ class RentSpider(scrapy.Spider):
         "http://sz.58.com/xinzhongxinqu/zufang/0/j1/?minprice=1000_3000",
         # 西乡
         "http://sz.58.com/xixiangsz/zufang/0/j1/?minprice=1000_3000"
+'''
+class RentSpider(scrapy.Spider):
+    name = "rent_spider"
+    start_urls = [
+        # 南山，用前三页
+        "http://sz.58.com/nanshan/zufang/0/j1/?minprice=1000_3000",
+
     ]
     # 获取所有的li下的链接
     start_xpath = "/html/body/div[3]/div[1]/div[5]/div[2]/ul/li[*]/div[2]/h2/a[1]/@href"
@@ -44,6 +49,26 @@ class RentSpider(scrapy.Spider):
     }
     yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            sql_uri = crawler.settings.get('SQLITE_FILE'),
+            sql_table = crawler.settings.get('SQLITE_TABLE', 'items'))
+
+    def __init__(self, sql_uri, sql_table):
+        self.sql_uri = sql_uri
+        self.sql_table = sql_table
+        self.query_str = "select count(*) from %s where url=(?);"%(self.sql_table)
+        self.sql_conn = sqlite3.connect(self.sql_uri)
+        self.sql_cur = self.sql_conn.cursor()
+
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
+
+    def if_record_existed(self, url):
+        self.sql_cur.execute(self.query_str, (url,))
+        total = self.sql_cur.fetchone()
+        return total[0] != 0
 
     def start_requests(self):
         for url in self.start_urls:
@@ -52,7 +77,9 @@ class RentSpider(scrapy.Spider):
     def parse(self, response):
         sels = response.xpath(self.start_xpath).extract()
         for sel in sels:
-            yield scrapy.Request(url=sel, headers=self.headers, callback=self.parse_detail)
+            # TODO: 去重检测，如果当前url已经存在数据库中则不再抓取
+            if (not self.if_record_existed(sel)):
+                yield scrapy.Request(url=sel, headers=self.headers, callback=self.parse_detail)
 
     def parse_detail(self, response):
         value = lambda ilist: "-".join([v for v in ilist]) if len(ilist) else ''

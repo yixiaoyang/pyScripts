@@ -18,3 +18,4 @@ class RespiderItem(scrapy.Item):
     last_post = scrapy.Field()
     detail = scrapy.Field()
     fine = scrapy.Field()
+    duplication = scrapy.Field()

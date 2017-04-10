@@ -25,7 +25,14 @@ p{
 }
 
 .delicate{
-  color: red;
+  color: black;
+}
+
+.no_img{
+    color: gray;
+}
+.has_img{
+
 }
 
 .recommend-normal{
@@ -35,5 +42,5 @@ p{
   background-color: #ccf;
 }
 .recommend-best{
-  background-color: #ffbebe;
+  background-color: #d4ffbe;
 }

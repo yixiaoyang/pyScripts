@@ -9,7 +9,11 @@ import datetime
 import sqlite3
 import sys
 
-'''
+class RentSpider(scrapy.Spider):
+    name = "rent_spider"
+    start_urls = [
+        # 南山，用前三页
+        "http://sz.58.com/nanshan/zufang/0/j1/?minprice=1000_3000",
         "http://sz.58.com/nanshan/zufang/0/j1/pn2/?minprice=1000_3000",
         "http://sz.58.com/nanshan/zufang/0/j1/pn3/?minprice=1000_3000",
         # 宝安
@@ -24,13 +28,6 @@ import sys
         "http://sz.58.com/xinzhongxinqu/zufang/0/j1/?minprice=1000_3000",
         # 西乡
         "http://sz.58.com/xixiangsz/zufang/0/j1/?minprice=1000_3000"
-'''
-class RentSpider(scrapy.Spider):
-    name = "rent_spider"
-    start_urls = [
-        # 南山，用前三页
-        "http://sz.58.com/nanshan/zufang/0/j1/?minprice=1000_3000",
-
     ]
     # 获取所有的li下的链接
     start_xpath = "/html/body/div[3]/div[1]/div[5]/div[2]/ul/li[*]/div[2]/h2/a[1]/@href"
@@ -41,7 +38,8 @@ class RentSpider(scrapy.Spider):
         "zone":"/html/body/div[4]/div[2]/div[2]/div[1]/div[1]/ul/li[5]/span[2]/a/text()",
         "last_post":"/html/body/div[4]/div[1]/p/text()",
         "location":"/html/body/div[4]/div[2]/div[2]/div[1]/div[1]/ul/li[4]/span[2]/a/text()",
-        "detail":"/html/body/div[4]/div[3]/div[1]/div[1]/p/text()"
+        "detail":"/html/body/div[4]/div[3]/div[1]/div[1]/p/text()",
+        "ptitle":"/html/head/title/text()"
     }
     headers = {
         'User-Agent':'Mozilla/5.0 (X11; Linux i686; rv:41.0) Gecko/20100101 Firefox/41.0',
@@ -90,6 +88,15 @@ class RentSpider(scrapy.Spider):
             if xpath:
                 doc = value(response.xpath(xpath).extract()).strip().encode('utf-8')
                 item[key] = doc
+
+        xpath = self.detail_xpaths['ptitle']
+        ptitle_doc = value(response.xpath(xpath).extract()).strip().encode('utf-8')
+        idx1 = ptitle_doc.find("【")
+        idx2 = ptitle_doc.find("图")
+        if idx1 != -1 and idx2 != -1:
+            item['img_cnt'] = int(ptitle_doc[idx1+3:idx2])
+            #print "LDEBUG" ,idx1, idx2, item['img_cnt'],  ptitle_doc
+
         self.strip_item(item)
         # 只解析今天，昨天的
         if item["last_post"].split(" ")[0] != time.strftime("%Y-%m-%d"):

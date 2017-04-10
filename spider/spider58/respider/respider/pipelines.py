@@ -8,12 +8,12 @@
 import time
 import sqlite3
 import sys
+import datetime
 
 class Items:
-    keys =  ["room","price","fine","title","zone","location","last_post","url","detail"]
+    keys =  ["room","price","fine","title","zone","location","last_post","url","detail", "img_cnt"]
 
 def if_item_excepted(item):
-    print item["room"],item["fine"]
     if item["room"].find("1室1厅") == -1:
         return False
     if str(item["fine"]) == "0":
@@ -86,7 +86,8 @@ class RespiderSqlitePipeline(object):
             location CHAR(64),
             last_post DATETIME,
             url TEXT,
-            detail TEXT);'''%(self.sql_table)
+            detail TEXT,
+            img_cnt INTEGER);'''%(self.sql_table)
         # 中文编码
         self.sql_conn.text_factory=lambda x: unicode(x, "utf-8")
         self.sql_cur.execute(sql)
@@ -114,14 +115,16 @@ class RespiderSqlitePipeline(object):
 
     def close_spider(self, spider):
         # 导出记录到html文件
+        yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
         date_str = time.strftime("%Y-%m-%d")
+        yesterday_str = yesterday.strftime("%Y-%m-%d")
         sql_str = '''select * from data_58 where last_post between '%s 00:00:00' and '%s 23:59:59'
-        '''%(date_str, date_str)
+        '''%(yesterday_str, date_str)
         self.sql_cur.execute(sql_str)
         items = self.sql_cur.fetchall()
         if len(items) != 0:
             #               0    1      2       3       4       5       6           7       8       9
-            header_str = ["id","room","price","fine","title","zone","location","last_post","url","detail"]
+            header_str = ["id","room","price","fine","title","zone","location","last_post","url","detail", "img_cnt"]
             fp_html = open("%s.html"%(time.strftime("%Y-%m-%d")), 'w')
             fp_html.write("<head><meta charset=UTF-8> <meta name=renderer content=webkit><link rel=\"stylesheet\" type=\"text/css\" href=\"./style.css\"/></head><html><body>")
 
@@ -132,13 +135,14 @@ class RespiderSqlitePipeline(object):
                 #    item[name] = str(sql_item[i]).encode("utf-8")
                 item = dict( (name,str(value).encode("utf-8")) for name,value in zip(header_str,sql_item))
                 fp_html.write("<p class=\"pitem %s\">"
-                    "<span class=\"room %s\">%s</span>"
+                    "<span class=\"room %s %s\">%s</span>"
                     "<span class=\"item price\">%s</span>"
                     "<span class=\"item post_time\">%s</span>"
                     "<span class=\"item place\">%s</span>"
                     "<a target=\"_blank\"href=\"%s\">%s</a></p>\n"%(
                     "recommend-best" if if_item_excepted(item) else "recommend-normal",
                     "delicate" if (if_item_delicate(item)) else "",
+                    "no_img" if item["img_cnt"]=="0" else "has_img",
                     item["room"],
                     item["price"],
                     item["last_post"],

@@ -19,3 +19,4 @@ class RespiderItem(scrapy.Item):
     detail = scrapy.Field()
     fine = scrapy.Field()
     duplication = scrapy.Field()
+    img_cnt = scrapy.Field()

@@ -27,7 +27,7 @@ class RentSpider(scrapy.Spider):
         # 新中心区
         "http://sz.58.com/xinzhongxinqu/zufang/0/j1/?minprice=1000_3000",
         # 西乡
-        "http://sz.58.com/xixiangsz/zufang/0/j1/?minprice=1000_3000"
+        #"http://sz.58.com/xixiangsz/zufang/0/j1/?minprice=1000_3000"
     ]
     # 获取所有的li下的链接
     start_xpath = "/html/body/div[3]/div[1]/div[5]/div[2]/ul/li[*]/div[2]/h2/a[1]/@href"
@@ -95,7 +95,7 @@ class RentSpider(scrapy.Spider):
         idx2 = ptitle_doc.find("图")
         if idx1 != -1 and idx2 != -1:
             item['img_cnt'] = int(ptitle_doc[idx1+3:idx2])
-            #print "LDEBUG" ,idx1, idx2, item['img_cnt'],  ptitle_doc
+            print "LDEBUG" ,idx1, idx2, item['img_cnt'],  ptitle_doc
 
         self.strip_item(item)
         # 只解析今天，昨天的

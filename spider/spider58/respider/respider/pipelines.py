@@ -115,7 +115,7 @@ class RespiderSqlitePipeline(object):
 
     def close_spider(self, spider):
         # 导出记录到html文件
-        yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
+        yesterday = datetime.datetime.now() - datetime.timedelta(days = 2)
         date_str = time.strftime("%Y-%m-%d")
         yesterday_str = yesterday.strftime("%Y-%m-%d")
         sql_str = '''select * from data_58 where last_post between '%s 00:00:00' and '%s 23:59:59'

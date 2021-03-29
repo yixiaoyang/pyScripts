@@ -22,7 +22,7 @@ Pillow==2.4.0
 PyDispatcher==2.0.5
 PyOpenGL==3.0.2
 PyYAML==3.11
-Pygments==2.0.1
+Pygments==2.7.4
 SQLAlchemy==1.0.9
 Scrapy==1.1.0dev1
 Sphinx==1.2.2

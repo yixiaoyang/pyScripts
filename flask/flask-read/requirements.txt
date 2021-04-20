@@ -69,7 +69,7 @@ netifaces==0.8
 parsel==0.9.6
 ply==3.4
 portage==2.2.20
-py==1.4.25
+py==1.10.0
 pyOpenSSL==0.15.1
 pyalsa==1.0.26
 pyasn1==0.1.8

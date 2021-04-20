@@ -33,7 +33,7 @@ Twisted-Mail==0.0.0
 Twisted-Names==0.0.0
 Twisted-Web==0.0.0
 WTForms==2.0.1
-Werkzeug==0.11
+Werkzeug==0.15.3
 alembic==0.8.3
 aniso8601==0.83
 ## FIXME: could not find svn URL in dependency_links for this package:

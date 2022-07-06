@@ -61,7 +61,7 @@ java-config==2.2.0
 javatoolkit==0.3.0
 jsonpickle==0.4.0
 layman==2.0.0
-lxml==3.3.5
+lxml==4.9.1
 mechanize==0.2.5
 mercurial==3.3.2
 mingc==0.4.4

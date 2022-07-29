@@ -24,7 +24,7 @@ PyOpenGL==3.0.2
 PyYAML==3.11
 Pygments==2.0.1
 SQLAlchemy==1.0.9
-Scrapy==1.1.0dev1
+Scrapy==2.6.2
 Sphinx==1.2.2
 Twisted==15.3.0
 Twisted-Conch==0.0.0
